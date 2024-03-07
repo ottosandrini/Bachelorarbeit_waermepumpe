@@ -29,26 +29,39 @@ Validierung
 ## Abstract für Anmeldung
 
 Context: Energiewende, Auslegungsplanugn WP wichtig, komplexes System. Muss simuliert werden, um nahe ans optimum zu kommen
+
 Problem: DIN normen , auselgugnsrichtlienien, Betirebzustände können sich sher utnerscheiden, je nach Nutzung, deswegen kann man nicht generalisierung und wir kommen zu besseren WP, wenn wir diese vorab simulieren können
+
 Related Work: TesPy (zu breit), Jentsch et al. haben schon folgendes gemacht. ABER passt für uns nicht, wir wissen nicht wie gut die Modelle sind, da nicht mit echten Welt korreliert
+
 Own approach: Wir bauen einen Digialen Wzillen, der wird open soruce, man kann verschiedene systemzustände simulieren, und wir validieren das an einen echten system
+
 Evaluation: Wir schauen, wie groß der Fehler unseres Digitalen Zwillings ist und im besten Fall schauen wir auch, unter welchen Bedigugnen die Fehler am größten sind
+
 Results: Generationen von Studiernedne werden dieses Systen nutzen um eine besseres verständis zu erlenagen und wir können bessere Wärmepumoen bauen
+
 Outlook:Dauch dass wir open soruce sind, kann man das dann weiter entwicklein
+
+
+
 Rezept Abstract
 
-
-
 Context: What is problem area, why is it interesting and important?
+
 Problem: What is problem we specifically consider, why is it hard? (e.g., why do
 naive approaches fail?)
+
 Related Work: Survey past work relevant to this topic. Why hasn’t it been
 solved before (related work)? Or, what’s wrong with previous proposed
 solutions?
+
 Own approach: What are the key components of our approach and how does it
 differ to related work?
+
 Evaluation: What are the results and how will we have validated them?
+
 Results The scientific surplus value
+
 Outlook: An outlook on application or further research
 
 ## Arbeitsplan
