@@ -91,9 +91,5 @@ https://www.ki-portal.de/wp-content/uploads/2021/04/KI_2021_04_48_Wissenschaft_J
 
 ## To-Do Julian
 
-Datenblatt, Komponentenliste
-Unterlagen Labor
-Aktuelle Version Anmeldung
-
 ## To-Do Otto
 
