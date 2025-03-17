@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Web Interface Heat Pump</title>
+<link rel="stylesheet" href="stylewebpage.css"> 
+<script src="lib/gauge.min.js"></script>
+<script type="text/javascript" src="ihatejs.js"></script>
+<script type="text/javascript" src="illustration.js"></script>
+<meta charset="UTF-8">
+<meta name="description" content="Heat Pump digital Twin">
+<meta name="keywords" content="HTML, CSS, JavaScript">
+<meta name="author" content="Otto Sandrini">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'real')">Real System</button>
+        <button class="tablinks" onclick="openTab(event, 'digital')">Digital System</button>
+        <button class="tablinks" onclick="openTab(event, 'comp')">Comparison</button>
+    </div>
+
+    <!-- Real System -->
+    <div id="real" class="tabcontent">        
+        <div class="row">
+            <div class="column" id="leftcol">
+                <h2>Real System</h2>
+                <p>This is the actual, physical heat pump.</p>
+                <canvas id="OTGaugeReal"></canvas>
+                <h3 id="ueh">Überhitzung</h3>
+            </div>
+            <div class="column" id="rightcol">
+                <canvas id="HeatPump" width="1000" height="800"></canvas>
+            </div>
+        </div>        
+    </div>
+  
+    <!-- Virtual System -->
+    <div id="digital" class="tabcontent">
+        <div class="row">
+            <div class="column" id="leftcol">
+                <h2>Digital System</h2>
+                <p>This is the digital simulation of the real system.</p>
+                <!-- <canvas id="OTGaugeSim"></canvas> NEW IDENTIFIER -> needs new gauge -->
+                <h3 id="ueh">Überhitzung</h3>
+            </div>
+            <div class="column" id="rightcol">
+                <!-- <canvas id="HeatPump" width="1000" height="800"></canvas> -> needs new HP sim -->
+            </div>
+        </div>
+    </div>
+  
+    <!-- Comparison -->
+    <div id="comp" class="tabcontent">
+        <h3>Comparison</h3>
+        <p>Here we have a comparison between the two.</p>
+    </div>
+
+
+</body>
+</html> 

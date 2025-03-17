@@ -47,3 +47,4 @@ celerybeat.pid
 cython_debug/
 
 Termine
+.pdm-python

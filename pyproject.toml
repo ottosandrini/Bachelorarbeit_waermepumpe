@@ -1,0 +1,43 @@
+[project]
+name = "Bachelorarbeit_waermepumpe"
+version = "0.1.0"
+description = "digitaler Zwilling der Versuchswärmepumpe am MCI"
+authors = [
+    {name = "Otto Sandrini", email = "so0599@mci4me.at"},
+]
+dependencies = [
+    "contourpy==1.2.0",
+    "CoolProp==6.6.0",
+    "cycler==0.12.1",
+    "deprecation==2.1.0",
+    "fonttools==4.49.0",
+    "hightime==0.2.1",
+    "Jinja2==3.1.3",
+    "kiwisolver==1.4.5",
+    "MarkupSafe==2.1.5",
+    "matplotlib==3.8.3",
+    "nidaqmx==0.9.0",
+    "numpy==1.26.4",
+    "packaging==23.2",
+    "pandas==2.2.1",
+    "pillow==10.2.0",
+    "pyparsing==3.1.1",
+    "python-dateutil==2.9.0.post0",
+    "pytz==2024.1",
+    "six==1.16.0",
+    "tabulate==0.8.10",
+    "tespy==0.7.2.post2",
+    "tzdata==2024.1",
+    "streamlit>=1.42.2",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "GPLV3"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
