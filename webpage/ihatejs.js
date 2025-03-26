@@ -61,8 +61,47 @@ document.addEventListener("DOMContentLoaded", function () {
     needleCircleInner: false,
     animationDuration: 1500,
     animationRule: "linear"
-}).draw();
+  }
+).draw();
 
+  var gauge = new RadialGauge({
+    renderTo: 'OTGaugeSim',
+    width: 250,
+    height: 250,
+    units: "°C",
+    minValue: 0,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
+    maxValue: 20,
+    majorTicks: [
+        "0",
+        "5",
+        "10",
+        "15",
+        "20"
+    ],
+    minorTicks: 4,
+    strokeTicks: true,
+    highlights: [
+        {
+            "from": 0,
+            "to": 8,
+            "color": "rgba(200, 50, 50, .75)"
+        }
+    ],
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    animationDuration: 1500,
+    animationRule: "linear"
+  }
+  ).draw();
 // TEST ANIMATION:
 // setInterval(() => {
 //   gauge.value = Math.random() * -20 + 20;

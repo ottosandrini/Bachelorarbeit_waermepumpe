@@ -174,9 +174,36 @@ function drawParams(c, xoffset, yoffset){
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    var HP = document.getElementById("HeatPump");
-    if (HP) {  
-      var c = HP.getContext("2d");
+    var HPR = document.getElementById("HeatPumpReal");
+    if (HPR) {  
+      var c = HPR.getContext("2d");
+      var xoffset = 50;
+      var yoffset = 10;
+      // draw compressor
+      var compx = 450+xoffset;
+      var compy = 45+yoffset;
+      drawCompressor(c, compx, compy);
+      // draw Evaporator
+      var evax = 100+xoffset;
+      var evay = 250+yoffset;
+      drawHeatExchanger2(c, evax, evay);
+      // draw condenser
+      var cdx = 700+xoffset;
+      var cdy = 250+yoffset;
+      drawHeatExchanger1(c, cdx, cdy);
+      // draw expansion valve
+      var evx = 450+xoffset;
+      var evy = 650+yoffset;
+      drawValve(c, evx, evy);
+      line1(c, evax+55,evay,compx-40,compy,0);
+      line2(c, compx+40, compy, cdx+55, cdy, 0);
+      line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
+      line4(c, evx-30, evy, evax+55, evay+180, 0);
+      drawParams(c, xoffset, yoffset);
+    }
+    var HPS = document.getElementById("HeatPumpSim");
+    if (HPS) {  
+      var c = HPS.getContext("2d");
       var xoffset = 50;
       var yoffset = 10;
       // draw compressor

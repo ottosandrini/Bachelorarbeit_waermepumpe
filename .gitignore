@@ -48,3 +48,5 @@ cython_debug/
 
 Termine
 .pdm-python
+# push script
+push.sh
