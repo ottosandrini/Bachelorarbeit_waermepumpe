@@ -50,3 +50,5 @@ Termine
 .pdm-python
 # push script
 push.sh
+
+*.svg
