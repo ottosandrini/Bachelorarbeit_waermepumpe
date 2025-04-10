@@ -9,52 +9,91 @@ import logging
     screen_level=logging.INFO, file_level=logging.DEBUG
 );()  # +doctest: ELIPSIS
 
-tanktemp = 15
-tankvol = 50
+# Systemparameter
+working_fluid = "n-propane"
+tanktemp = 288          # °K
+tankvol = 50            # L
+wq_pump_power = 50      # W
+ww_pump_power = 50      # W
+compressor_power = 500 # W
+
 
 heatpump = Network()
-
 heatpump.set_attr(T_unit='C', p_unit='bar', h_unit='kJ / kg', iterinfo=True)
 
-cc = com.CycleCloser('cycle closer')
 # Heatpump components
-evap = com.HeatExchanger('evaporator')
-cond = com.HeatExchanger('condenser')
-exva = com.Valve('expansionValve')
-comp = com.Compressor('compressor')
-comp.set_attr(pr=5)
-# Heatpump pipes
-pipe1 = com.Pipe('pipe1')
-pipe2 = com.Pipe('pipe2')
-pipe3 = com.Pipe('pipe3')
-pipe4 = com.Pipe('pipe4')
-
+cc = com.CycleCloser('cycle closer')
+evaporator = com.HeatExchanger('evaporator')
+evaporator.set_attr(pr1=0.99, pr2=0.99)
+condenser = com.HeatExchanger('condenser')
+condenser.set_attr(pr1=0.99, pr2=0.99)
+expansionvalve = com.Valve('expansionValve')
+expansionvalve.set_attr(pr=0.15)
+compressor = com.Compressor('compressor')
+compressor.set_attr(eta_s=0.85, P=compressor_power)
 # connect the heatpump
-conn1 = Connection(comp, 'out1', pipe1, 'in1')
-conn2 = Connection(pipe1, 'out1', cond, 'in1')
-conn3 = Connection(cond, 'out1', pipe2, 'in1')
-conn4 = Connection(pipe2, 'out1', exva, 'in1')
-conn5 = Connection(exva, 'out1', pipe3, 'in1')
-conn6 = Connection(pipe3, 'out1', evap, 'in1')
-conn7 = Connection(evap, 'out1', pipe4, 'in1')
-conn8 = Connection(pipe4, 'out1', comp, 'in1')
+conn0 = Connection(cc, 'out1', compressor, 'in1')
+conn1 = Connection(compressor, 'out1', condenser, 'in1')
+conn2 = Connection(condenser, 'out1', expansionvalve, 'in1')
+conn3 = Connection(expansionvalve, 'out1', evaporator, 'in2')
+conn4 = Connection(evaporator, 'out2', cc, 'in1')
 
-#rest of the heating system
+conn4.set_attr(T=20, x=1, fluid={'propane':1})
+conn2.set_attr(T=80, x=0)
+#HEATING SYSTEM
+#pufferspeicher
+tank_in_h = com.Sink('tank_in_h')
+tank_out_h = com.Source('tank_out_h')
+tank_in_c = com.Sink('tank_in_c')
+tank_out_c = com.Source('tank_out_c')
 
-tank_in = com.Sink('tank_in')
-tank_out = com.Source('tank_out')
+# waermequellenseite
+reg_valve_1 = com.Valve('reg_valve_1')
+reg_valve_1.set_attr(pr=0.85)
+merge1 = com.Merge('merge1')
+split1 = com.Splitter('split1')
+p1 = com.Pump('p1')
+p1.set_attr(eta_s=0.75, P=wq_pump_power)
+
+# vor und ruecklauf
+reg_valve_2 = com.Valve('reg_valve_2')
+reg_valve_2.set_attr(pr=0.85)
+merge2 = com.Merge('merge2')
+split2 = com.Splitter('split2')
+p2 = com.Pump('p2')
+p2.set_attr(eta_s=0.75, P=ww_pump_power)
+
+# connections wq-side ??? Does this work???
+wq1 = Connection(tank_out_h, 'out1', merge1, 'in1')
+wq2 = Connection(merge1, 'out1', p1, 'in1')
+wq3 = Connection(p1, 'out1', evaporator, 'in1')
+wq4 = Connection(evaporator, 'out1', split1, 'in1')
+wq5 = Connection(split1, 'out1', reg_valve_1, 'in1')
+wq6 = Connection(reg_valve_1, 'out1', merge1, 'in2')
+wq7 = Connection(split1, 'out2', tank_in_h, 'in1')
+
+#speichertemp
+wq1.set_attr(T=tanktemp, p=1.2, fluid={'water': 1})
+#wq7.set_attr(T=tanktemp-2)
+
+# connections heating circuit
+ww1 = Connection(tank_out_c, 'out1', merge2, 'in1')
+ww2 = Connection(merge2, 'out1', p2, 'in1')
+ww3 = Connection(p2, 'out1', condenser, 'in2')
+ww4 = Connection(condenser, 'out2', split2, 'in1')
+ww5 = Connection(split2, 'out1', reg_valve_2, 'in1')
+ww6 = Connection(reg_valve_2, 'out1', merge2, 'in2')
+ww7 = Connection(split2, 'out2', tank_in_c, 'in1')
+
+#speichertemp
+ww1.set_attr(T=tanktemp, p=1.2, fluid={'water': 1})
+#ww7.set_attr(T=tanktemp+2, p=1)
 
 
 
-
-heatpump.add_conns(conn1, conn2, conn3, conn4, conn5, conn6, conn7, conn8)
+heatpump.add_conns(conn0, conn1, conn2, conn3, conn4, ww1, ww2, ww3, ww4, ww5, ww6, ww7, wq1, wq2, wq3, wq4, wq5, wq6, wq7)
 heatpump.solve("design")
 heatpump.print_components
 print("------------         RESULTS           ---------------")
 heatpump.print_results
-# fluid is n-Propane
-# hydraulic system components
 
-
-
-# look at tespy docs more

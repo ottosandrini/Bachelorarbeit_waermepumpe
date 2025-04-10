@@ -1,0 +1,41 @@
+2025-03-24 14:48:44,980 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-03-24 14:48:44,980 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-03-24 14:48:44,985 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-03-24 14:48:44,985 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-03-24 14:48:44,985 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-03-24 14:48:44,985 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-03-24 14:48:44,985 - DEBUG - network - Setting pressure unit: bar.
+2025-03-24 14:48:44,985 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-03-24 14:48:44,986 - DEBUG - network - Setting temperature unit: C.
+2025-03-24 14:48:44,986 - DEBUG - connection - Created connection from compressor (out1) to pipe1 (in1).
+2025-03-24 14:48:44,987 - DEBUG - connection - Created connection from pipe1 (out1) to condenser (in1).
+2025-03-24 14:48:44,987 - DEBUG - connection - Created connection from condenser (out1) to pipe2 (in1).
+2025-03-24 14:48:44,987 - DEBUG - connection - Created connection from pipe2 (out1) to expansionValve (in1).
+2025-03-24 14:48:44,987 - DEBUG - connection - Created connection from expansionValve (out1) to pipe3 (in1).
+2025-03-24 14:48:44,987 - DEBUG - connection - Created connection from pipe3 (out1) to evaporator (in1).
+2025-03-24 14:48:44,988 - DEBUG - connection - Created connection from evaporator (out1) to pipe4 (in1).
+2025-03-24 14:48:44,988 - DEBUG - connection - Created connection from pipe4 (out1) to compressor (in1).
+2025-03-24 14:48:44,988 - DEBUG - network - Added connection compressor:out1_pipe1:in1 to network.
+2025-03-24 14:48:44,989 - DEBUG - network - Added connection pipe1:out1_condenser:in1 to network.
+2025-03-24 14:48:44,989 - DEBUG - network - Added connection condenser:out1_pipe2:in1 to network.
+2025-03-24 14:48:44,990 - DEBUG - network - Added connection pipe2:out1_expansionValve:in1 to network.
+2025-03-24 14:48:44,991 - DEBUG - network - Added connection expansionValve:out1_pipe3:in1 to network.
+2025-03-24 14:48:44,992 - DEBUG - network - Added connection pipe3:out1_evaporator:in1 to network.
+2025-03-24 14:48:44,992 - DEBUG - network - Added connection evaporator:out1_pipe4:in1 to network.
+2025-03-24 14:48:44,993 - DEBUG - network - Added connection pipe4:out1_compressor:in1 to network.
+2025-03-24 14:48:45,013 - ERROR - network - The component condenser is missing 1 outgoing connections. Make sure all outlets are connected and all connections have been added to the network.
