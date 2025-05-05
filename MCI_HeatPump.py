@@ -10,12 +10,13 @@ import logging
 );()  # +doctest: ELIPSIS
 
 # Systemparameter
-working_fluid = "n-propane"
+#working_fluid = "propane"
+working_fluid = "R410a"
 tanktemp = 288          # °K
 tankvol = 50            # L
 wq_pump_power = 50      # W
 ww_pump_power = 50      # W
-compressor_power = 500 # W
+compressor_power = 1140 # W
 
 
 heatpump = Network()
@@ -26,7 +27,8 @@ cc = com.CycleCloser('cycle closer')
 evaporator = com.HeatExchanger('evaporator')
 evaporator.set_attr(pr1=0.99, pr2=0.99)
 condenser = com.HeatExchanger('condenser')
-condenser.set_attr(pr1=0.99, pr2=0.99)
+#condenser.set_attr(pr1=0.99, pr2=0.99, Q=-1e-5)
+condenser.set_attr(Q=1)
 expansionvalve = com.Valve('expansionValve')
 expansionvalve.set_attr(pr=0.15)
 compressor = com.Compressor('compressor')
@@ -38,7 +40,7 @@ conn2 = Connection(condenser, 'out1', expansionvalve, 'in1')
 conn3 = Connection(expansionvalve, 'out1', evaporator, 'in2')
 conn4 = Connection(evaporator, 'out2', cc, 'in1')
 
-conn4.set_attr(T=20, x=1, fluid={'propane':1})
+conn4.set_attr(T=20, x=1, fluid={working_fluid:1})
 conn2.set_attr(T=80, x=0)
 #HEATING SYSTEM
 #pufferspeicher
@@ -93,7 +95,7 @@ ww1.set_attr(T=tanktemp, p=1.2, fluid={'water': 1})
 
 heatpump.add_conns(conn0, conn1, conn2, conn3, conn4, ww1, ww2, ww3, ww4, ww5, ww6, ww7, wq1, wq2, wq3, wq4, wq5, wq6, wq7)
 heatpump.solve("design")
-heatpump.print_components
+#heatpump.print_components()
 print("------------         RESULTS           ---------------")
-heatpump.print_results
+heatpump.print_results()
 

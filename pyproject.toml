@@ -7,7 +7,7 @@ authors = [
 ]
 dependencies = [
     "contourpy==1.2.0",
-    "CoolProp==6.6.0",
+    "CoolProp>=6.7.0",
     "cycler==0.12.1",
     "deprecation==2.1.0",
     "fonttools==4.49.0",
@@ -29,6 +29,7 @@ dependencies = [
     "tespy==0.7.2.post2",
     "tzdata==2024.1",
     "streamlit>=1.42.2",
+    "fluprodia>=3.5.1",
 ]
 requires-python = ">=3.12"
 readme = "README.md"

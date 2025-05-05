@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:0a95eaf1616d53ed8695df1911145ed9c8e21526268c79870b351413561534fd"
+content_hash = "sha256:5866c61625f3cacb7389c7aeaf7ce73280d4b299ea9dd02848ba4eda993b025f"
 
 [[metadata.targets]]
 requires_python = ">=3.12"
@@ -161,19 +161,27 @@ files = [
 
 [[package]]
 name = "coolprop"
-version = "6.6.0"
+version = "6.7.0"
 summary = "Open-source thermodynamic and transport properties database"
 groups = ["default"]
 files = [
-    {file = "CoolProp-6.6.0-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:2f738c22f4c81d7bc91567fe101502c5106cefc98a9afe884be72cf6908b3b7f"},
-    {file = "CoolProp-6.6.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:e2ef2de94f51ec8f095fe772cdb22593245feeb7df76d3616eb19c5da1d4ac7f"},
-    {file = "CoolProp-6.6.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:48f3de22cfbdb31e9a2f19aefb8074c25c57abba7ba6302eb331694e7bcc4b11"},
-    {file = "CoolProp-6.6.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:50f3339c3d590d2c86f9f2c055b9423001653344958000b8dcf7655710a5adee"},
-    {file = "CoolProp-6.6.0-cp312-cp312-musllinux_1_1_aarch64.whl", hash = "sha256:c556df424dcf93ce2e4b41f1f52537b94050ddf595df67eb7a76a1dd0d92263e"},
-    {file = "CoolProp-6.6.0-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:75dd59ea068a6385977815b0572dd824f8cb932a97432737392e3aba11782210"},
-    {file = "CoolProp-6.6.0-cp312-cp312-win32.whl", hash = "sha256:bfc5729c00376c00b33538d4685f4243ea43e69d618f2edd31729003a0fb1440"},
-    {file = "CoolProp-6.6.0-cp312-cp312-win_amd64.whl", hash = "sha256:809a8572515009a42386ce7381f7d11fd5c785657637cb402f722edf266a6fb3"},
-    {file = "CoolProp-6.6.0.tar.gz", hash = "sha256:cf6fad704b3ae00f4df309cfd1e2ee48d155886b569a73f2cc38a57eda463082"},
+    {file = "CoolProp-6.7.0-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:f81e14d17ecbb72942c9d0a7a216c47626138d51198118af0c77a992b0865c17"},
+    {file = "CoolProp-6.7.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:af655c4410b20fdd65322d6770bc30f4b01e461abd00ac3ccbcb9fa7dc71b87b"},
+    {file = "CoolProp-6.7.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:293aa9e721bdc0fab1912a8d732a32c9b346a97eb4a4e69d17655e25ad8b8a4a"},
+    {file = "CoolProp-6.7.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f318cf5f6cbf6629a15e126b23f4c83d2f97eec5753553408e85840b10f4115f"},
+    {file = "CoolProp-6.7.0-cp312-cp312-musllinux_1_2_aarch64.whl", hash = "sha256:230c30cf51ab47d4ed18fbc8f6a4a3479b498acbf4ca88beceabe307619843d8"},
+    {file = "CoolProp-6.7.0-cp312-cp312-musllinux_1_2_x86_64.whl", hash = "sha256:18b91d89b29a2b74c52cb08d0d0f289a3b26ef5f88199cc6db5503d09e9e11b0"},
+    {file = "CoolProp-6.7.0-cp312-cp312-win32.whl", hash = "sha256:edcb45a8ecba126fd3580735bd3dde603cfd79c500e1792782646a7141ed2989"},
+    {file = "CoolProp-6.7.0-cp312-cp312-win_amd64.whl", hash = "sha256:8072086925bda20285f1915be4a9cd04da874aac314003d838a787e8d9ed5b84"},
+    {file = "CoolProp-6.7.0-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:b3f66bb2ad2331652da21f2b3537207857515f0f0aba6214348a3a94f2ec4382"},
+    {file = "CoolProp-6.7.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:a450316dc1bcaa21d042ef69a3bd8fd222ca33b45e0e638ba161a62c6386cfad"},
+    {file = "CoolProp-6.7.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:5b464e267b47f2ffa46a612b81e284fd083b861370c4b8eb1a64bf12af6b665d"},
+    {file = "CoolProp-6.7.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:bd0d7f545bcb7798b14786389165f0b55495dd2ffecd1e896a0e3c1412a59e28"},
+    {file = "CoolProp-6.7.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:f501708660d9d10a89b7fca7149ffdc17ea1bf594978c7e048467426e4745293"},
+    {file = "CoolProp-6.7.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:23d4b310cb0c3fb1580471f396def346f30365415761659b2dd4436e0c9a7e5c"},
+    {file = "CoolProp-6.7.0-cp313-cp313-win32.whl", hash = "sha256:5a34fb2a765acb8300f675174db3b9769f3154b5ad97fdabf7c0fcaa125d1707"},
+    {file = "CoolProp-6.7.0-cp313-cp313-win_amd64.whl", hash = "sha256:33182a01d744883e647cba5bbfa70df586db9370bddec932fce17782bbd37deb"},
+    {file = "coolprop-6.7.0.tar.gz", hash = "sha256:309bbd5f490afa798f12bc94067c56779ad82712319a0f5d70b97e23b387f778"},
 ]
 
 [[package]]
@@ -198,6 +206,21 @@ dependencies = [
 files = [
     {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
     {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
+]
+
+[[package]]
+name = "fluprodia"
+version = "3.5.1"
+requires_python = ">=3.9"
+summary = "Create beautiful fluid property diagrams using CoolProp and matplotlib"
+groups = ["default"]
+dependencies = [
+    "CoolProp>=6.4",
+    "numpy>=1.13.3",
+]
+files = [
+    {file = "fluprodia-3.5.1-py3-none-any.whl", hash = "sha256:3cb194ce5d6cd7bc4a7b6781e2fdef12a09b8f037febe8ca9b389727abccc52e"},
+    {file = "fluprodia-3.5.1.tar.gz", hash = "sha256:aa4f5db5c6d40c956230603ee4ca10145a2f9d77c22cbcd9923f35f964e030f8"},
 ]
 
 [[package]]
