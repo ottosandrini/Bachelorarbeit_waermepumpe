@@ -1,0 +1,2236 @@
+2025-05-04 12:36:58,341 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 12:36:58,341 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 12:36:58,867 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 12:37:04,498 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 12:37:04,499 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 12:37:04,499 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 12:37:04,499 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 12:37:04,499 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 12:37:04,499 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 12:37:04,499 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 12:37:04,502 - DEBUG - connection - Created connection from tank_out_h (out1) to condensertest (in2).
+2025-05-04 12:37:04,503 - DEBUG - connection - Created connection from tank_out_c (out1) to evaporatortest (in1).
+2025-05-04 12:37:04,503 - DEBUG - connection - Created connection from condensertest (out2) to tank_in_h (in1).
+2025-05-04 12:37:04,504 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_c (in1).
+2025-05-04 12:37:04,505 - DEBUG - connection - Created connection from cycle closer (out1) to compressor (in1).
+2025-05-04 12:37:04,505 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 12:37:04,506 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 12:37:04,506 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in2).
+2025-05-04 12:37:04,507 - DEBUG - connection - Created connection from evaporatortest (out2) to cycle closer (in1).
+2025-05-04 12:37:04,508 - DEBUG - network - Added connection cycle closer:out1_compressor:in1 to network.
+2025-05-04 12:37:04,509 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 12:37:04,510 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 12:37:04,511 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in2 to network.
+2025-05-04 12:37:04,511 - DEBUG - network - Added connection evaporatortest:out2_cycle closer:in1 to network.
+2025-05-04 12:37:04,512 - DEBUG - network - Added connection tank_out_c:out1_evaporatortest:in1 to network.
+2025-05-04 12:37:04,512 - DEBUG - network - Added connection tank_out_h:out1_condensertest:in2 to network.
+2025-05-04 12:37:04,513 - DEBUG - network - Added connection evaporatortest:out1_tank_in_c:in1 to network.
+2025-05-04 12:37:04,514 - DEBUG - network - Added connection condensertest:out2_tank_in_h:in1 to network.
+2025-05-04 12:37:04,541 - INFO - network - Networkcheck successful.
+2025-05-04 12:37:04,541 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: None
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 12:37:04,541 - DEBUG - network - Network information:
+ - Number of components: 9
+ - Number of connections: 9
+ - Number of busses: 0
+2025-05-04 12:37:04,542 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 12:37:04,542 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 12:37:04,545 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 12:37:04,545 - DEBUG - component - The component tank_in_c has 0 variables.
+2025-05-04 12:37:04,545 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 12:37:04,546 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 12:37:04,546 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 12:37:04,547 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 12:37:04,547 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 12:37:04,547 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 12:37:04,548 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 12:37:04,548 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 12:37:04,548 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 12:37:04,549 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 12:37:04,549 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 12:37:04,550 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 12:37:04,550 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 12:37:04,551 - DEBUG - component - The component tank_out_c has 0 variables.
+2025-05-04 12:37:04,551 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 12:37:04,551 - DEBUG - component - The component cycle closer has 0 variables.
+2025-05-04 12:37:04,565 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 12:37:04,565 - INFO - network - Network initialised.
+2025-05-04 12:37:04,565 - INFO - network - Starting solver.
+2025-05-04 12:37:04,565 - DEBUG - network - Number of connection equations: 4.
+2025-05-04 12:37:04,565 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 12:37:04,565 - DEBUG - network - Number of component equations: 8.
+2025-05-04 12:37:04,565 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 12:37:04,565 - DEBUG - network - Total number of variables: 14.
+2025-05-04 12:37:04,565 - DEBUG - network - Number of component variables: 0.
+2025-05-04 12:37:04,565 - DEBUG - network - Number of connection variables: 14.
+2025-05-04 12:37:04,565 - ERROR - network - You have not provided enough parameters: 14 required, 12 supplied. Aborting calculation!
+2025-05-04 14:14:17,221 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 14:14:17,221 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 14:14:17,746 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 14:14:19,149 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 14:14:19,149 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 14:14:19,149 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 14:14:19,149 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 14:14:19,149 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 14:14:19,149 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 14:14:19,149 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 14:14:19,150 - DEBUG - connection - Created connection from tank_out_h (out1) to condensertest (in2).
+2025-05-04 14:14:19,150 - DEBUG - connection - Created connection from tank_out_c (out1) to evaporatortest (in1).
+2025-05-04 14:14:19,150 - DEBUG - connection - Created connection from condensertest (out2) to tank_in_h (in1).
+2025-05-04 14:14:19,150 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_c (in1).
+2025-05-04 14:14:19,150 - DEBUG - connection - Created connection from cycle closer (out1) to compressor (in1).
+2025-05-04 14:14:19,151 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 14:14:19,151 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 14:14:19,151 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in2).
+2025-05-04 14:14:19,151 - DEBUG - connection - Created connection from evaporatortest (out2) to cycle closer (in1).
+2025-05-04 14:14:19,152 - DEBUG - network - Added connection cycle closer:out1_compressor:in1 to network.
+2025-05-04 14:14:19,153 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 14:14:19,154 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 14:14:19,155 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in2 to network.
+2025-05-04 14:14:19,155 - DEBUG - network - Added connection evaporatortest:out2_cycle closer:in1 to network.
+2025-05-04 14:14:19,156 - DEBUG - network - Added connection tank_out_h:out1_condensertest:in2 to network.
+2025-05-04 14:14:19,156 - DEBUG - network - Added connection tank_out_c:out1_evaporatortest:in1 to network.
+2025-05-04 14:14:19,157 - DEBUG - network - Added connection condensertest:out2_tank_in_h:in1 to network.
+2025-05-04 14:14:19,157 - DEBUG - network - Added connection evaporatortest:out1_tank_in_c:in1 to network.
+2025-05-04 14:14:19,182 - INFO - network - Networkcheck successful.
+2025-05-04 14:14:19,182 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: None
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 14:14:19,182 - DEBUG - network - Network information:
+ - Number of components: 9
+ - Number of connections: 9
+ - Number of busses: 0
+2025-05-04 14:14:19,184 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:14:19,184 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:14:19,190 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 14:14:19,190 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 14:14:19,190 - DEBUG - component - The component cycle closer has 0 variables.
+2025-05-04 14:14:19,191 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:14:19,191 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 14:14:19,192 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:14:19,192 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:14:19,192 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 14:14:19,193 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:14:19,194 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:14:19,194 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 14:14:19,195 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:14:19,195 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:14:19,195 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:14:19,195 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 14:14:19,197 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 14:14:19,197 - DEBUG - component - The component tank_in_c has 0 variables.
+2025-05-04 14:14:19,197 - DEBUG - component - The component tank_out_c has 0 variables.
+2025-05-04 14:14:19,210 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 14:14:19,210 - INFO - network - Network initialised.
+2025-05-04 14:14:19,210 - INFO - network - Starting solver.
+2025-05-04 14:14:19,210 - DEBUG - network - Number of connection equations: 4.
+2025-05-04 14:14:19,210 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 14:14:19,210 - DEBUG - network - Number of component equations: 9.
+2025-05-04 14:14:19,210 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 14:14:19,210 - DEBUG - network - Total number of variables: 14.
+2025-05-04 14:14:19,210 - DEBUG - network - Number of component variables: 0.
+2025-05-04 14:14:19,210 - DEBUG - network - Number of connection variables: 14.
+2025-05-04 14:14:19,210 - ERROR - network - You have not provided enough parameters: 14 required, 13 supplied. Aborting calculation!
+2025-05-04 14:30:50,325 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 14:30:50,325 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 14:30:50,876 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 14:30:52,130 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 14:30:52,130 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 14:30:52,130 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 14:30:52,130 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 14:30:52,130 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 14:30:52,130 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 14:30:52,130 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 14:30:52,131 - DEBUG - connection - Created connection from tank_out_h (out1) to condensertest (in2).
+2025-05-04 14:30:52,132 - DEBUG - connection - Created connection from tank_out_c (out1) to evaporatortest (in1).
+2025-05-04 14:30:52,132 - DEBUG - connection - Created connection from condensertest (out2) to tank_in_h (in1).
+2025-05-04 14:30:52,133 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_c (in1).
+2025-05-04 14:30:52,133 - DEBUG - connection - Created connection from cycle closer (out1) to compressor (in1).
+2025-05-04 14:30:52,133 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 14:30:52,133 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 14:30:52,134 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in2).
+2025-05-04 14:30:52,134 - DEBUG - connection - Created connection from evaporatortest (out2) to cycle closer (in1).
+2025-05-04 14:30:52,135 - DEBUG - network - Added connection cycle closer:out1_compressor:in1 to network.
+2025-05-04 14:30:52,136 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 14:30:52,138 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 14:30:52,139 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in2 to network.
+2025-05-04 14:30:52,140 - DEBUG - network - Added connection evaporatortest:out2_cycle closer:in1 to network.
+2025-05-04 14:30:52,141 - DEBUG - network - Added connection tank_out_h:out1_condensertest:in2 to network.
+2025-05-04 14:30:52,141 - DEBUG - network - Added connection tank_out_c:out1_evaporatortest:in1 to network.
+2025-05-04 14:30:52,142 - DEBUG - network - Added connection condensertest:out2_tank_in_h:in1 to network.
+2025-05-04 14:30:52,143 - DEBUG - network - Added connection evaporatortest:out1_tank_in_c:in1 to network.
+2025-05-04 14:30:52,167 - INFO - network - Networkcheck successful.
+2025-05-04 14:30:52,167 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 14:30:52,167 - DEBUG - network - Network information:
+ - Number of components: 9
+ - Number of connections: 9
+ - Number of busses: 0
+2025-05-04 14:30:52,169 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:30:52,169 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:30:52,174 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 14:30:52,174 - DEBUG - component - The component tank_out_c has 0 variables.
+2025-05-04 14:30:52,175 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:30:52,175 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:30:52,175 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 14:30:52,176 - DEBUG - component - The component cycle closer has 0 variables.
+2025-05-04 14:30:52,177 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 14:30:52,177 - DEBUG - component - The component tank_in_c has 0 variables.
+2025-05-04 14:30:52,177 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 14:30:52,177 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:30:52,177 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:30:52,177 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:30:52,177 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 14:30:52,179 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:30:52,179 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:30:52,179 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 14:30:52,180 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:30:52,180 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 14:30:52,193 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 14:30:52,193 - INFO - network - Network initialised.
+2025-05-04 14:30:52,193 - INFO - network - Starting solver.
+2025-05-04 14:30:52,193 - DEBUG - network - Number of connection equations: 4.
+2025-05-04 14:30:52,193 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 14:30:52,193 - DEBUG - network - Number of component equations: 9.
+2025-05-04 14:30:52,193 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 14:30:52,193 - DEBUG - network - Total number of variables: 14.
+2025-05-04 14:30:52,193 - DEBUG - network - Number of component variables: 0.
+2025-05-04 14:30:52,193 - DEBUG - network - Number of connection variables: 14.
+2025-05-04 14:30:52,193 - ERROR - network - You have not provided enough parameters: 14 required, 13 supplied. Aborting calculation!
+2025-05-04 14:32:27,973 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 14:32:27,973 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 14:32:28,528 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 14:32:29,776 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 14:32:29,776 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 14:32:29,776 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 14:32:29,776 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 14:32:29,776 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 14:32:29,776 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 14:32:29,776 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 14:32:29,777 - DEBUG - connection - Created connection from tank_out_h (out1) to condensertest (in2).
+2025-05-04 14:32:29,777 - DEBUG - connection - Created connection from tank_out_c (out1) to evaporatortest (in1).
+2025-05-04 14:32:29,777 - DEBUG - connection - Created connection from condensertest (out2) to tank_in_h (in1).
+2025-05-04 14:32:29,778 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_c (in1).
+2025-05-04 14:32:29,778 - DEBUG - connection - Created connection from cycle closer (out1) to compressor (in1).
+2025-05-04 14:32:29,778 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 14:32:29,778 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 14:32:29,779 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in2).
+2025-05-04 14:32:29,779 - DEBUG - connection - Created connection from evaporatortest (out2) to cycle closer (in1).
+2025-05-04 14:32:29,780 - DEBUG - network - Added connection cycle closer:out1_compressor:in1 to network.
+2025-05-04 14:32:29,781 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 14:32:29,782 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 14:32:29,782 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in2 to network.
+2025-05-04 14:32:29,783 - DEBUG - network - Added connection evaporatortest:out2_cycle closer:in1 to network.
+2025-05-04 14:32:29,783 - DEBUG - network - Added connection tank_out_h:out1_condensertest:in2 to network.
+2025-05-04 14:32:29,784 - DEBUG - network - Added connection tank_out_c:out1_evaporatortest:in1 to network.
+2025-05-04 14:32:29,784 - DEBUG - network - Added connection condensertest:out2_tank_in_h:in1 to network.
+2025-05-04 14:32:29,784 - DEBUG - network - Added connection evaporatortest:out1_tank_in_c:in1 to network.
+2025-05-04 14:32:29,807 - INFO - network - Networkcheck successful.
+2025-05-04 14:32:29,807 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 14:32:29,807 - DEBUG - network - Network information:
+ - Number of components: 9
+ - Number of connections: 9
+ - Number of busses: 0
+2025-05-04 14:32:29,808 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:32:29,808 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:32:29,811 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 14:32:29,811 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:32:29,812 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:32:29,812 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 14:32:29,813 - DEBUG - component - The component tank_out_c has 0 variables.
+2025-05-04 14:32:29,813 - DEBUG - component - The component cycle closer has 0 variables.
+2025-05-04 14:32:29,814 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:32:29,814 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 14:32:29,815 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 14:32:29,815 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:32:29,815 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:32:29,815 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 14:32:29,817 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:32:29,817 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:32:29,817 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:32:29,817 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 14:32:29,819 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 14:32:29,819 - DEBUG - component - The component tank_in_c has 0 variables.
+2025-05-04 14:32:29,833 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 14:32:29,833 - INFO - network - Network initialised.
+2025-05-04 14:32:29,833 - INFO - network - Starting solver.
+2025-05-04 14:32:29,833 - DEBUG - network - Number of connection equations: 4.
+2025-05-04 14:32:29,833 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 14:32:29,833 - DEBUG - network - Number of component equations: 9.
+2025-05-04 14:32:29,833 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 14:32:29,833 - DEBUG - network - Total number of variables: 13.
+2025-05-04 14:32:29,833 - DEBUG - network - Number of component variables: 0.
+2025-05-04 14:32:29,833 - DEBUG - network - Number of connection variables: 13.
+2025-05-04 14:32:29,833 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 14:32:29,833 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 14:32:29,837 - PROGRESS - network -  1     | 1.57e+07   | 0 %        | NaN        | NaN        | NaN        | NaN        | NaN        
+2025-05-04 14:32:29,837 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 14:32:29,837 - DEBUG - network - Total iterations: 1, Calculation time: 0.00 s, Iterations per second: 297.83
+2025-05-04 14:32:29,837 - ERROR - network - Singularity in jacobian matrix, calculation aborted! Make sure your network does not have any linear dependencies in the parametrisation. Other reasons might be
+-> given temperature with given pressure in two phase region, try setting enthalpy instead or provide accurate starting value for pressure.
+-> given logarithmic temperature differences or kA-values for heat exchangers, 
+-> support better starting values.
+-> bad starting value for fuel mass flow of combustion chamber, provide small (near to zero, but not zero) starting value.
+2025-05-04 14:39:37,858 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 14:39:37,859 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 14:39:38,397 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 14:39:38,610 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 14:39:38,610 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 14:39:38,610 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 14:39:38,610 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 14:39:38,610 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 14:39:38,610 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 14:39:38,610 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 14:39:38,611 - ERROR - component - Component condensertest has no attribute pr.
+2025-05-04 14:39:46,828 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 14:39:46,828 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 14:39:47,367 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 14:39:47,576 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 14:39:47,576 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 14:39:47,576 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 14:39:47,576 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 14:39:47,577 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 14:39:47,577 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 14:39:47,577 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 14:39:47,577 - DEBUG - connection - Created connection from tank_out_h (out1) to condensertest (in2).
+2025-05-04 14:39:47,577 - DEBUG - connection - Created connection from tank_out_c (out1) to evaporatortest (in1).
+2025-05-04 14:39:47,577 - DEBUG - connection - Created connection from condensertest (out2) to tank_in_h (in1).
+2025-05-04 14:39:47,578 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_c (in1).
+2025-05-04 14:39:47,578 - DEBUG - connection - Created connection from cycle closer (out1) to compressor (in1).
+2025-05-04 14:39:47,578 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 14:39:47,578 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 14:39:47,578 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in2).
+2025-05-04 14:39:47,578 - DEBUG - connection - Created connection from evaporatortest (out2) to cycle closer (in1).
+2025-05-04 14:39:47,579 - DEBUG - network - Added connection cycle closer:out1_compressor:in1 to network.
+2025-05-04 14:39:47,579 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 14:39:47,580 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 14:39:47,580 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in2 to network.
+2025-05-04 14:39:47,581 - DEBUG - network - Added connection evaporatortest:out2_cycle closer:in1 to network.
+2025-05-04 14:39:47,581 - DEBUG - network - Added connection tank_out_h:out1_condensertest:in2 to network.
+2025-05-04 14:39:47,582 - DEBUG - network - Added connection tank_out_c:out1_evaporatortest:in1 to network.
+2025-05-04 14:39:47,582 - DEBUG - network - Added connection condensertest:out2_tank_in_h:in1 to network.
+2025-05-04 14:39:47,582 - DEBUG - network - Added connection evaporatortest:out1_tank_in_c:in1 to network.
+2025-05-04 14:39:47,602 - INFO - network - Networkcheck successful.
+2025-05-04 14:39:47,602 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 14:39:47,602 - DEBUG - network - Network information:
+ - Number of components: 9
+ - Number of connections: 9
+ - Number of busses: 0
+2025-05-04 14:39:47,603 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:39:47,603 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 14:39:47,605 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 14:39:47,605 - DEBUG - component - The component tank_in_c has 0 variables.
+2025-05-04 14:39:47,605 - DEBUG - component - The component tank_out_c has 0 variables.
+2025-05-04 14:39:47,605 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:39:47,605 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 14:39:47,606 - DEBUG - component - The component cycle closer has 0 variables.
+2025-05-04 14:39:47,607 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:39:47,607 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:39:47,607 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 14:39:47,607 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 14:39:47,609 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 14:39:47,609 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:39:47,609 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:39:47,609 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 14:39:47,610 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 14:39:47,610 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:39:47,610 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 14:39:47,610 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 14:39:47,623 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 14:39:47,623 - INFO - network - Network initialised.
+2025-05-04 14:39:47,623 - INFO - network - Starting solver.
+2025-05-04 14:39:47,623 - DEBUG - network - Number of connection equations: 4.
+2025-05-04 14:39:47,623 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 14:39:47,623 - DEBUG - network - Number of component equations: 10.
+2025-05-04 14:39:47,623 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 14:39:47,623 - DEBUG - network - Total number of variables: 14.
+2025-05-04 14:39:47,623 - DEBUG - network - Number of component variables: 0.
+2025-05-04 14:39:47,623 - DEBUG - network - Number of connection variables: 14.
+2025-05-04 14:39:47,623 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 14:39:47,623 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 14:39:47,625 - PROGRESS - network -  1     | 1.54e+07   | 0 %        | NaN        | NaN        | NaN        | NaN        | NaN        
+2025-05-04 14:39:47,625 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 14:39:47,625 - DEBUG - network - Total iterations: 1, Calculation time: 0.00 s, Iterations per second: 484.61
+2025-05-04 14:39:47,625 - ERROR - network - Singularity in jacobian matrix, calculation aborted! Make sure your network does not have any linear dependencies in the parametrisation. Other reasons might be
+-> given temperature with given pressure in two phase region, try setting enthalpy instead or provide accurate starting value for pressure.
+-> given logarithmic temperature differences or kA-values for heat exchangers, 
+-> support better starting values.
+-> bad starting value for fuel mass flow of combustion chamber, provide small (near to zero, but not zero) starting value.
+2025-05-04 14:39:47,625 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 14:39:47,633 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 14:39:47,633 - DEBUG - network - Component information (Sink) saved to ./designstate/components/Sink.csv.
+2025-05-04 14:39:47,634 - DEBUG - network - Component information (Source) saved to ./designstate/components/Source.csv.
+2025-05-04 14:39:47,634 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 14:39:47,634 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 14:39:47,634 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 14:39:47,635 - DEBUG - network - Component information (HeatExchanger) saved to ./designstate/components/HeatExchanger.csv.
+2025-05-04 14:39:47,635 - DEBUG - network - Component information (Condenser) saved to ./designstate/components/Condenser.csv.
+2025-05-04 15:10:51,722 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:10:51,722 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:10:52,249 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:10:52,461 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:10:52,462 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:10:52,462 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:10:52,462 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:10:52,462 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:10:52,462 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:10:52,462 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:10:52,462 - DEBUG - connection - Created connection from tank_out_h (out1) to condensertest (in2).
+2025-05-04 15:10:52,462 - DEBUG - connection - Created connection from tank_out_c (out1) to evaporatortest (in1).
+2025-05-04 15:10:52,462 - DEBUG - connection - Created connection from condensertest (out2) to tank_in_h (in1).
+2025-05-04 15:10:52,463 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_c (in1).
+2025-05-04 15:10:52,463 - DEBUG - connection - Created connection from cycle closer (out1) to compressor (in1).
+2025-05-04 15:10:52,463 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:10:52,463 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:10:52,463 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in2).
+2025-05-04 15:10:52,463 - DEBUG - connection - Created connection from evaporatortest (out2) to cycle closer (in1).
+2025-05-04 15:10:52,464 - DEBUG - network - Added connection cycle closer:out1_compressor:in1 to network.
+2025-05-04 15:10:52,464 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:10:52,465 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:10:52,465 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in2 to network.
+2025-05-04 15:10:52,466 - DEBUG - network - Added connection evaporatortest:out2_cycle closer:in1 to network.
+2025-05-04 15:10:52,467 - DEBUG - network - Added connection tank_out_h:out1_condensertest:in2 to network.
+2025-05-04 15:10:52,467 - DEBUG - network - Added connection tank_out_c:out1_evaporatortest:in1 to network.
+2025-05-04 15:10:52,468 - DEBUG - network - Added connection condensertest:out2_tank_in_h:in1 to network.
+2025-05-04 15:10:52,468 - DEBUG - network - Added connection evaporatortest:out1_tank_in_c:in1 to network.
+2025-05-04 15:10:52,497 - INFO - network - Networkcheck successful.
+2025-05-04 15:10:52,497 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:10:52,497 - DEBUG - network - Network information:
+ - Number of components: 9
+ - Number of connections: 9
+ - Number of busses: 0
+2025-05-04 15:10:52,499 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 15:10:52,499 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 15:10:52,502 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:10:52,502 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:10:52,502 - DEBUG - component - The component tank_in_c has 0 variables.
+2025-05-04 15:10:52,502 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:10:52,503 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:10:52,503 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:10:52,505 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:10:52,505 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:10:52,505 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:10:52,506 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:10:52,506 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:10:52,507 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:10:52,507 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:10:52,507 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:10:52,509 - DEBUG - component - The component tank_out_c has 0 variables.
+2025-05-04 15:10:52,509 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:10:52,509 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:10:52,510 - DEBUG - component - The component cycle closer has 0 variables.
+2025-05-04 15:10:52,528 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:10:52,528 - INFO - network - Network initialised.
+2025-05-04 15:10:52,528 - INFO - network - Starting solver.
+2025-05-04 15:10:52,528 - DEBUG - network - Number of connection equations: 4.
+2025-05-04 15:10:52,528 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:10:52,528 - DEBUG - network - Number of component equations: 9.
+2025-05-04 15:10:52,528 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:10:52,528 - DEBUG - network - Total number of variables: 13.
+2025-05-04 15:10:52,528 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:10:52,528 - DEBUG - network - Number of connection variables: 13.
+2025-05-04 15:10:52,528 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:10:52,528 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:10:52,531 - PROGRESS - network -  1     | 1.54e+07   | 0 %        | NaN        | NaN        | NaN        | NaN        | NaN        
+2025-05-04 15:10:52,531 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:10:52,531 - DEBUG - network - Total iterations: 1, Calculation time: 0.00 s, Iterations per second: 311.82
+2025-05-04 15:10:52,532 - ERROR - network - Singularity in jacobian matrix, calculation aborted! Make sure your network does not have any linear dependencies in the parametrisation. Other reasons might be
+-> given temperature with given pressure in two phase region, try setting enthalpy instead or provide accurate starting value for pressure.
+-> given logarithmic temperature differences or kA-values for heat exchangers, 
+-> support better starting values.
+-> bad starting value for fuel mass flow of combustion chamber, provide small (near to zero, but not zero) starting value.
+2025-05-04 15:10:52,532 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:10:52,534 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:10:52,534 - DEBUG - network - Component information (Source) saved to ./designstate/components/Source.csv.
+2025-05-04 15:10:52,535 - DEBUG - network - Component information (Sink) saved to ./designstate/components/Sink.csv.
+2025-05-04 15:10:52,535 - DEBUG - network - Component information (HeatExchanger) saved to ./designstate/components/HeatExchanger.csv.
+2025-05-04 15:10:52,535 - DEBUG - network - Component information (Condenser) saved to ./designstate/components/Condenser.csv.
+2025-05-04 15:10:52,535 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:10:52,536 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:10:52,536 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 15:31:55,602 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:31:55,602 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:31:56,142 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:31:56,359 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:31:56,359 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:31:56,359 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:31:56,359 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:31:56,359 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:31:56,359 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:31:56,359 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:31:56,360 - DEBUG - connection - Created connection from tank_out_h (out1) to condensertest (in2).
+2025-05-04 15:31:56,360 - DEBUG - connection - Created connection from tank_out_c (out1) to evaporatortest (in1).
+2025-05-04 15:31:56,360 - DEBUG - connection - Created connection from condensertest (out2) to tank_in_h (in1).
+2025-05-04 15:31:56,360 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_c (in1).
+2025-05-04 15:31:56,360 - DEBUG - connection - Created connection from cycle closer (out1) to compressor (in1).
+2025-05-04 15:31:56,360 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:31:56,361 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:31:56,361 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in2).
+2025-05-04 15:31:56,361 - DEBUG - connection - Created connection from evaporatortest (out2) to cycle closer (in1).
+2025-05-04 15:31:56,361 - DEBUG - network - Added connection cycle closer:out1_compressor:in1 to network.
+2025-05-04 15:31:56,362 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:31:56,362 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:31:56,363 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in2 to network.
+2025-05-04 15:31:56,363 - DEBUG - network - Added connection evaporatortest:out2_cycle closer:in1 to network.
+2025-05-04 15:31:56,364 - DEBUG - network - Added connection tank_out_h:out1_condensertest:in2 to network.
+2025-05-04 15:31:56,364 - DEBUG - network - Added connection tank_out_c:out1_evaporatortest:in1 to network.
+2025-05-04 15:31:56,365 - DEBUG - network - Added connection condensertest:out2_tank_in_h:in1 to network.
+2025-05-04 15:31:56,365 - DEBUG - network - Added connection evaporatortest:out1_tank_in_c:in1 to network.
+2025-05-04 15:31:56,384 - INFO - network - Networkcheck successful.
+2025-05-04 15:31:56,384 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:31:56,384 - DEBUG - network - Network information:
+ - Number of components: 9
+ - Number of connections: 9
+ - Number of busses: 0
+2025-05-04 15:31:56,386 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 15:31:56,386 - DEBUG - network - Removing 1 mass flow variables from system variables.
+2025-05-04 15:31:56,387 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:31:56,388 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:31:56,388 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:31:56,388 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:31:56,389 - DEBUG - component - The component tank_out_c has 0 variables.
+2025-05-04 15:31:56,389 - DEBUG - component - The component tank_in_c has 0 variables.
+2025-05-04 15:31:56,389 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:31:56,389 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:31:56,389 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:31:56,389 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:31:56,391 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:31:56,391 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:31:56,392 - DEBUG - component - The component cycle closer has 0 variables.
+2025-05-04 15:31:56,393 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:31:56,393 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:31:56,394 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:31:56,394 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:31:56,394 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:31:56,408 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:31:56,408 - INFO - network - Network initialised.
+2025-05-04 15:31:56,408 - INFO - network - Starting solver.
+2025-05-04 15:31:56,408 - DEBUG - network - Number of connection equations: 4.
+2025-05-04 15:31:56,408 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:31:56,408 - DEBUG - network - Number of component equations: 9.
+2025-05-04 15:31:56,408 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:31:56,408 - DEBUG - network - Total number of variables: 13.
+2025-05-04 15:31:56,408 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:31:56,408 - DEBUG - network - Number of connection variables: 13.
+2025-05-04 15:31:56,408 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:31:56,408 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:31:56,410 - PROGRESS - network -  1     | 1.55e+07   | 0 %        | NaN        | NaN        | NaN        | NaN        | NaN        
+2025-05-04 15:31:56,410 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:31:56,410 - DEBUG - network - Total iterations: 1, Calculation time: 0.00 s, Iterations per second: 424.87
+2025-05-04 15:31:56,410 - ERROR - network - Singularity in jacobian matrix, calculation aborted! Make sure your network does not have any linear dependencies in the parametrisation. Other reasons might be
+-> given temperature with given pressure in two phase region, try setting enthalpy instead or provide accurate starting value for pressure.
+-> given logarithmic temperature differences or kA-values for heat exchangers, 
+-> support better starting values.
+-> bad starting value for fuel mass flow of combustion chamber, provide small (near to zero, but not zero) starting value.
+2025-05-04 15:31:56,411 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:31:56,412 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:31:56,412 - DEBUG - network - Component information (Condenser) saved to ./designstate/components/Condenser.csv.
+2025-05-04 15:31:56,413 - DEBUG - network - Component information (Source) saved to ./designstate/components/Source.csv.
+2025-05-04 15:31:56,413 - DEBUG - network - Component information (Sink) saved to ./designstate/components/Sink.csv.
+2025-05-04 15:31:56,413 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:31:56,415 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:31:56,415 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 15:31:56,415 - DEBUG - network - Component information (HeatExchanger) saved to ./designstate/components/HeatExchanger.csv.
+2025-05-04 15:32:38,341 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:32:38,341 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:32:38,870 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:32:39,083 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:32:39,083 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:32:39,083 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:32:39,083 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:32:39,083 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:32:39,083 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:32:39,083 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:32:39,083 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:32:39,083 - DEBUG - connection - Created connection from compressor (out1) to tank_in_h (in1).
+2025-05-04 15:32:39,084 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:32:39,084 - DEBUG - network - Added connection compressor:out1_tank_in_h:in1 to network.
+2025-05-04 15:32:39,092 - INFO - network - Networkcheck successful.
+2025-05-04 15:32:39,092 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:32:39,092 - DEBUG - network - Network information:
+ - Number of components: 3
+ - Number of connections: 2
+ - Number of busses: 0
+2025-05-04 15:32:39,094 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:32:39,094 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:32:39,095 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:32:39,095 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:32:39,095 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:32:39,095 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:32:39,096 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:32:39,099 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:32:39,099 - INFO - network - Network initialised.
+2025-05-04 15:32:39,099 - INFO - network - Starting solver.
+2025-05-04 15:32:39,099 - DEBUG - network - Number of connection equations: 1.
+2025-05-04 15:32:39,099 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:32:39,099 - DEBUG - network - Number of component equations: 2.
+2025-05-04 15:32:39,099 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:32:39,099 - DEBUG - network - Total number of variables: 4.
+2025-05-04 15:32:39,099 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:32:39,099 - DEBUG - network - Number of connection variables: 4.
+2025-05-04 15:32:39,099 - ERROR - network - You have not provided enough parameters: 4 required, 3 supplied. Aborting calculation!
+2025-05-04 15:32:58,822 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:32:58,822 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:32:59,374 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:32:59,592 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:32:59,592 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:32:59,592 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:32:59,592 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:32:59,592 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:32:59,592 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:32:59,592 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:32:59,593 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:32:59,593 - DEBUG - connection - Created connection from compressor (out1) to tank_in_h (in1).
+2025-05-04 15:32:59,593 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:32:59,594 - DEBUG - network - Added connection compressor:out1_tank_in_h:in1 to network.
+2025-05-04 15:32:59,602 - INFO - network - Networkcheck successful.
+2025-05-04 15:32:59,602 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:32:59,602 - DEBUG - network - Network information:
+ - Number of components: 3
+ - Number of connections: 2
+ - Number of busses: 0
+2025-05-04 15:32:59,604 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:32:59,604 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:32:59,604 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:32:59,604 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:32:59,605 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:32:59,606 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:32:59,606 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:32:59,609 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:32:59,609 - INFO - network - Network initialised.
+2025-05-04 15:32:59,609 - INFO - network - Starting solver.
+2025-05-04 15:32:59,609 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:32:59,609 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:32:59,609 - DEBUG - network - Number of component equations: 2.
+2025-05-04 15:32:59,609 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:32:59,609 - DEBUG - network - Total number of variables: 3.
+2025-05-04 15:32:59,609 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:32:59,609 - DEBUG - network - Number of connection variables: 3.
+2025-05-04 15:32:59,609 - ERROR - network - You have not provided enough parameters: 3 required, 2 supplied. Aborting calculation!
+2025-05-04 15:33:18,702 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:33:18,703 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:33:19,234 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:33:19,445 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:33:19,445 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:33:19,445 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:33:19,445 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:33:19,445 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:33:19,445 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:33:19,445 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:33:19,446 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:33:19,446 - DEBUG - connection - Created connection from compressor (out1) to tank_in_h (in1).
+2025-05-04 15:33:19,446 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:33:19,447 - DEBUG - network - Added connection compressor:out1_tank_in_h:in1 to network.
+2025-05-04 15:33:19,455 - INFO - network - Networkcheck successful.
+2025-05-04 15:33:19,455 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:33:19,455 - DEBUG - network - Network information:
+ - Number of components: 3
+ - Number of connections: 2
+ - Number of busses: 0
+2025-05-04 15:33:19,457 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:33:19,457 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:33:19,457 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:33:19,457 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:33:19,457 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:33:19,457 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:33:19,458 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:33:19,461 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:33:19,462 - INFO - network - Network initialised.
+2025-05-04 15:33:19,462 - INFO - network - Starting solver.
+2025-05-04 15:33:19,462 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:33:19,462 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:33:19,462 - DEBUG - network - Number of component equations: 1.
+2025-05-04 15:33:19,462 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:33:19,462 - DEBUG - network - Total number of variables: 3.
+2025-05-04 15:33:19,462 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:33:19,462 - DEBUG - network - Number of connection variables: 3.
+2025-05-04 15:33:19,462 - ERROR - network - You have not provided enough parameters: 3 required, 1 supplied. Aborting calculation!
+2025-05-04 15:34:02,788 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:34:02,789 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:34:03,339 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:34:03,567 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:34:03,567 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:34:03,567 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:34:03,567 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:34:03,567 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:34:03,567 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:34:03,567 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:34:03,568 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:34:03,568 - DEBUG - connection - Created connection from compressor (out1) to tank_in_h (in1).
+2025-05-04 15:34:03,568 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:34:03,569 - DEBUG - network - Added connection compressor:out1_tank_in_h:in1 to network.
+2025-05-04 15:34:03,577 - INFO - network - Networkcheck successful.
+2025-05-04 15:34:03,577 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:34:03,577 - DEBUG - network - Network information:
+ - Number of components: 3
+ - Number of connections: 2
+ - Number of busses: 0
+2025-05-04 15:34:03,578 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:34:03,579 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:34:03,579 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:34:03,579 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:34:03,579 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:34:03,579 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:34:03,579 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:34:03,583 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:34:03,583 - INFO - network - Network initialised.
+2025-05-04 15:34:03,583 - INFO - network - Starting solver.
+2025-05-04 15:34:03,583 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:34:03,583 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:34:03,583 - DEBUG - network - Number of component equations: 2.
+2025-05-04 15:34:03,583 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:34:03,583 - DEBUG - network - Total number of variables: 2.
+2025-05-04 15:34:03,583 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:34:03,583 - DEBUG - network - Number of connection variables: 2.
+2025-05-04 15:34:03,583 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:34:03,584 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:34:03,584 - PROGRESS - network -  1     | 1.10e+06   | 0 %        | 1.19e-01   | 0.00e+00   | 5.38e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:34:03,585 - PROGRESS - network -  2     | 6.40e+04   | 13 %       | 1.58e+00   | 0.00e+00   | 7.70e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:34:03,585 - PROGRESS - network -  3     | 1.22e-10   | 100 %      | 2.94e-15   | 0.00e+00   | 2.57e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:34:03,586 - PROGRESS - network -  4     | 2.18e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 2.57e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:34:03,586 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:34:03,586 - DEBUG - network - Total iterations: 4, Calculation time: 0.00 s, Iterations per second: 1781.59
+2025-05-04 15:34:03,589 - INFO - network - Postprocessing complete.
+2025-05-04 15:34:03,589 - INFO - network - Calculation complete.
+2025-05-04 15:34:03,590 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:34:03,591 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:34:03,592 - DEBUG - network - Component information (Source) saved to ./designstate/components/Source.csv.
+2025-05-04 15:34:03,592 - DEBUG - network - Component information (Sink) saved to ./designstate/components/Sink.csv.
+2025-05-04 15:34:03,592 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:34:03,595 - RESULT - network - 
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.50e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (Connection) #####
++--------------------------------+-----------+-----------+-----------+-----------+
+|                                |         m |         p |         h |         T |
+|--------------------------------+-----------+-----------+-----------+-----------|
+| tank_out_h:out1_compressor:in1 | 2.817e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_tank_in_h:in1  | 2.817e-02 | [94m2.800e+01[0m | 4.618e+02 | 3.434e+02 |
++--------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:39:38,607 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:39:38,607 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:39:39,169 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:39:39,386 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:39:39,386 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:39:39,387 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:39:39,387 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:39:39,387 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:39:39,387 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:39:39,387 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:39:39,387 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:39:39,387 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:39:39,387 - DEBUG - connection - Created connection from condensertest (out1) to tank_in_h (in1).
+2025-05-04 15:39:39,388 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:39:39,388 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:39:39,389 - DEBUG - network - Added connection condensertest:out1_tank_in_h:in1 to network.
+2025-05-04 15:39:39,400 - INFO - network - Networkcheck successful.
+2025-05-04 15:39:39,400 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:39:39,400 - DEBUG - network - Network information:
+ - Number of components: 4
+ - Number of connections: 3
+ - Number of busses: 0
+2025-05-04 15:39:39,401 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:39:39,402 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:39:39,402 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:39:39,402 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:39:39,402 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:39:39,404 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:39:39,404 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:39:39,404 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:39:39,404 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:39:39,409 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:39:39,409 - INFO - network - Network initialised.
+2025-05-04 15:39:39,409 - INFO - network - Starting solver.
+2025-05-04 15:39:39,409 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:39:39,409 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:39:39,409 - DEBUG - network - Number of component equations: 3.
+2025-05-04 15:39:39,409 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:39:39,409 - DEBUG - network - Total number of variables: 4.
+2025-05-04 15:39:39,409 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:39:39,409 - DEBUG - network - Number of connection variables: 4.
+2025-05-04 15:39:39,409 - ERROR - network - You have not provided enough parameters: 4 required, 3 supplied. Aborting calculation!
+2025-05-04 15:40:27,751 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:40:27,751 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:40:28,308 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:40:28,539 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:40:28,539 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:40:28,540 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:40:28,540 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:40:28,540 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:40:28,540 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:40:28,540 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:40:28,540 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:40:28,540 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:40:28,541 - DEBUG - connection - Created connection from condensertest (out1) to tank_in_h (in1).
+2025-05-04 15:40:28,541 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:40:28,542 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:40:28,542 - DEBUG - network - Added connection condensertest:out1_tank_in_h:in1 to network.
+2025-05-04 15:40:28,553 - INFO - network - Networkcheck successful.
+2025-05-04 15:40:28,553 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:40:28,553 - DEBUG - network - Network information:
+ - Number of components: 4
+ - Number of connections: 3
+ - Number of busses: 0
+2025-05-04 15:40:28,555 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:40:28,555 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:40:28,555 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:40:28,556 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:40:28,557 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:40:28,557 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:40:28,557 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:40:28,558 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:40:28,558 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:40:28,562 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:40:28,562 - INFO - network - Network initialised.
+2025-05-04 15:40:28,562 - INFO - network - Starting solver.
+2025-05-04 15:40:28,562 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:40:28,562 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:40:28,562 - DEBUG - network - Number of component equations: 4.
+2025-05-04 15:40:28,562 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:40:28,562 - DEBUG - network - Total number of variables: 4.
+2025-05-04 15:40:28,562 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:40:28,562 - DEBUG - network - Number of connection variables: 4.
+2025-05-04 15:40:28,562 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:40:28,562 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:40:28,563 - PROGRESS - network -  1     | 2.76e+06   | 0 %        | 9.88e-01   | 2.64e+06   | 1.61e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:40:28,563 - PROGRESS - network -  2     | 1.96e+05   | 7 %        | 9.31e-01   | 0.00e+00   | 1.10e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:40:28,564 - PROGRESS - network -  3     | 1.03e+03   | 33 %       | 4.99e-16   | 0.00e+00   | 3.65e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:40:28,564 - PROGRESS - network -  4     | 2.90e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 6.59e-10   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:40:28,564 - PROGRESS - network -  5     | 2.19e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 2.86e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:40:28,564 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:40:28,564 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 2429.79
+2025-05-04 15:40:28,571 - INFO - network - Postprocessing complete.
+2025-05-04 15:40:28,571 - INFO - network - Calculation complete.
+2025-05-04 15:40:28,571 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:40:28,573 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:40:28,573 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:40:28,574 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:40:28,574 - DEBUG - network - Component information (Source) saved to ./designstate/components/Source.csv.
+2025-05-04 15:40:28,575 - DEBUG - network - Component information (Sink) saved to ./designstate/components/Sink.csv.
+2025-05-04 15:40:28,582 - RESULT - network - 
+##### RESULTS (SimpleHeatExchanger) #####
++---------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|               |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|---------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| condensertest | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.40e+10 | nan | nan |  nan |     nan |  nan |    nan |
++---------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.50e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (Connection) #####
++-----------------------------------+-----------+-----------+-----------+-----------+
+|                                   |         m |         p |         h |         T |
+|-----------------------------------+-----------+-----------+-----------+-----------|
+| tank_out_h:out1_compressor:in1    | 2.817e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1 | 2.817e-02 | [94m2.800e+01[0m | 4.618e+02 | 3.434e+02 |
+| condensertest:out1_tank_in_h:in1  | 2.817e-02 | 2.744e+01 | 2.941e+02 | 3.183e+02 |
++-----------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:47:56,960 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:47:56,961 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:47:57,518 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:47:57,753 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:47:57,753 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:47:57,753 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:47:57,753 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:47:57,753 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:47:57,753 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:47:57,753 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:47:57,753 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:47:57,753 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:47:57,754 - DEBUG - connection - Created connection from condensertest (out1) to tank_in_h (in1).
+2025-05-04 15:47:57,754 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:47:57,755 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:47:57,755 - DEBUG - network - Added connection condensertest:out1_tank_in_h:in1 to network.
+2025-05-04 15:47:57,766 - INFO - network - Networkcheck successful.
+2025-05-04 15:47:57,766 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:47:57,766 - DEBUG - network - Network information:
+ - Number of components: 4
+ - Number of connections: 3
+ - Number of busses: 0
+2025-05-04 15:47:57,768 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:47:57,768 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:47:57,768 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:47:57,769 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:47:57,769 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:47:57,770 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:47:57,770 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:47:57,770 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:47:57,771 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:47:57,775 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:47:57,775 - INFO - network - Network initialised.
+2025-05-04 15:47:57,775 - INFO - network - Starting solver.
+2025-05-04 15:47:57,775 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:47:57,775 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:47:57,775 - DEBUG - network - Number of component equations: 4.
+2025-05-04 15:47:57,775 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:47:57,775 - DEBUG - network - Total number of variables: 4.
+2025-05-04 15:47:57,775 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:47:57,775 - DEBUG - network - Number of connection variables: 4.
+2025-05-04 15:47:57,775 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:47:57,775 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:47:57,776 - PROGRESS - network -  1     | 2.71e+06   | 0 %        | 7.19e-01   | 2.64e+06   | 1.61e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:47:57,776 - PROGRESS - network -  2     | 1.43e+05   | 9 %        | 6.78e-01   | 0.00e+00   | 1.49e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:47:57,777 - PROGRESS - network -  3     | 1.01e+03   | 33 %       | 5.02e-16   | 0.00e+00   | 3.59e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:47:57,777 - PROGRESS - network -  4     | 2.73e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 6.01e-10   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:47:57,777 - PROGRESS - network -  5     | 2.18e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 3.23e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:47:57,777 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:47:57,778 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 2240.31
+2025-05-04 15:47:57,783 - INFO - network - Postprocessing complete.
+2025-05-04 15:47:57,783 - INFO - network - Calculation complete.
+2025-05-04 15:47:57,783 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:47:57,784 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:47:57,785 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:47:57,785 - DEBUG - network - Component information (Source) saved to ./designstate/components/Source.csv.
+2025-05-04 15:47:57,786 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:47:57,786 - DEBUG - network - Component information (Sink) saved to ./designstate/components/Sink.csv.
+2025-05-04 15:47:57,793 - RESULT - network - 
+##### RESULTS (SimpleHeatExchanger) #####
++---------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|               |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|---------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| condensertest | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.40e+10 | nan | nan |  nan |     nan |  nan |    nan |
++---------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.50e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (Connection) #####
++-----------------------------------+-----------+-----------+-----------+-----------+
+|                                   |         m |         p |         h |         T |
+|-----------------------------------+-----------+-----------+-----------+-----------|
+| tank_out_h:out1_compressor:in1    | 2.817e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1 | 2.817e-02 | [94m2.800e+01[0m | 4.618e+02 | 3.434e+02 |
+| condensertest:out1_tank_in_h:in1  | 2.817e-02 | 2.744e+01 | 2.941e+02 | 3.183e+02 |
++-----------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:48:55,446 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:48:55,446 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:48:55,982 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:48:56,200 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:48:56,200 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:48:56,201 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:48:56,201 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:48:56,201 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:48:56,201 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:48:56,201 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:48:56,201 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:48:56,201 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:48:56,201 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:48:56,202 - DEBUG - connection - Created connection from expansionValve (out1) to tank_in_h (in1).
+2025-05-04 15:48:56,202 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:48:56,203 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:48:56,203 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:48:56,213 - ERROR - network - The component expansionValve is missing 1 outgoing connections. Make sure all outlets are connected and all connections have been added to the network.
+2025-05-04 15:49:25,652 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:49:25,652 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:49:26,192 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:49:26,441 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:49:26,441 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:49:26,441 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:49:26,441 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:49:26,441 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:49:26,441 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:49:26,441 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:49:26,442 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:49:26,442 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:49:26,442 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:49:26,443 - DEBUG - connection - Created connection from expansionValve (out1) to tank_in_h (in1).
+2025-05-04 15:49:26,443 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:49:26,444 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:49:26,444 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:49:26,445 - DEBUG - network - Added connection expansionValve:out1_tank_in_h:in1 to network.
+2025-05-04 15:49:26,458 - INFO - network - Networkcheck successful.
+2025-05-04 15:49:26,458 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:49:26,458 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 4
+ - Number of busses: 0
+2025-05-04 15:49:26,460 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:49:26,460 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:49:26,460 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:49:26,461 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:49:26,461 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:49:26,461 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:49:26,462 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:49:26,462 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:49:26,463 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:49:26,463 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:49:26,464 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:49:26,470 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:49:26,470 - INFO - network - Network initialised.
+2025-05-04 15:49:26,470 - INFO - network - Starting solver.
+2025-05-04 15:49:26,470 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:49:26,470 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:49:26,470 - DEBUG - network - Number of component equations: 5.
+2025-05-04 15:49:26,470 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:49:26,470 - DEBUG - network - Total number of variables: 5.
+2025-05-04 15:49:26,470 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:49:26,470 - DEBUG - network - Number of connection variables: 5.
+2025-05-04 15:49:26,470 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:49:26,470 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:49:26,471 - PROGRESS - network -  1     | 2.47e+06   | 0 %        | 6.83e-01   | 2.44e+06   | 1.58e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:49:26,471 - PROGRESS - network -  2     | 7.04e+04   | 12 %       | 6.44e-01   | 0.00e+00   | 3.76e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:49:26,472 - PROGRESS - network -  3     | 1.71e+03   | 30 %       | 5.01e-16   | 0.00e+00   | 8.60e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:49:26,472 - PROGRESS - network -  4     | 3.79e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 1.52e-09   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:49:26,473 - PROGRESS - network -  5     | 2.18e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 3.78e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:49:26,473 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:49:26,473 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 2113.43
+2025-05-04 15:49:26,479 - INFO - network - Postprocessing complete.
+2025-05-04 15:49:26,479 - INFO - network - Calculation complete.
+2025-05-04 15:49:26,479 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:49:26,480 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:49:26,480 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:49:26,481 - DEBUG - network - Component information (Sink) saved to ./designstate/components/Sink.csv.
+2025-05-04 15:49:26,481 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:49:26,481 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:49:26,481 - DEBUG - network - Component information (Source) saved to ./designstate/components/Source.csv.
+2025-05-04 15:49:26,490 - RESULT - network - 
+##### RESULTS (Valve) #####
++----------------+----------+----------+
+|                |       pr |     zeta |
+|----------------+----------+----------|
+| expansionValve | 2.92e-01 | 3.71e+11 |
++----------------+----------+----------+
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.50e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (SimpleHeatExchanger) #####
++---------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|               |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|---------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| condensertest | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.40e+10 | nan | nan |  nan |     nan |  nan |    nan |
++---------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (Connection) #####
++---------------------------------------+-----------+-----------+-----------+-----------+
+|                                       |         m |         p |         h |         T |
+|---------------------------------------+-----------+-----------+-----------+-----------|
+| tank_out_h:out1_compressor:in1        | 2.817e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1     | 2.817e-02 | [94m2.800e+01[0m | 4.618e+02 | 3.434e+02 |
+| condensertest:out1_expansionValve:in1 | 2.817e-02 | 2.744e+01 | 2.941e+02 | 3.183e+02 |
+| expansionValve:out1_tank_in_h:in1     | 2.817e-02 | [94m8.000e+00[0m | 2.941e+02 | 2.732e+02 |
++---------------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:52:43,406 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:52:43,407 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:52:43,966 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:52:44,184 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:52:44,184 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:52:44,184 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:52:44,184 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:52:44,184 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:52:44,184 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:52:44,184 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:52:44,184 - DEBUG - connection - Created connection from tank_out_h (out1) to compressor (in1).
+2025-05-04 15:52:44,184 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:52:44,185 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:52:44,185 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 15:52:44,185 - DEBUG - connection - Created connection from evaporatortest (out1) to tank_in_h (in1).
+2025-05-04 15:52:44,185 - DEBUG - network - Added connection tank_out_h:out1_compressor:in1 to network.
+2025-05-04 15:52:44,186 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:52:44,186 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:52:44,187 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 15:52:44,187 - DEBUG - network - Added connection evaporatortest:out1_tank_in_h:in1 to network.
+2025-05-04 15:52:44,201 - INFO - network - Networkcheck successful.
+2025-05-04 15:52:44,201 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:52:44,201 - DEBUG - network - Network information:
+ - Number of components: 6
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 15:52:44,204 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:52:44,204 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:52:44,204 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:52:44,205 - DEBUG - component - The component tank_out_h has 0 variables.
+2025-05-04 15:52:44,205 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:52:44,205 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:52:44,206 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:52:44,206 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:52:44,206 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:52:44,207 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:52:44,208 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:52:44,208 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:52:44,210 - DEBUG - component - The component tank_in_h has 0 variables.
+2025-05-04 15:52:44,216 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:52:44,216 - INFO - network - Network initialised.
+2025-05-04 15:52:44,216 - INFO - network - Starting solver.
+2025-05-04 15:52:44,216 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:52:44,216 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:52:44,216 - DEBUG - network - Number of component equations: 6.
+2025-05-04 15:52:44,216 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:52:44,216 - DEBUG - network - Total number of variables: 7.
+2025-05-04 15:52:44,216 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:52:44,216 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 15:52:44,216 - ERROR - network - You have not provided enough parameters: 7 required, 6 supplied. Aborting calculation!
+2025-05-04 15:56:56,380 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:56:56,380 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:56:56,944 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:56:57,164 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:56:57,164 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:56:57,164 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:56:57,164 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:56:57,164 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:56:57,164 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:56:57,164 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:56:57,165 - DEBUG - connection - Created connection from cycle_closer (out1) to compressor (in1).
+2025-05-04 15:56:57,165 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:56:57,165 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:56:57,165 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 15:56:57,166 - DEBUG - connection - Created connection from evaporatortest (out1) to cycle_closer (in1).
+2025-05-04 15:56:57,166 - DEBUG - network - Added connection cycle_closer:out1_compressor:in1 to network.
+2025-05-04 15:56:57,167 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:56:57,167 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:56:57,168 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 15:56:57,168 - DEBUG - network - Added connection evaporatortest:out1_cycle_closer:in1 to network.
+2025-05-04 15:56:57,180 - INFO - network - Networkcheck successful.
+2025-05-04 15:56:57,180 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:56:57,181 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 15:56:57,183 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:56:57,183 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:56:57,183 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:56:57,184 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:56:57,184 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:56:57,184 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:56:57,184 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:56:57,186 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:56:57,186 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:56:57,187 - DEBUG - component - The component cycle_closer has 0 variables.
+2025-05-04 15:56:57,188 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:56:57,188 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:56:57,198 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:56:57,198 - INFO - network - Network initialised.
+2025-05-04 15:56:57,198 - INFO - network - Starting solver.
+2025-05-04 15:56:57,198 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:56:57,198 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:56:57,198 - DEBUG - network - Number of component equations: 8.
+2025-05-04 15:56:57,198 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:56:57,198 - DEBUG - network - Total number of variables: 7.
+2025-05-04 15:56:57,198 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:56:57,198 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 15:56:57,198 - ERROR - network - You have provided too many parameters: 7 required, 8 supplied. Aborting calculation!
+2025-05-04 15:57:18,278 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:57:18,278 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:57:18,814 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:57:19,025 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:57:19,026 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:57:19,026 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:57:19,026 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:57:19,026 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:57:19,026 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:57:19,026 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:57:19,026 - DEBUG - connection - Created connection from cycle_closer (out1) to compressor (in1).
+2025-05-04 15:57:19,026 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:57:19,027 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:57:19,027 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 15:57:19,027 - DEBUG - connection - Created connection from evaporatortest (out1) to cycle_closer (in1).
+2025-05-04 15:57:19,027 - DEBUG - network - Added connection cycle_closer:out1_compressor:in1 to network.
+2025-05-04 15:57:19,028 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:57:19,028 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:57:19,029 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 15:57:19,029 - DEBUG - network - Added connection evaporatortest:out1_cycle_closer:in1 to network.
+2025-05-04 15:57:19,042 - INFO - network - Networkcheck successful.
+2025-05-04 15:57:19,042 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:57:19,042 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 15:57:19,044 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:57:19,045 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:57:19,045 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:57:19,045 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:57:19,045 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:57:19,046 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:57:19,046 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:57:19,047 - DEBUG - component - The component cycle_closer has 0 variables.
+2025-05-04 15:57:19,048 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:57:19,048 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:57:19,049 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:57:19,049 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:57:19,059 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:57:19,059 - INFO - network - Network initialised.
+2025-05-04 15:57:19,059 - INFO - network - Starting solver.
+2025-05-04 15:57:19,059 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:57:19,059 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:57:19,059 - DEBUG - network - Number of component equations: 7.
+2025-05-04 15:57:19,059 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:57:19,059 - DEBUG - network - Total number of variables: 7.
+2025-05-04 15:57:19,059 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:57:19,059 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 15:57:19,059 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:57:19,059 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:57:19,060 - PROGRESS - network -  1     | 2.56e+06   | 0 %        | 6.90e-01   | 2.54e+06   | 1.46e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:57:19,061 - PROGRESS - network -  2     | 7.12e+04   | 12 %       | 6.51e-01   | 0.00e+00   | 3.72e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:57:19,062 - PROGRESS - network -  3     | 1.71e+03   | 30 %       | 5.01e-16   | 0.00e+00   | 8.60e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:57:19,063 - PROGRESS - network -  4     | 3.79e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 1.52e-09   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:57:19,064 - PROGRESS - network -  5     | 2.18e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 3.78e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:57:19,064 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:57:19,064 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 1074.58
+2025-05-04 15:57:19,075 - INFO - network - Postprocessing complete.
+2025-05-04 15:57:19,075 - INFO - network - Calculation complete.
+2025-05-04 15:57:19,075 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:57:19,077 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:57:19,077 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:57:19,078 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:57:19,078 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 15:57:19,078 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:57:19,090 - RESULT - network - 
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.50e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (SimpleHeatExchanger) #####
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|                |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|----------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| evaporatortest |  3.59e+03 | 9.96e-01 | 2.06e+08 | nan | nan |  nan |     nan |  nan |    nan |
+| condensertest  | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.40e+10 | nan | nan |  nan |     nan |  nan |    nan |
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (CycleCloser) #####
++--------------+------------------+-------------------+
+|              |   mass_deviation |   fluid_deviation |
+|--------------+------------------+-------------------|
+| cycle_closer |         0.00e+00 |          0.00e+00 |
++--------------+------------------+-------------------+
+##### RESULTS (Valve) #####
++----------------+----------+----------+
+|                |       pr |     zeta |
+|----------------+----------+----------|
+| expansionValve | 2.92e-01 | 3.71e+11 |
++----------------+----------+----------+
+##### RESULTS (Connection) #####
++----------------------------------------+-----------+-----------+-----------+-----------+
+|                                        |         m |         p |         h |         T |
+|----------------------------------------+-----------+-----------+-----------+-----------|
+| cycle_closer:out1_compressor:in1       | 2.817e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1      | 2.817e-02 | [94m2.800e+01[0m | 4.618e+02 | 3.434e+02 |
+| condensertest:out1_expansionValve:in1  | 2.817e-02 | 2.744e+01 | 2.941e+02 | 3.183e+02 |
+| expansionValve:out1_evaporatortest:in1 | 2.817e-02 | [94m8.000e+00[0m | 2.941e+02 | 2.732e+02 |
+| evaporatortest:out1_cycle_closer:in1   | 2.817e-02 | 7.969e+00 | 4.214e+02 | 2.731e+02 |
++----------------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:58:43,984 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:58:43,984 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:58:44,523 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:58:44,760 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:58:44,760 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:58:44,760 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:58:44,760 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:58:44,760 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:58:44,760 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:58:44,760 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:58:44,760 - DEBUG - connection - Created connection from cycle_closer (out1) to compressor (in1).
+2025-05-04 15:58:44,761 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:58:44,761 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:58:44,761 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 15:58:44,761 - DEBUG - connection - Created connection from evaporatortest (out1) to cycle_closer (in1).
+2025-05-04 15:58:44,762 - DEBUG - network - Added connection cycle_closer:out1_compressor:in1 to network.
+2025-05-04 15:58:44,762 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:58:44,763 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:58:44,763 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 15:58:44,764 - DEBUG - network - Added connection evaporatortest:out1_cycle_closer:in1 to network.
+2025-05-04 15:58:44,777 - INFO - network - Networkcheck successful.
+2025-05-04 15:58:44,777 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:58:44,777 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 15:58:44,779 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:58:44,780 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:58:44,780 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:58:44,780 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:58:44,780 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:58:44,781 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:58:44,781 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:58:44,782 - DEBUG - component - The component cycle_closer has 0 variables.
+2025-05-04 15:58:44,783 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:58:44,783 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:58:44,784 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:58:44,784 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:58:44,792 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:58:44,792 - INFO - network - Network initialised.
+2025-05-04 15:58:44,792 - INFO - network - Starting solver.
+2025-05-04 15:58:44,792 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:58:44,792 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:58:44,792 - DEBUG - network - Number of component equations: 7.
+2025-05-04 15:58:44,792 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:58:44,792 - DEBUG - network - Total number of variables: 7.
+2025-05-04 15:58:44,792 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:58:44,792 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 15:58:44,793 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:58:44,793 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:58:44,793 - PROGRESS - network -  1     | 2.56e+06   | 0 %        | 5.44e-01   | 2.54e+06   | 1.46e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:58:44,794 - PROGRESS - network -  2     | 5.73e+04   | 13 %       | 5.38e-01   | 0.00e+00   | 4.44e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:58:44,795 - PROGRESS - network -  3     | 1.69e+03   | 30 %       | 2.79e-16   | 0.00e+00   | 8.28e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:58:44,795 - PROGRESS - network -  4     | 2.68e-11   | 100 %      | 1.04e-18   | 0.00e+00   | 7.86e-10   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:58:44,796 - PROGRESS - network -  5     | 2.19e-11   | 100 %      | 1.04e-18   | 0.00e+00   | 6.70e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:58:44,796 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:58:44,796 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 1495.51
+2025-05-04 15:58:44,806 - INFO - network - Postprocessing complete.
+2025-05-04 15:58:44,806 - INFO - network - Calculation complete.
+2025-05-04 15:58:44,806 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:58:44,807 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:58:44,808 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:58:44,808 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:58:44,808 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 15:58:44,808 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:58:44,819 - RESULT - network - 
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.70e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (SimpleHeatExchanger) #####
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|                |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|----------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| evaporatortest |  3.59e+03 | 9.96e-01 | 1.95e+08 | nan | nan |  nan |     nan |  nan |    nan |
+| condensertest  | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.33e+10 | nan | nan |  nan |     nan |  nan |    nan |
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (CycleCloser) #####
++--------------+------------------+-------------------+
+|              |   mass_deviation |   fluid_deviation |
+|--------------+------------------+-------------------|
+| cycle_closer |         0.00e+00 |          0.00e+00 |
++--------------+------------------+-------------------+
+##### RESULTS (Valve) #####
++----------------+----------+----------+
+|                |       pr |     zeta |
+|----------------+----------+----------|
+| expansionValve | 2.92e-01 | 3.42e+11 |
++----------------+----------+----------+
+##### RESULTS (Connection) #####
++----------------------------------------+-----------+-----------+-----------+-----------+
+|                                        |         m |         p |         h |         T |
+|----------------------------------------+-----------+-----------+-----------+-----------|
+| cycle_closer:out1_compressor:in1       | 2.883e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1      | 2.883e-02 | [94m2.800e+01[0m | 4.609e+02 | 3.427e+02 |
+| condensertest:out1_expansionValve:in1  | 2.883e-02 | 2.744e+01 | 2.970e+02 | 3.183e+02 |
+| expansionValve:out1_evaporatortest:in1 | 2.883e-02 | [94m8.000e+00[0m | 2.970e+02 | 2.732e+02 |
+| evaporatortest:out1_cycle_closer:in1   | 2.883e-02 | 7.969e+00 | 4.214e+02 | 2.731e+02 |
++----------------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:59:12,436 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:59:12,436 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:59:12,970 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:59:13,190 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:59:13,190 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:59:13,190 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:59:13,190 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:59:13,190 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:59:13,190 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:59:13,190 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:59:13,191 - DEBUG - connection - Created connection from cycle_closer (out1) to compressor (in1).
+2025-05-04 15:59:13,191 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:59:13,191 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:59:13,192 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 15:59:13,192 - DEBUG - connection - Created connection from evaporatortest (out1) to cycle_closer (in1).
+2025-05-04 15:59:13,192 - DEBUG - network - Added connection cycle_closer:out1_compressor:in1 to network.
+2025-05-04 15:59:13,193 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:59:13,193 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:59:13,194 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 15:59:13,194 - DEBUG - network - Added connection evaporatortest:out1_cycle_closer:in1 to network.
+2025-05-04 15:59:13,207 - INFO - network - Networkcheck successful.
+2025-05-04 15:59:13,207 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:59:13,207 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 15:59:13,209 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:59:13,209 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:13,210 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:59:13,211 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:13,211 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:59:13,212 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:13,212 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:59:13,212 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:59:13,212 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:59:13,214 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:13,214 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:59:13,215 - DEBUG - component - The component cycle_closer has 0 variables.
+2025-05-04 15:59:13,226 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:59:13,226 - INFO - network - Network initialised.
+2025-05-04 15:59:13,226 - INFO - network - Starting solver.
+2025-05-04 15:59:13,226 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:59:13,226 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:59:13,226 - DEBUG - network - Number of component equations: 7.
+2025-05-04 15:59:13,226 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:59:13,226 - DEBUG - network - Total number of variables: 7.
+2025-05-04 15:59:13,226 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:59:13,226 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 15:59:13,226 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:59:13,226 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:59:13,234 - PROGRESS - network -  1     | 2.56e+06   | 0 %        | 4.59e-01   | 2.54e+06   | 1.48e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:13,238 - PROGRESS - network -  2     | 5.24e+04   | 14 %       | 5.38e-01   | 0.00e+00   | 4.40e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:13,240 - PROGRESS - network -  3     | 1.67e+03   | 30 %       | 5.14e-17   | 0.00e+00   | 7.51e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:13,241 - PROGRESS - network -  4     | 7.78e-12   | 100 %      | 5.90e-18   | 0.00e+00   | 1.73e-10   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:13,247 - PROGRESS - network -  5     | 7.28e-12   | 100 %      | 3.80e-19   | 0.00e+00   | 1.13e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:13,248 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:59:13,248 - DEBUG - network - Total iterations: 5, Calculation time: 0.02 s, Iterations per second: 232.44
+2025-05-04 15:59:13,260 - INFO - network - Postprocessing complete.
+2025-05-04 15:59:13,261 - INFO - network - Calculation complete.
+2025-05-04 15:59:13,261 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:59:13,262 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:59:13,263 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:59:13,263 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:59:13,264 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:59:13,264 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 15:59:13,277 - RESULT - network - 
+##### RESULTS (SimpleHeatExchanger) #####
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|                |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|----------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| condensertest  | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.09e+10 | nan | nan |  nan |     nan |  nan |    nan |
+| evaporatortest |  3.58e+03 | 9.96e-01 | 1.58e+08 | nan | nan |  nan |     nan |  nan |    nan |
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (Valve) #####
++----------------+----------+----------+
+|                |       pr |     zeta |
+|----------------+----------+----------|
+| expansionValve | 2.92e-01 | 2.56e+11 |
++----------------+----------+----------+
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m9.50e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (CycleCloser) #####
++--------------+------------------+-------------------+
+|              |   mass_deviation |   fluid_deviation |
+|--------------+------------------+-------------------|
+| cycle_closer |         0.00e+00 |          0.00e+00 |
++--------------+------------------+-------------------+
+##### RESULTS (Connection) #####
++----------------------------------------+-----------+-----------+-----------+-----------+
+|                                        |         m |         p |         h |         T |
+|----------------------------------------+-----------+-----------+-----------+-----------|
+| cycle_closer:out1_compressor:in1       | 3.148e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1      | 3.148e-02 | [94m2.800e+01[0m | 4.576e+02 | 3.402e+02 |
+| condensertest:out1_expansionValve:in1  | 3.148e-02 | 2.744e+01 | 3.075e+02 | 3.183e+02 |
+| expansionValve:out1_evaporatortest:in1 | 3.148e-02 | [94m8.000e+00[0m | 3.075e+02 | 2.732e+02 |
+| evaporatortest:out1_cycle_closer:in1   | 3.148e-02 | 7.969e+00 | 4.214e+02 | 2.731e+02 |
++----------------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:59:26,417 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:59:26,417 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:59:26,967 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:59:27,185 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:59:27,185 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:59:27,185 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:59:27,185 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:59:27,185 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:59:27,185 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:59:27,185 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:59:27,185 - DEBUG - connection - Created connection from cycle_closer (out1) to compressor (in1).
+2025-05-04 15:59:27,186 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:59:27,186 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:59:27,186 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 15:59:27,186 - DEBUG - connection - Created connection from evaporatortest (out1) to cycle_closer (in1).
+2025-05-04 15:59:27,187 - DEBUG - network - Added connection cycle_closer:out1_compressor:in1 to network.
+2025-05-04 15:59:27,187 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:59:27,188 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:59:27,188 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 15:59:27,189 - DEBUG - network - Added connection evaporatortest:out1_cycle_closer:in1 to network.
+2025-05-04 15:59:27,201 - INFO - network - Networkcheck successful.
+2025-05-04 15:59:27,201 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:59:27,202 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 15:59:27,204 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:59:27,204 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:27,204 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:59:27,204 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:59:27,204 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:59:27,206 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:27,206 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:59:27,207 - DEBUG - component - The component cycle_closer has 0 variables.
+2025-05-04 15:59:27,208 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:27,208 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:59:27,209 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:27,209 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:59:27,218 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:59:27,218 - INFO - network - Network initialised.
+2025-05-04 15:59:27,218 - INFO - network - Starting solver.
+2025-05-04 15:59:27,218 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:59:27,218 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:59:27,218 - DEBUG - network - Number of component equations: 7.
+2025-05-04 15:59:27,218 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:59:27,218 - DEBUG - network - Total number of variables: 7.
+2025-05-04 15:59:27,218 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:59:27,218 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 15:59:27,218 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:59:27,218 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:59:27,219 - PROGRESS - network -  1     | 2.57e+06   | 0 %        | 9.21e-01   | 2.54e+06   | 1.45e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:27,220 - PROGRESS - network -  2     | 8.87e+04   | 11 %       | 7.63e-01   | 0.00e+00   | 3.22e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:27,220 - PROGRESS - network -  3     | 1.74e+03   | 30 %       | 1.70e-16   | 0.00e+00   | 9.26e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:27,221 - PROGRESS - network -  4     | 1.31e-11   | 100 %      | 3.20e-19   | 0.00e+00   | 5.92e-10   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:27,221 - PROGRESS - network -  5     | 7.28e-12   | 100 %      | 3.20e-19   | 0.00e+00   | 1.34e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:27,222 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:59:27,222 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 1372.48
+2025-05-04 15:59:27,234 - INFO - network - Postprocessing complete.
+2025-05-04 15:59:27,234 - INFO - network - Calculation complete.
+2025-05-04 15:59:27,234 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:59:27,236 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:59:27,237 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:59:27,237 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:59:27,237 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 15:59:27,238 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:59:27,250 - RESULT - network - 
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.00e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (SimpleHeatExchanger) #####
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|                |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|----------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| evaporatortest |  3.59e+03 | 9.96e-01 | 2.38e+08 | nan | nan |  nan |     nan |  nan |    nan |
+| condensertest  | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.61e+10 | nan | nan |  nan |     nan |  nan |    nan |
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (CycleCloser) #####
++--------------+------------------+-------------------+
+|              |   mass_deviation |   fluid_deviation |
+|--------------+------------------+-------------------|
+| cycle_closer |         0.00e+00 |          0.00e+00 |
++--------------+------------------+-------------------+
+##### RESULTS (Valve) #####
++----------------+----------+----------+
+|                |       pr |     zeta |
+|----------------+----------+----------|
+| expansionValve | 2.92e-01 | 4.62e+11 |
++----------------+----------+----------+
+##### RESULTS (Connection) #####
++----------------------------------------+-----------+-----------+-----------+-----------+
+|                                        |         m |         p |         h |         T |
+|----------------------------------------+-----------+-----------+-----------+-----------|
+| cycle_closer:out1_compressor:in1       | 2.651e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1      | 2.651e-02 | [94m2.800e+01[0m | 4.644e+02 | 3.453e+02 |
+| condensertest:out1_expansionValve:in1  | 2.651e-02 | 2.744e+01 | 2.862e+02 | 3.183e+02 |
+| expansionValve:out1_evaporatortest:in1 | 2.651e-02 | [94m8.000e+00[0m | 2.862e+02 | 2.732e+02 |
+| evaporatortest:out1_cycle_closer:in1   | 2.651e-02 | 7.969e+00 | 4.214e+02 | 2.731e+02 |
++----------------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 15:59:46,397 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 15:59:46,397 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 15:59:46,947 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 15:59:47,170 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 15:59:47,171 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 15:59:47,171 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 15:59:47,171 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 15:59:47,171 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 15:59:47,171 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 15:59:47,171 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 15:59:47,171 - DEBUG - connection - Created connection from cycle_closer (out1) to compressor (in1).
+2025-05-04 15:59:47,171 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 15:59:47,171 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 15:59:47,172 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 15:59:47,172 - DEBUG - connection - Created connection from evaporatortest (out1) to cycle_closer (in1).
+2025-05-04 15:59:47,172 - DEBUG - network - Added connection cycle_closer:out1_compressor:in1 to network.
+2025-05-04 15:59:47,173 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 15:59:47,173 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 15:59:47,174 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 15:59:47,174 - DEBUG - network - Added connection evaporatortest:out1_cycle_closer:in1 to network.
+2025-05-04 15:59:47,187 - INFO - network - Networkcheck successful.
+2025-05-04 15:59:47,187 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 15:59:47,187 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 15:59:47,189 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 15:59:47,189 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:47,189 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:59:47,189 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 15:59:47,189 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 15:59:47,191 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:47,191 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 15:59:47,192 - DEBUG - component - The component cycle_closer has 0 variables.
+2025-05-04 15:59:47,193 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:47,193 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 15:59:47,194 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 15:59:47,195 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 15:59:47,204 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 15:59:47,204 - INFO - network - Network initialised.
+2025-05-04 15:59:47,204 - INFO - network - Starting solver.
+2025-05-04 15:59:47,204 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 15:59:47,204 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 15:59:47,204 - DEBUG - network - Number of component equations: 7.
+2025-05-04 15:59:47,204 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 15:59:47,204 - DEBUG - network - Total number of variables: 7.
+2025-05-04 15:59:47,204 - DEBUG - network - Number of component variables: 0.
+2025-05-04 15:59:47,204 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 15:59:47,204 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 15:59:47,204 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:59:47,206 - PROGRESS - network -  1     | 2.58e+06   | 0 %        | 1.14e+00   | 2.54e+06   | 1.44e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:47,206 - PROGRESS - network -  2     | 9.09e+04   | 11 %       | 6.85e-01   | 0.00e+00   | 3.60e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:47,207 - PROGRESS - network -  3     | 1.74e+03   | 30 %       | 6.41e-17   | 0.00e+00   | 1.06e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:47,208 - PROGRESS - network -  4     | 8.58e-12   | 100 %      | 2.80e-19   | 0.00e+00   | 2.89e-10   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:47,209 - PROGRESS - network -  5     | 7.34e-12   | 100 %      | 2.80e-19   | 0.00e+00   | 4.54e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 15:59:47,209 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 15:59:47,209 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 1144.17
+2025-05-04 15:59:47,218 - INFO - network - Postprocessing complete.
+2025-05-04 15:59:47,218 - INFO - network - Calculation complete.
+2025-05-04 15:59:47,218 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 15:59:47,220 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 15:59:47,220 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 15:59:47,221 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 15:59:47,222 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 15:59:47,222 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 15:59:47,233 - RESULT - network - 
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m7.00e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (Valve) #####
++----------------+----------+----------+
+|                |       pr |     zeta |
+|----------------+----------+----------|
+| expansionValve | 2.92e-01 | 7.77e+11 |
++----------------+----------+----------+
+##### RESULTS (CycleCloser) #####
++--------------+------------------+-------------------+
+|              |   mass_deviation |   fluid_deviation |
+|--------------+------------------+-------------------|
+| cycle_closer |         0.00e+00 |          0.00e+00 |
++--------------+------------------+-------------------+
+##### RESULTS (SimpleHeatExchanger) #####
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|                |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|----------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| evaporatortest |  3.58e+03 | 9.96e-01 | 3.31e+08 | nan | nan |  nan |     nan |  nan |    nan |
+| condensertest  | [94m-4.72e+03[0m | [94m9.80e-01[0m | 2.13e+10 | nan | nan |  nan |     nan |  nan |    nan |
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (Connection) #####
++----------------------------------------+-----------+-----------+-----------+-----------+
+|                                        |         m |         p |         h |         T |
+|----------------------------------------+-----------+-----------+-----------+-----------|
+| cycle_closer:out1_compressor:in1       | 2.320e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1      | 2.320e-02 | [94m2.800e+01[0m | 4.705e+02 | 3.501e+02 |
+| condensertest:out1_expansionValve:in1  | 2.320e-02 | 2.744e+01 | 2.668e+02 | 3.136e+02 |
+| expansionValve:out1_evaporatortest:in1 | 2.320e-02 | [94m8.000e+00[0m | 2.668e+02 | 2.732e+02 |
+| evaporatortest:out1_cycle_closer:in1   | 2.320e-02 | 7.969e+00 | 4.214e+02 | 2.731e+02 |
++----------------------------------------+-----------+-----------+-----------+-----------+
+2025-05-04 16:00:08,289 - INFO - logger - Path for logging: myloggings/tespy.log
+2025-05-04 16:00:08,289 - INFO - logger - Used TESPy version: 0.7.2.post2 - Newton's Nature
+2025-05-04 16:00:08,854 - WARNING - warnings - FutureWarning: color is redundantly defined by the 'color' keyword argument and the fmt string "b-" (-> color='b'). The keyword argument will take precedence.
+2025-05-04 16:00:09,090 - DEBUG - network - Default unit specifications:
+mass flow: kg / s
+volumetric flow: m3 / s
+pressure: Pa
+enthalpy: J / kg
+temperature: K
+temperature difference to boiling point: K
+specific volume: m3 / kg
+vapor mass fraction: -
+entropy: J / kgK
+2025-05-04 16:00:09,090 - DEBUG - network - Default mass flow limits
+min: -1000000000000.0 kg / s
+max: 1000000000000.0 kg / s
+2025-05-04 16:00:09,090 - DEBUG - network - Default pressure limits
+min: 200.0 Pa
+max: 30000000.0 Pa
+2025-05-04 16:00:09,090 - DEBUG - network - Default enthalpy limits
+min: 1000.0 J / kg
+max: 7000000.0 J / kg
+2025-05-04 16:00:09,090 - DEBUG - network - Setting pressure unit: bar.
+2025-05-04 16:00:09,090 - DEBUG - network - Setting enthalpy unit: kJ / kg.
+2025-05-04 16:00:09,090 - DEBUG - network - Setting temperature unit: K.
+2025-05-04 16:00:09,091 - DEBUG - connection - Created connection from cycle_closer (out1) to compressor (in1).
+2025-05-04 16:00:09,091 - DEBUG - connection - Created connection from compressor (out1) to condensertest (in1).
+2025-05-04 16:00:09,091 - DEBUG - connection - Created connection from condensertest (out1) to expansionValve (in1).
+2025-05-04 16:00:09,091 - DEBUG - connection - Created connection from expansionValve (out1) to evaporatortest (in1).
+2025-05-04 16:00:09,092 - DEBUG - connection - Created connection from evaporatortest (out1) to cycle_closer (in1).
+2025-05-04 16:00:09,092 - DEBUG - network - Added connection cycle_closer:out1_compressor:in1 to network.
+2025-05-04 16:00:09,093 - DEBUG - network - Added connection compressor:out1_condensertest:in1 to network.
+2025-05-04 16:00:09,093 - DEBUG - network - Added connection condensertest:out1_expansionValve:in1 to network.
+2025-05-04 16:00:09,094 - DEBUG - network - Added connection expansionValve:out1_evaporatortest:in1 to network.
+2025-05-04 16:00:09,094 - DEBUG - network - Added connection evaporatortest:out1_cycle_closer:in1 to network.
+2025-05-04 16:00:09,107 - INFO - network - Networkcheck successful.
+2025-05-04 16:00:09,107 - DEBUG - network - Solver properties:
+ - mode: design
+ - init_path: None
+ - design_path: testdesign.json
+ - min_iter: 4
+ - max_iter: 50
+ - init_path: None
+2025-05-04 16:00:09,107 - DEBUG - network - Network information:
+ - Number of components: 5
+ - Number of connections: 5
+ - Number of busses: 0
+2025-05-04 16:00:09,109 - DEBUG - network - Updated fluid property SI values and fluid mass fraction for user specified connection parameters.
+2025-05-04 16:00:09,109 - DEBUG - component - The component cycle_closer has 0 variables.
+2025-05-04 16:00:09,110 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 16:00:09,110 - DEBUG - component - The component condensertest has 0 variables.
+2025-05-04 16:00:09,112 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 16:00:09,112 - DEBUG - component - The component expansionValve has 0 variables.
+2025-05-04 16:00:09,113 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 16:00:09,113 - DEBUG - component - The component evaporatortest has 0 variables.
+2025-05-04 16:00:09,116 - DEBUG - characteristics - Created characteristic line function.
+2025-05-04 16:00:09,116 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 16:00:09,116 - DEBUG - characteristics - Created characteristic map function.
+2025-05-04 16:00:09,116 - DEBUG - component - The component compressor has 0 variables.
+2025-05-04 16:00:09,126 - DEBUG - network - Generic fluid property specification complete.
+2025-05-04 16:00:09,126 - INFO - network - Network initialised.
+2025-05-04 16:00:09,126 - INFO - network - Starting solver.
+2025-05-04 16:00:09,126 - DEBUG - network - Number of connection equations: 0.
+2025-05-04 16:00:09,126 - DEBUG - network - Number of bus equations: 0.
+2025-05-04 16:00:09,126 - DEBUG - network - Number of component equations: 7.
+2025-05-04 16:00:09,126 - DEBUG - network - Number of user defined equations: 0.
+2025-05-04 16:00:09,126 - DEBUG - network - Total number of variables: 7.
+2025-05-04 16:00:09,126 - DEBUG - network - Number of component variables: 0.
+2025-05-04 16:00:09,126 - DEBUG - network - Number of connection variables: 7.
+2025-05-04 16:00:09,126 - PROGRESS - network -  iter  | residual   | progress   | massflow   | pressure   | enthalpy   | fluid      | component  
+2025-05-04 16:00:09,126 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 16:00:09,127 - PROGRESS - network -  1     | 2.58e+06   | 0 %        | 9.32e-01   | 2.54e+06   | 1.46e+05   | 0.00e+00   | 0.00e+00   
+2025-05-04 16:00:09,128 - PROGRESS - network -  2     | 9.64e+04   | 11 %       | 8.79e-01   | 0.00e+00   | 2.80e+03   | 0.00e+00   | 0.00e+00   
+2025-05-04 16:00:09,129 - PROGRESS - network -  3     | 1.74e+03   | 30 %       | 6.05e-16   | 0.00e+00   | 8.74e+04   | 0.00e+00   | 0.00e+00   
+2025-05-04 16:00:09,129 - PROGRESS - network -  4     | 4.17e-11   | 100 %      | 4.60e-18   | 0.00e+00   | 1.86e-09   | 0.00e+00   | 0.00e+00   
+2025-05-04 16:00:09,130 - PROGRESS - network -  5     | 2.19e-11   | 100 %      | 1.02e-18   | 0.00e+00   | 6.86e-11   | 0.00e+00   | 0.00e+00   
+2025-05-04 16:00:09,130 - PROGRESS - network - -------+------------+------------+------------+------------+------------+------------+------------
+2025-05-04 16:00:09,130 - DEBUG - network - Total iterations: 5, Calculation time: 0.00 s, Iterations per second: 1427.31
+2025-05-04 16:00:09,142 - INFO - network - Postprocessing complete.
+2025-05-04 16:00:09,142 - INFO - network - Calculation complete.
+2025-05-04 16:00:09,142 - DEBUG - network - Saving network to path ./designstate/.
+2025-05-04 16:00:09,144 - DEBUG - network - Connection information saved to ./designstate/.
+2025-05-04 16:00:09,145 - DEBUG - network - Component information (CycleCloser) saved to ./designstate/components/CycleCloser.csv.
+2025-05-04 16:00:09,145 - DEBUG - network - Component information (SimpleHeatExchanger) saved to ./designstate/components/SimpleHeatExchanger.csv.
+2025-05-04 16:00:09,146 - DEBUG - network - Component information (Valve) saved to ./designstate/components/Valve.csv.
+2025-05-04 16:00:09,146 - DEBUG - network - Component information (Compressor) saved to ./designstate/components/Compressor.csv.
+2025-05-04 16:00:09,159 - RESULT - network - 
+##### RESULTS (CycleCloser) #####
++--------------+------------------+-------------------+
+|              |   mass_deviation |   fluid_deviation |
+|--------------+------------------+-------------------|
+| cycle_closer |         0.00e+00 |          0.00e+00 |
++--------------+------------------+-------------------+
+##### RESULTS (SimpleHeatExchanger) #####
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+|                |         Q |       pr |     zeta |   D |   L |   ks |   ks_HW |   kA |   Tamb |
+|----------------+-----------+----------+----------+-----+-----+------+---------+------+--------|
+| condensertest  | [94m-4.72e+03[0m | [94m9.80e-01[0m | 1.40e+10 | nan | nan |  nan |     nan |  nan |    nan |
+| evaporatortest |  3.59e+03 | 9.96e-01 | 2.06e+08 | nan | nan |  nan |     nan |  nan |    nan |
++----------------+-----------+----------+----------+-----+-----+------+---------+------+--------+
+##### RESULTS (Valve) #####
++----------------+----------+----------+
+|                |       pr |     zeta |
+|----------------+----------+----------|
+| expansionValve | 2.92e-01 | 3.71e+11 |
++----------------+----------+----------+
+##### RESULTS (Compressor) #####
++------------+----------+----------+----------+--------+
+|            |        P |    eta_s |       pr |   igva |
+|------------+----------+----------+----------+--------|
+| compressor | [94m1.14e+03[0m | [94m8.50e-01[0m | 3.51e+00 |    nan |
++------------+----------+----------+----------+--------+
+##### RESULTS (Connection) #####
++----------------------------------------+-----------+-----------+-----------+-----------+
+|                                        |         m |         p |         h |         T |
+|----------------------------------------+-----------+-----------+-----------+-----------|
+| cycle_closer:out1_compressor:in1       | 2.817e-02 | 7.969e+00 | 4.214e+02 | [94m2.731e+02[0m |
+| compressor:out1_condensertest:in1      | 2.817e-02 | [94m2.800e+01[0m | 4.618e+02 | 3.434e+02 |
+| condensertest:out1_expansionValve:in1  | 2.817e-02 | 2.744e+01 | 2.941e+02 | 3.183e+02 |
+| expansionValve:out1_evaporatortest:in1 | 2.817e-02 | [94m8.000e+00[0m | 2.941e+02 | 2.732e+02 |
+| evaporatortest:out1_cycle_closer:in1   | 2.817e-02 | 7.969e+00 | 4.214e+02 | 2.731e+02 |
++----------------------------------------+-----------+-----------+-----------+-----------+

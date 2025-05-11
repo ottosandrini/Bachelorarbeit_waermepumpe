@@ -54,4 +54,6 @@ push.sh
 *.svg
 notepad.txt
 tespytest.py
+.tespytestMOD.py
+tests
 
