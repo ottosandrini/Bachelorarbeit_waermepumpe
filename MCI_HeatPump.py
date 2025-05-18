@@ -78,10 +78,10 @@ wq_valve = com.Valve('wq_valve')
 ww_pump = com.Pump('ww_pump')
 wq_pump = com.Pump('wq_pump')
 # --- Sources ---
-tank_in_h = com.Sink('tank_in_h')
-tank_out_h = com.Source('tank_out_h')
-tank_in_c = com.Sink('tank_in_c')
-tank_out_c = com.Source('tank_out_c')
+tank_in_ww = com.Sink('tank_in_ww')
+tank_out_ww = com.Source('tank_out_ww')
+tank_in_wq = com.Sink('tank_in_wq')
+tank_out_wq = com.Source('tank_out_wq')
 #sink = com.Sink('sink')
 #source = com.Source('source')
 
@@ -94,18 +94,20 @@ conn3 = Connection(expansionvalve, 'out1', evaporator, 'in2')
 conn4 = Connection(evaporator, 'out2', superheater, 'in2')
 conn5 = Connection(superheater, 'out2', cc, 'in1')
 # --- Water system ---
-ww1 = Connection(tank_out_c, 'out1', condenser, 'in2')
-ww2 = Connection(condenser, 'out2', tank_in_c, 'in1')
-wq1 = Connection(tank_out_h, 'out1', superheater, 'in1')
+ww1 = Connection(tank_out_wq, 'out1', condenser, 'in2')
+ww2 = Connection(condenser, 'out2', tank_in_wq, 'in1')
+wq1 = Connection(tank_out_ww, 'out1', superheater, 'in1')
 wq2 = Connection(superheater, 'out1', evaporator, 'in1')
-wq3 = Connection(evaporator, 'out1', tank_in_h, 'in1')
+wq3 = Connection(evaporator, 'out1', tank_in_ww, 'in1')
 conn_list = [conn0, conn1, conn2, conn3, conn4, conn5]
 
-# --- CONNECTIONS ---
-#conn0.set_attr(T=condensation_temp, x=1, fluid={working_fluid: 1})
+# --- PARAMETRISATION ---
 conn1.set_attr(p=high_pressure)
+conn1.set_attr(design=['p'], offdesign=['p'])       # offdesign??
 conn3.set_attr(p=low_pressure+0.2)
+conn3.set_attr(design=['p'])                        # offdesign no value, pressure determined by expansionvalve zeta
 conn4.set_attr(T=condensation_temp, x=1, fluid={working_fluid: 1})
+conn4.set_attr(design=['T', 'x', 'fluid'], offdesign=['T', 'x', 'fluid'])   # offdesign??
 conn5.set_attr(p=low_pressure, h=430)
 
 ww1.set_attr(T=278, p=2, m=0.6, fluid={'ethanol': 1})                       # Warmwasser Vorlauf
@@ -113,16 +115,21 @@ wq1.set_attr(T=condensation_temp+10, p=2, m=0.6, fluid={'ethanol': 1})      # WÃ
 #wq3.set_attr(T=condensation_temp+10, p=2, m=0.6, fluid={'ethanol': 1})      # Superheater seperater zulauf
 #wq2.set_attr()
 
-# --- COMPONENTS ---
 compressor.set_attr(P=compressor_power, eta_s=0.85)
+compressor.set_attr(design=['P', 'eta_s'], offdesign=['P', 'eta_s'])
 condenser.set_attr(Q=-4725, pr1=0.98, pr2=0.98)
+condenser.set_attr(design=['Q', 'pr1', 'pr2'], offdesign=['zeta1', 'zeta2', 'kA'])
 #expansionvalve.set_attr(pr=4)
 evaporator.set_attr(pr1=0.98)
+evaporator.set_attr(design=['pr1'], offdesign=['zeta1'])
 superheater.set_attr(pr1=0.98)
+superheater.set_attr(design=['pr1'], offdesign=['zeta1'])
+expansionvalve.set_attr(offdesign=['zeta'])
 # FINISH SETUP AND SOLVE
 heatpump.add_conns(conn0, conn1, conn2, conn3, conn4, conn5, ww1, ww2, wq1, wq2, wq3)
-heatpump.solve(mode="design")
-heatpump.save('designstate')
+heatpump.solve(mode='design')
+heatpump.save('designstate/design_state.json')
+#heatpump.solve(mode="offdesign", design_path='designstate/design_state.json')
 
 print("------------------------------------------------------")
 print("------------         RESULTS           ---------------")
