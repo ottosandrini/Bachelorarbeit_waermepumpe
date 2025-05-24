@@ -1,3 +1,77 @@
+const Temperatures = {conn0:10, conn1:60, conn2:55, conn03:3, conn4:3, conn5:10}
+const Pressures = {conn0:8, conn1:22, conn2:22, conn03:8, conn4:8, conn5:8}
+const Enthalpies = {conn0:430, conn1:450, conn2:200, conn03:200, conn4:400, conn5:430}
+const Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800}
+const MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02}
+
+const HPData = {temp:Temperatures, pressure:Pressures, enthalpy:Enthalpies, power:Powers, massflow:MassFlows}
+
+class HeatpumpVis {
+    constructor(data, type, canvas) {
+        this.canvas = canvas;
+        this.Temperatures = data.temp;
+        this.Pressures = data.pressure;
+        this.Enthalpies = data.enthalpy;
+        this.Powers = data.power;
+        this.MassFlows = data.massflow;
+        this.type = type;                   // Select Simulation or Real Thing with 0 or 1
+    }
+
+    update_data() {
+        // update Heat pump data here by running python script and reading new data
+        if (this.type == 0) {
+            // update by running python script
+        }
+        else if (this.type == 1) {
+            // update data from mqtt
+        }
+        else  {
+            // give an error: Type not supported; choose Simulation (0) or Real System (1)
+        }
+    }
+
+    redrawParams(c, xoffset, yoffset){    // draw over old parameters, might need to white out old ones
+    c.font = "25px comic";
+    c.fillStyle = "red";
+    c.fillText(this.Temperatures.conn1 + "°C", -25 + xoffset, 388 + yoffset);
+    c.fillText(this.Temperatures.conn1 + "°C", 880 + xoffset, 308 + yoffset);
+    c.fillStyle = "blue";
+    c.fillText(this.Temperatures.conn2 + "°C", -25 + xoffset, 308 + yoffset);
+    c.fillText(this.Temperatures.conn2 + "°C", 880 + xoffset, 388 + yoffset);
+    c.fillStyle = "black";
+    c.fillText(this.Pressures.conn1 + " %", 425 + xoffset, 130 + yoffset);
+    c.fillText(this.Pressures.conn2 + " %", 425 + xoffset, 710 + yoffset);
+    }
+
+    drawHeatpump(){                            // draws the Heatpump at first start
+    var c = this.canvas.getContext("2d");
+    var xoffset = 50;
+    var yoffset = 10;
+    // draw compressor
+    var compx = 450+xoffset;
+    var compy = 45+yoffset;
+    drawCompressor(c, compx, compy);
+    // draw Evaporator
+    var evax = 100+xoffset;
+    var evay = 250+yoffset;
+    drawHeatExchanger2(c, evax, evay);
+    // draw condenser
+    var cdx = 700+xoffset;
+    var cdy = 250+yoffset;
+    drawHeatExchanger1(c, cdx, cdy);
+    // draw expansion valve
+    var evx = 450+xoffset;
+    var evy = 650+yoffset;
+    drawValve(c, evx, evy);
+    line1(c, evax+55,evay,compx-40,compy,0);
+    line2(c, compx+40, compy, cdx+55, cdy, 0);
+    line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
+    line4(c, evx-30, evy, evax+55, evay+180, 0);
+    this.redrawParams(c, xoffset, yoffset);
+    }
+
+}
+
 function drawPoint(c, d, cX, cY) {
     if (d=="rr"){
         c.lineTo(cX-12, cY-6);
@@ -155,77 +229,16 @@ function line4(c, x1, y1, x2, y2, r) {
     c.stroke();
 }
 
-var T1 = 15;
-var T2 = 8;
-var p1 = 77;
-var p2 = 50;
-
-function drawParams(c, xoffset, yoffset){
-    c.font = "25px comic";
-    c.fillStyle = "red";
-    c.fillText(T1 + "°C", -25 + xoffset, 388 + yoffset);
-    c.fillText(T1 + "°C", 880 + xoffset, 308 + yoffset);
-    c.fillStyle = "blue";
-    c.fillText(T2 + "°C", -25 + xoffset, 308 + yoffset);
-    c.fillText(T2 + "°C", 880 + xoffset, 388 + yoffset);
-    c.fillStyle = "black";
-    c.fillText(p1 + " %", 425 + xoffset, 130 + yoffset);
-    c.fillText(p2 + " %", 425 + xoffset, 710 + yoffset);
-}
-
+// Main Function ?!
 document.addEventListener("DOMContentLoaded", function () {
     var HPR = document.getElementById("HeatPumpReal");
     if (HPR) {  
-      var c = HPR.getContext("2d");
-      var xoffset = 50;
-      var yoffset = 10;
-      // draw compressor
-      var compx = 450+xoffset;
-      var compy = 45+yoffset;
-      drawCompressor(c, compx, compy);
-      // draw Evaporator
-      var evax = 100+xoffset;
-      var evay = 250+yoffset;
-      drawHeatExchanger2(c, evax, evay);
-      // draw condenser
-      var cdx = 700+xoffset;
-      var cdy = 250+yoffset;
-      drawHeatExchanger1(c, cdx, cdy);
-      // draw expansion valve
-      var evx = 450+xoffset;
-      var evy = 650+yoffset;
-      drawValve(c, evx, evy);
-      line1(c, evax+55,evay,compx-40,compy,0);
-      line2(c, compx+40, compy, cdx+55, cdy, 0);
-      line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
-      line4(c, evx-30, evy, evax+55, evay+180, 0);
-      drawParams(c, xoffset, yoffset);
+        const realpump = new HeatpumpVis(HPData, 1, HPR);
+        realpump.drawHeatpump();
     }
     var HPS = document.getElementById("HeatPumpSim");
-    if (HPS) {  
-      var c = HPS.getContext("2d");
-      var xoffset = 50;
-      var yoffset = 10;
-      // draw compressor
-      var compx = 450+xoffset;
-      var compy = 45+yoffset;
-      drawCompressor(c, compx, compy);
-      // draw Evaporator
-      var evax = 100+xoffset;
-      var evay = 250+yoffset;
-      drawHeatExchanger2(c, evax, evay);
-      // draw condenser
-      var cdx = 700+xoffset;
-      var cdy = 250+yoffset;
-      drawHeatExchanger1(c, cdx, cdy);
-      // draw expansion valve
-      var evx = 450+xoffset;
-      var evy = 650+yoffset;
-      drawValve(c, evx, evy);
-      line1(c, evax+55,evay,compx-40,compy,0);
-      line2(c, compx+40, compy, cdx+55, cdy, 0);
-      line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
-      line4(c, evx-30, evy, evax+55, evay+180, 0);
-      drawParams(c, xoffset, yoffset);
+    if (HPS) {
+        const simpump = new HeatpumpVis(HPData, 0, HPS);
+        simpump.drawHeatpump();
     }
-  });
+});
