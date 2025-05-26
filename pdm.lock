@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:faf94fdea19861f9928ff3cf58a503f21b436034e0c46d01864fa06134844aa5"
+content_hash = "sha256:3489c5f7af21d818a520a5d2a993da40e5910e00481d6c53aa6f3e11fc181c0d"
 
 [[metadata.targets]]
 requires_python = ">=3.12"
@@ -437,6 +437,20 @@ groups = ["default"]
 files = [
     {file = "mdurl-0.1.2-py3-none-any.whl", hash = "sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8"},
     {file = "mdurl-0.1.2.tar.gz", hash = "sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"},
+]
+
+[[package]]
+name = "mpld3"
+version = "0.5.10"
+summary = "D3 Viewer for Matplotlib"
+groups = ["default"]
+dependencies = [
+    "jinja2",
+    "matplotlib",
+]
+files = [
+    {file = "mpld3-0.5.10-py3-none-any.whl", hash = "sha256:80877acce87ea447380fad7374668737505c8c0684aab05238e7c5dc1fab38c1"},
+    {file = "mpld3-0.5.10.tar.gz", hash = "sha256:a478eb404fa5212505c59133cf272cd9a94105872e605597720e7f84de38fbc7"},
 ]
 
 [[package]]

@@ -5,7 +5,7 @@ from tespy.tools import logger
 from CoolProp.CoolProp import PropsSI
 import logging
 from fluprodia import FluidPropertyDiagram
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt, mpld3
 import numpy as np
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
@@ -173,8 +173,9 @@ class Heatpump():
         diagram2.draw_isolines(diagram_type='logph', fig=fig, ax=ax, x_min=0, x_max=750, y_min=1, y_max=800)
         plt.plot(r_enthalpies, r_pressures, 'b-', label='Heat Pump Cycle')
         #fig.savefig('logph_diagram_H2O.svg')
-        #fig.savefig('logph_diagram_H2O.png', dpi=300)
-        plt.show()
+        #fig.savefig('logph_diagram_calculated.png', dpi=300)
+        #mpld3.save_html(fig, "thermocycle.html", figid="thermocycle")
+        mpld3.save_json(fig, "thermocycle.json")
         
     def show_temps(self):
         r_enthalpies = []
@@ -268,9 +269,9 @@ class Heatpump():
 pump = Heatpump()
 pump.solve(1)
 #pump.show_design()
-#pump.show_cycle()
+pump.show_cycle()
 #pump.show_temps()
-pump.show_all()
+#pump.show_all()
 
 
 """

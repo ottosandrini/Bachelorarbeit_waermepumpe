@@ -5,7 +5,7 @@
 <title>Web Interface Heat Pump</title>
 <link rel="stylesheet" href="stylewebpage.css"> 
 <script src="lib/gauge.min.js"></script>
-<script type="text/javascript" src="ihatejs.js"></script>
+<script src="lib/jquery.js"></script>
 <script type="text/javascript" src="illustration.js"></script>
 <meta charset="UTF-8">
 <meta name="description" content="Heat Pump digital Twin">
@@ -15,48 +15,61 @@
 </head>
 
 <body>
-    <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'real')">Real System</button>
-        <button class="tablinks" onclick="openTab(event, 'digital')">Digital System</button>
-        <button class="tablinks" onclick="openTab(event, 'comp')">Comparison</button>
-    </div>
+    <div class="tab_structure">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'digital')">Digital System</button>
+            <button class="tablinks" onclick="openTab(event, 'real')">Real System</button>
+            <button class="tablinks" onclick="openTab(event, 'comp')">Comparison</button>
+        </div>
 
-    <!-- Real System -->
-    <div id="real" class="tabcontent">        
-        <div class="row">
-            <div class="column" id="leftcol">
-                <h2>Real System</h2>
-                <p>This is the actual, physical heat pump.</p>
-                <canvas id="OTGaugeReal"></canvas>
-                <h3 id="ueh">Überhitzung</h3>
-            </div>
-            <div class="column" id="rightcol">
-                <canvas id="HeatPumpReal" width="1000" height="800"></canvas>
-            </div>
-        </div>        
-    </div>
-  
-    <!-- Virtual System -->
-    <div id="digital" class="tabcontent">
-        <div class="row">
-            <div class="column" id="leftcol">
-                <h2>Digital System</h2>
-                <p>This is the digital simulation of the real system.</p>
-                <canvas id="OTGaugeSim"></canvas>
-                <h3 id="ueh">Überhitzung</h3>   
-            </div>
-            <div class="column" id="rightcol">
-                <canvas id="HeatPumpSim" width="1000" height="800"></canvas>
+        <!-- Virtual System -->
+        <div id="digital" class="tabcontent">
+            <div class="row">
+                <div class="column" id="leftcol">
+                    <h2>Simulation</h2>
+                    <!--
+                    <p style="padding: 0%; margin: 0%;">-----------------------------------------</p>
+                    <button id="calculate_button">Calculate</button>
+                    <p style="padding: 0%; margin: 0%;">-----------------------------------------</p>
+                    -->
+                    <canvas id="OTGaugeSim"></canvas>
+                    <h3 id="cop">COP</h3>
+                    <h2 id="cop_value_sim">6.25</h2>
+                </div>
+                <div class="column" id="rightcol">
+                    <canvas id="HeatPumpSim" width="900" height="800"></canvas>
+                    <button id="T_wqout" style="left:30px; bottom:500px; color: blue;" onmouseover="showtool(this, 'Wärmequelle Rücklauftemperatur')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_wqin" style="left:30px; bottom:410px; color: red;" onmouseover="showtool(this, 'Wärmequelle Vorlauftemperatur')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
+                    <button id="T_wwout" style="left:880px; bottom:500px; color: red;" onmouseover="showtool(this, 'Warmwasser Rücklauftemperatur')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
+                    <button id="T_wwin" style="left:880px; bottom:410px; color: blue;" onmouseover="showtool(this, 'Warmwasser Vorlauftemperatur')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
+                    <button id="P_comp" style="left: 440px; bottom:640px; color: black;" onmouseover="showtool(this, 'Verdichter Leistung')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
+                    <button id="Q_cond" style="left:580px; bottom:460px; color: black;" onmouseover="showtool(this, 'Verflüssiger Leistung')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
+                    <button id="Q_evap" style="left:310px; bottom:460px; color: black;" onmouseover="showtool(this, 'Verdampfer Leistung')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
+                    <!--<input type="number"></input>-->
+                </div>
             </div>
         </div>
-    </div>
-  
-    <!-- Comparison -->
-    <div id="comp" class="tabcontent">
-        <h3>Comparison</h3>
-        <p>Here we have a comparison between the two.</p>
-    </div>
+    
+        <!-- Real System -->
+        <div id="real" class="tabcontent">        
+            <div class="row">
+                <div class="column" id="leftcol">
+                    <h2>Real System</h2>
+                    <canvas id="OTGaugeReal"></canvas>
+                    <h3 id="cop">COP</h3>
+                    <h2 id="cop_value_real">6.25</h2>
+                </div>
+                <div class="column" id="rightcol">
+                    <canvas id="HeatPumpReal" width="1000" height="800"></canvas>
+                </div>
+            </div>        
+        </div>
 
-
+        <!-- Comparison -->
+        <div id="comp" class="tabcontent">
+            <h3>Comparison</h3>
+            <p>Here we have a comparison between the two.</p>
+        </div>
+    </div> 
 </body>
 </html> 

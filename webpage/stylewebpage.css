@@ -1,4 +1,5 @@
-/* Also mostly copied from w3 schools example */
+/*website only works for screens wider than 1280px*/
+/* flex container stuff mostly copied from w3 schools example */
 .flex-container {
   display: flex;
   height: 7%;
@@ -43,19 +44,33 @@
   border-top: none;
 }
 
-.column {
-  float: left;
-  overflow: auto;
+.tab_structure {
+  position: relative;
+  align-self: center;
+  max-width: 1280px;
 }
 
-#ueh {
-  position:absolute;
-  
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.column {
+  float: center;
+  position: relative;
+  overflow: auto;
 }
 
 #leftcol {
   text-align: center;
-  padding: 10px 100px;
+  float:left;
+  align-items: center;
+  padding: 5px 20px;
 }
 
 #rightcol {
@@ -68,10 +83,85 @@
   border: 1px solid lightgrey;
 }
 
+#OTGaugeSim, #OTGaugeReal {
+  float: top;
+  border: rgba(204, 204, 204, 0.867);
+  border-style: solid;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+#cop {
+  position: relative;
+  bottom: 110px;
+}
+
+#cop_value_sim {
+  position: relative;
+  bottom: 120px;
+}
+
+#cop_value_real{
+  position: relative;
+  bottom: 120px;
+}
+
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
+.tooltip {
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 9999;
+  opacity: 0.9;
+}
 
+#calculate_button {
+  position: relative;
+  background-color: #0055C1;
+  border-radius: 5px;
+  border: None;
+  padding: 15px 30px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+}
+
+#HeatPumpSim, #HeatPumpReal {
+  position:relative;
+  z-index: -1;
+}
+
+#T_wqin, #T_wqout, 
+#T_wwin, #T_wwout,
+#P_comp, #Q_cond, #Q_evap
+{
+  background-color: white;
+  font-size: 24px;
+  font-family: sans-serif;
+  color: rgb(27, 27, 27);
+  position: absolute;
+  border-radius: 5px;
+  border: #ffffff;
+  border-style: solid;
+}
+
+#T_wqin:hover, #T_wqout:hover,
+#T_wwin:hover, #T_wwout:hover,
+#P_comp:hover, #Q_cond:hover, #Q_evap:hover
+{
+  border-radius: 10px;
+  border: #9c9c9c;
+  border-style: solid;
+}

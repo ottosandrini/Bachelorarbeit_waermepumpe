@@ -1,20 +1,18 @@
-const Temperatures = {conn0:10, conn1:60, conn2:55, conn03:3, conn4:3, conn5:10}
-const Pressures = {conn0:8, conn1:22, conn2:22, conn03:8, conn4:8, conn5:8}
-const Enthalpies = {conn0:430, conn1:450, conn2:200, conn03:200, conn4:400, conn5:430}
-const Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800}
-const MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02}
-
-const HPData = {temp:Temperatures, pressure:Pressures, enthalpy:Enthalpies, power:Powers, massflow:MassFlows}
+// --------------------------------------------------------------------------
+// ----------------------- HEATPUMP CLASS -----------------------------------
+// --------------------------------------------------------------------------
 
 class HeatpumpVis {
-    constructor(data, type, canvas) {
+    constructor(type, canvas) {
         this.canvas = canvas;
-        this.Temperatures = data.temp;
-        this.Pressures = data.pressure;
-        this.Enthalpies = data.enthalpy;
-        this.Powers = data.power;
-        this.MassFlows = data.massflow;
-        this.type = type;                   // Select Simulation or Real Thing with 0 or 1
+        // semi-random starting values
+        this.Temperatures = {conn0:10, conn1:60, conn2:55, conn03:3, conn4:3, conn5:10, wq_in:11, wq_out:9, ww_in:11, ww_out:14};
+        this.Pressures = {conn0:8, conn1:22, conn2:22, conn03:8, conn4:8, conn5:8};
+        this.Enthalpies = {conn0:430, conn1:450, conn2:200, conn03:200, conn4:400, conn5:430};
+        this.Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800};
+        this.MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02};
+        // Select Simulation or Real Thing with 0 or 1
+        this.type = type;
     }
 
     update_data() {
@@ -30,8 +28,19 @@ class HeatpumpVis {
         }
     }
 
-    redrawParams(c, xoffset, yoffset){    // draw over old parameters, might need to white out old ones
+    /*
+    redrawParams(c, xoffset, yoffset){    // draw over old parameters
     c.font = "25px comic";
+    // white out old things
+    c.fillStyle = "green"; // green to check location
+    //c.fillStyle = "white";
+    c.fillRect(-25 + xoffset -2 , 388 + yoffset + 4 , 60, -30);
+    c.fillRect(-25 + xoffset -2 , 308 + yoffset + 4 , 60, -30);
+    c.fillRect(880 + xoffset -2 , 308 + yoffset + 4 , 60, -30);
+    c.fillRect(880 + xoffset -2 , 388 + yoffset + 4 , 60, -30);
+    c.fillRect(425 + xoffset -2 , 130 + yoffset + 4 , 60, -30);
+    c.fillRect(425 + xoffset -2 , 710 + yoffset + 4 , 60, -30);
+    // rewrite data fields
     c.fillStyle = "red";
     c.fillText(this.Temperatures.conn1 + "°C", -25 + xoffset, 388 + yoffset);
     c.fillText(this.Temperatures.conn1 + "°C", 880 + xoffset, 308 + yoffset);
@@ -42,35 +51,176 @@ class HeatpumpVis {
     c.fillText(this.Pressures.conn1 + " %", 425 + xoffset, 130 + yoffset);
     c.fillText(this.Pressures.conn2 + " %", 425 + xoffset, 710 + yoffset);
     }
+    */
 
     drawHeatpump(){                            // draws the Heatpump at first start
+    var xscale = 1.02;
+    var yscale = 1;
     var c = this.canvas.getContext("2d");
     var xoffset = 50;
     var yoffset = 10;
     // draw compressor
-    var compx = 450+xoffset;
-    var compy = 45+yoffset;
+    var compx = 400*xscale+xoffset;
+    var compy = 85*yscale+yoffset;
     drawCompressor(c, compx, compy);
     // draw Evaporator
-    var evax = 100+xoffset;
-    var evay = 250+yoffset;
+    var evax = 100*xscale+xoffset;
+    var evay = 250*yscale+yoffset;
     drawHeatExchanger2(c, evax, evay);
     // draw condenser
-    var cdx = 700+xoffset;
-    var cdy = 250+yoffset;
+    var cdx = 620*xscale+xoffset;
+    var cdy = 250*yscale+yoffset;
     drawHeatExchanger1(c, cdx, cdy);
     // draw expansion valve
-    var evx = 450+xoffset;
-    var evy = 650+yoffset;
+    var evx = 400*xscale+xoffset;
+    var evy = 600*yscale+yoffset;
     drawValve(c, evx, evy);
     line1(c, evax+55,evay,compx-40,compy,0);
     line2(c, compx+40, compy, cdx+55, cdy, 0);
     line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
     line4(c, evx-30, evy, evax+55, evay+180, 0);
-    this.redrawParams(c, xoffset, yoffset);
+    //this.redrawParams(c, xoffset, yoffset);
+    // enter data into buttons;
+    document.getElementById("T_wqin").textContent=this.Temperatures.wq_in+"°C";
+    document.getElementById("T_wqout").textContent=this.Temperatures.wq_out+"°C";
+    document.getElementById("T_wwin").textContent=this.Temperatures.ww_in+"°C";
+    document.getElementById("T_wwout").textContent=this.Temperatures.ww_out+"°C";
+    document.getElementById("P_comp").textContent=this.Powers.compressor+" W";
+    document.getElementById("Q_cond").textContent=this.Powers.condenser+" W";
+    document.getElementById("Q_evap").textContent=this.Powers.evaporator+" W";
     }
-
 }
+
+
+// --------------------------------------------------------------------------
+// ----------------------- WEBSITE THINGS -----------------------------------
+// --------------------------------------------------------------------------
+
+
+
+// WEBSITE THINGS
+
+// copied from the w3schools example for tabs and only slightly modified
+function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+  
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+function replace_button(b_id, e_id) {
+    // switch button and entry field visibility
+}
+
+function run_simulation(pump, gauge) {
+    // run python sim
+    pump.update_data()
+
+    var cop = pump.Powers.condenser/pump.Powers.compressor;
+    document.getElementById("cop_value_sim").textContent=cop;
+    gauge.value = cop;
+}
+  
+window.addEventListener('load', () => {
+    openTab(event, 'digital');
+});
+
+
+
+// --------------------------------------------------------------------------
+// ------------------------- DOM THINGS -------------------------------------
+// --------------------------------------------------------------------------
+
+
+// Main Function ?!
+document.addEventListener("DOMContentLoaded", function () {
+    var HPR = document.getElementById("HeatPumpReal");
+    if (HPR) {  
+        const realpump = new HeatpumpVis(1, HPR);
+        realpump.drawHeatpump();
+    }
+    var HPS = document.getElementById("HeatPumpSim");
+    if (HPS) {
+        const simpump = new HeatpumpVis(0, HPS);
+        simpump.drawHeatpump();
+    }
+    // ------ CANVAS GAUGES ------
+    var gauge = new RadialGauge({
+        renderTo: 'OTGaugeReal',
+        width: 250,
+        height: 200,
+        units: "",
+        minValue: 0,
+        startAngle: 90,
+        ticksAngle: 180,
+        valueBox: false,
+        maxValue: 12,
+        majorTicks: ["0","2","4","6","8","10", "12"],
+        minorTicks: 5,
+        strokeTicks: true,
+        highlights: [{"from": 2,"to": 12,"color": "rgba(10, 180, 50, .55)"}],
+        colorPlate: "#fff",
+        borderShadowWidth: 0,
+        borders: false,
+        needleType: "arrow",
+        needleWidth: 2,
+        needleCircleSize: 7,
+        needleCircleOuter: true,
+        needleCircleInner: false,
+        animationDuration: 1500,
+        animationRule: "linear"
+    }).draw();
+    var gauge2 = new RadialGauge({
+        renderTo: 'OTGaugeSim',
+        width: 250,
+        height: 200,
+        units: "",
+        minValue: 0,
+        startAngle: 90,
+        ticksAngle: 180,
+        valueBox: false,
+        maxValue: 12,
+        majorTicks: ["0","2","4","6","8","10", "12"],
+        minorTicks: 5,
+        strokeTicks: true,
+        highlights: [{"from": 2,"to": 12,"color": "rgba(10, 180, 50, .55)"}],
+        colorPlate: "#fff",
+        borderShadowWidth: 0,
+        borders: false,
+        needleType: "arrow",
+        needleWidth: 2,
+        needleCircleSize: 7,
+        needleCircleOuter: true,
+        needleCircleInner: false,
+        animationDuration: 1500,
+        animationRule: "linear"
+    }).draw();
+    // TEST ANIMATION:
+    // setInterval(() => {
+    //   gauge.value = Math.random() * -20 + 20;
+    // }, 100);
+    gauge.value = 6.25;
+    gauge2.value = 6.25;
+});
+
+
+// --------------------------------------------------------------------------
+// ------------------ DRAWING FUNCTIONS -------------------------------------
+// --------------------------------------------------------------------------
 
 function drawPoint(c, d, cX, cY) {
     if (d=="rr"){
@@ -228,17 +378,22 @@ function line4(c, x1, y1, x2, y2, r) {
     c.bezierCurveTo(x2+r, y1, x2, y1-r, x2, y2);
     c.stroke();
 }
+let tooltip;
 
-// Main Function ?!
-document.addEventListener("DOMContentLoaded", function () {
-    var HPR = document.getElementById("HeatPumpReal");
-    if (HPR) {  
-        const realpump = new HeatpumpVis(HPData, 1, HPR);
-        realpump.drawHeatpump();
+function showtool(element, text) {
+    tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+    tooltip.innerText = text;
+    document.body.appendChild(tooltip);
+
+    const rect = element.getBoundingClientRect();
+    tooltip.style.top = (window.scrollY + rect.top - tooltip.offsetHeight - 8) + "px";
+    tooltip.style.left = (window.scrollX + rect.right + 8) + "px";
+}
+
+function hidetool() {
+    if (tooltip) {
+    tooltip.remove();
+    tooltip = null;
     }
-    var HPS = document.getElementById("HeatPumpSim");
-    if (HPS) {
-        const simpump = new HeatpumpVis(HPData, 0, HPS);
-        simpump.drawHeatpump();
-    }
-});
+}

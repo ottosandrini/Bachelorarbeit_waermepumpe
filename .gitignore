@@ -58,3 +58,8 @@ tespytest.py
 tests
 myloggings
 tespy_scheme.drawio
+logph_diagram_calculated.png
+pyproject.toml
+.pdm-build
+thermocycle.html
+thermocycle.json
