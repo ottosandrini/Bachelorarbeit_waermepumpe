@@ -84,7 +84,7 @@ body {
 }
 
 #OTGaugeSim, #OTGaugeReal {
-  float: top;
+  float: bottom;
   border: rgba(204, 204, 204, 0.867);
   border-style: solid;
   border-radius: 10px;
@@ -126,16 +126,24 @@ body {
 }
 
 #calculate_button {
-  position: relative;
-  background-color: #0055C1;
+  /*position: relative;*/
+  background-color: #2872d3;
   border-radius: 5px;
   border: None;
   padding: 15px 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: white;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
+}
+
+.button-clicked {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
+  transition: all 0.1s ease;
 }
 
 #HeatPumpSim, #HeatPumpReal {
@@ -145,7 +153,10 @@ body {
 
 #T_wqin, #T_wqout, 
 #T_wwin, #T_wwout,
-#P_comp, #Q_cond, #Q_evap
+#P_comp, #Q_cond, #Q_evap,
+#T_conn1, #T_conn2, #T_conn3, #T_conn4,
+#P_conn1, #P_conn2, #P_conn3, #P_conn4,
+#M_wq, #M_ww, #overheat
 {
   background-color: white;
   font-size: 24px;
@@ -153,15 +164,24 @@ body {
   color: rgb(27, 27, 27);
   position: absolute;
   border-radius: 5px;
-  border: #ffffff;
-  border-style: solid;
+  border: None;
 }
 
 #T_wqin:hover, #T_wqout:hover,
 #T_wwin:hover, #T_wwout:hover,
-#P_comp:hover, #Q_cond:hover, #Q_evap:hover
+#P_comp:hover, #Q_cond:hover, #Q_evap:hover,
+#T_conn1:hover, #T_conn2:hover, #T_conn3:hover, #T_conn4:hover,
+#P_conn1:hover, #P_conn2:hover, #P_conn3:hover, #P_conn4:hover,
+#M_wq:hover, #M_ww:hover, #overheat:hover
 {
   border-radius: 10px;
-  border: #9c9c9c;
+  border: #6b6b6b;
   border-style: solid;
+}
+
+#headline {
+  margin-bottom: 5px; 
+  border-bottom: solid; 
+  border-color:#cacaca;
+  padding-bottom: 10px;
 }

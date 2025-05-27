@@ -26,25 +26,34 @@
         <div id="digital" class="tabcontent">
             <div class="row">
                 <div class="column" id="leftcol">
-                    <h2>Simulation</h2>
-                    <!--
-                    <p style="padding: 0%; margin: 0%;">-----------------------------------------</p>
-                    <button id="calculate_button">Calculate</button>
-                    <p style="padding: 0%; margin: 0%;">-----------------------------------------</p>
-                    -->
+                    <h2 id="headline">Simulation</h2>
+                    <!-- <p style="padding: 0%; margin: 0%;">-</p> -->
+                    <button id="calculate_button" onmouseover="brighten(this)" onmouseout="unbrighten(this)" onclick="buttonclick(this)">Calculate</button>
+                    <p style="padding: 0%; margin: 0%;"></p>
                     <canvas id="OTGaugeSim"></canvas>
                     <h3 id="cop">COP</h3>
                     <h2 id="cop_value_sim">6.25</h2>
                 </div>
                 <div class="column" id="rightcol">
                     <canvas id="HeatPumpSim" width="900" height="800"></canvas>
-                    <button id="T_wqout" style="left:30px; bottom:500px; color: blue;" onmouseover="showtool(this, 'Wärmequelle Rücklauftemperatur')" onmouseout="hidetool()" onclick="replace_button()">222</button>
-                    <button id="T_wqin" style="left:30px; bottom:410px; color: red;" onmouseover="showtool(this, 'Wärmequelle Vorlauftemperatur')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
-                    <button id="T_wwout" style="left:880px; bottom:500px; color: red;" onmouseover="showtool(this, 'Warmwasser Rücklauftemperatur')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
-                    <button id="T_wwin" style="left:880px; bottom:410px; color: blue;" onmouseover="showtool(this, 'Warmwasser Vorlauftemperatur')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
-                    <button id="P_comp" style="left: 440px; bottom:640px; color: black;" onmouseover="showtool(this, 'Verdichter Leistung')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
-                    <button id="Q_cond" style="left:580px; bottom:460px; color: black;" onmouseover="showtool(this, 'Verflüssiger Leistung')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
-                    <button id="Q_evap" style="left:310px; bottom:460px; color: black;" onmouseover="showtool(this, 'Verdampfer Leistung')" onmouseout="hidetool()" oonclick="replace_button()">222</button>
+                    <button id="T_wqout" style="left:30px; bottom:520px; color: blue;" onmouseover="showtool(this, 'Wärmequelle Rücklauftemperatur')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_wqin" style="left:30px; bottom:390px; color: red;" onmouseover="showtool(this, 'Wärmequelle Vorlauftemperatur')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_wwout" style="left:880px; bottom:520px; color: red;" onmouseover="showtool(this, 'Warmwasser Rücklauftemperatur')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_wwin" style="left:880px; bottom:390px; color: blue;" onmouseover="showtool(this, 'Warmwasser Vorlauftemperatur')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_conn1" style="left:600px; bottom:740px; color: black;" onmouseover="showtool(this, 'Temperatur Hochdurck 1')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_conn2" style="left:600px; bottom:170px; color: black;" onmouseover="showtool(this, 'Temperatur Hochdruck 2')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_conn3" style="left:320px; bottom:170px; color: black;" onmouseover="showtool(this, 'Temperatur Niederdruck 1')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="T_conn4" style="left:320px; bottom:740px; color: black;" onmouseover="showtool(this, 'Temperatur Niederdruck 2')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="P_conn1" style="left:680px; bottom:740px; color: black;" onmouseover="showtool(this, 'Hochdurck 1')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="P_conn2" style="left:680px; bottom:170px; color: black;" onmouseover="showtool(this, 'Hochdruck 2')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="P_conn3" style="left:250px; bottom:170px; color: black;" onmouseover="showtool(this, 'Niederdruck 1')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="P_conn4" style="left:250px; bottom:740px; color: black;" onmouseover="showtool(this, 'Niederdruck 2')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="P_comp" style="left: 440px; bottom:640px; color: black;" onmouseover="showtool(this, 'Verdichter Leistung')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="Q_cond" style="left:580px; bottom:460px; color: black;" onmouseover="showtool(this, 'Verflüssiger Leistung')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="Q_evap" style="left:310px; bottom:460px; color: black;" onmouseover="showtool(this, 'Verdampfer  Leistung')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="M_wq" style="left:35px; bottom:455px; color: black;" onmouseover="showtool(this, 'Massenstrom Wärmequelle')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="M_ww" style="left:825px; bottom:455px; color: black;" onmouseover="showtool(this, 'Massenstrom Wärmesenke')" onmouseout="hidetool()" onclick="replace_button()">222</button>
+                    <button id="overheat" style="left:460px; bottom:520px; color: black;" onmouseover="showtool(this, 'Überhitzung')" onmouseout="hidetool()" onclick="replace_button()">222</button>
                     <!--<input type="number"></input>-->
                 </div>
             </div>
