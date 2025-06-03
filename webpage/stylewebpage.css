@@ -13,16 +13,30 @@
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  min-width: 1279px;
 }
 
-/* Style the buttons that are used to open the tab content */
+.errorfield {
+  /* border: 1px solid #fff; */
+  border: none;
+  background-color: #cbffbb;
+  float: right;
+  font-family: sans-serif;
+  font-style:normal;
+  outline: none;
+  cursor: pointer;
+  color:#79c475;
+  padding: 9px 16px;
+  margin: 0px 0px;
+}
+
 .tab button {
-  background-color: inherit;
+  background-color: #cecece;
   float: left;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 14px 12px;
   transition: 0.3s;
 }
   
@@ -77,6 +91,7 @@ body {
   padding: 20px;
   margin-left: 50px;
   border-left: 1px solid lightgrey;
+  position: relative;
 }
 
 #HeatPump {
@@ -85,10 +100,12 @@ body {
 
 #OTGaugeSim, #OTGaugeReal {
   float: bottom;
-  border: rgba(204, 204, 204, 0.867);
-  border-style: solid;
-  border-radius: 10px;
   z-index: -1;
+  border-top: solid; 
+  border-bottom: solid; 
+  border-color:#dadada;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 #cop {
@@ -125,7 +142,7 @@ body {
   opacity: 0.9;
 }
 
-#calculate_button {
+#calculate_button, #plot_button {
   /*position: relative;*/
   background-color: #2872d3;
   border-radius: 5px;
@@ -147,41 +164,59 @@ body {
 }
 
 #HeatPumpSim, #HeatPumpReal {
-  position:relative;
+  /* position:relative; */
+  display: block;
   z-index: -1;
 }
 
-#T_wqin, #T_wqout, 
-#T_wwin, #T_wwout,
-#P_comp, #Q_cond, #Q_evap,
-#T_conn1, #T_conn2, #T_conn3, #T_conn4,
-#P_conn1, #P_conn2, #P_conn3, #P_conn4,
-#M_wq, #M_ww, #overheat
-{
+.para_button {
   background-color: white;
   font-size: 24px;
   font-family: sans-serif;
   color: rgb(27, 27, 27);
   position: absolute;
   border-radius: 5px;
-  border: None;
+  border: solid;
+  border-color:#fff;
 }
 
-#T_wqin:hover, #T_wqout:hover,
-#T_wwin:hover, #T_wwout:hover,
-#P_comp:hover, #Q_cond:hover, #Q_evap:hover,
-#T_conn1:hover, #T_conn2:hover, #T_conn3:hover, #T_conn4:hover,
-#P_conn1:hover, #P_conn2:hover, #P_conn3:hover, #P_conn4:hover,
-#M_wq:hover, #M_ww:hover, #overheat:hover
-{
+#para_button_2, #para_button_3 {
+  color:#e71c1c;
+}
+
+#para_button_1, #para_button_4 {
+  color:#1f1ce7;
+}
+
+.para_button:hover {
   border-radius: 10px;
   border: #6b6b6b;
   border-style: solid;
 }
 
+.para_input {
+  background-color: white;
+  font-size: 24px;
+  font-family: sans-serif;
+  color: rgb(27, 27, 27);
+  position: absolute;
+  border-radius: 5px;
+  border: solid;
+  border-color: rgb(194, 194, 194);
+  width: 70px;
+  display: none;
+}
+
+.para_div {
+  position:absolute;
+  margin:0px;
+  padding:0px;
+  width:130px;
+}
+
 #headline {
   margin-bottom: 5px; 
   border-bottom: solid; 
-  border-color:#cacaca;
+  border-color:#a3a3a3;
   padding-bottom: 10px;
 }

@@ -3,8 +3,8 @@
 // --------------------------------------------------------------------------
 
 class HeatpumpVis {
-    constructor(type, canvas) {
-        this.canvas = canvas;
+    constructor(type) {
+        this.canvas;
         // semi-random starting values
         this.Temperatures = {conn0:10, conn1:60, conn2:55, conn3:3, conn4:3, conn5:10, wq_in:11, wq_out:9, ww_in:11, ww_out:14};
         this.Pressures = {conn0:8, conn1:22, conn2:22, conn3:8, conn4:8, conn5:8};
@@ -16,10 +16,26 @@ class HeatpumpVis {
         this.overheat = 7;
     }
 
-    update_data() {
-        // update Heat pump data here by running python script and reading new data
+    spec_canvas(canvas) {
+        this.canvas = canvas;
+    }
+
+    update_data(json) {
+        // this function updates Heat pump data by running a python script and reading new data
+        
         if (this.type == 0) {
             // update by running python script
+            // if jsonstring === 1 then no input specified -> run last simulation
+            // if jsonstring === 20 then run design simulation
+            if (jsonstring === 1) {
+                // run simulation with last json string
+            }
+            else if (jsonstring === 20) {
+                // run design simulation
+            }
+            else {
+                // run simulation with json as inputs
+            }
         }
         else if (this.type == 1) {
             // update data from mqtt
@@ -55,54 +71,61 @@ class HeatpumpVis {
     */
 
     drawHeatpump(){                            // draws the Heatpump at first start
-    var xscale = 1.02;
-    var yscale = 1;
-    var c = this.canvas.getContext("2d");
-    var xoffset = 50;
-    var yoffset = 10;
-    // draw compressor
-    var compx = 400*xscale+xoffset;
-    var compy = 85*yscale+yoffset;
-    drawCompressor(c, compx, compy);
-    // draw Evaporator
-    var evax = 100*xscale+xoffset;
-    var evay = 250*yscale+yoffset;
-    drawHeatExchanger2(c, evax, evay);
-    // draw condenser
-    var cdx = 620*xscale+xoffset;
-    var cdy = 250*yscale+yoffset;
-    drawHeatExchanger1(c, cdx, cdy);
-    // draw expansion valve
-    var evx = 400*xscale+xoffset;
-    var evy = 600*yscale+yoffset;
-    drawValve(c, evx, evy);
-    drawNames(c);
-    line1(c, evax+55,evay,compx-40,compy,0);
-    line2(c, compx+40, compy, cdx+55, cdy, 0);
-    line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
-    line4(c, evx-30, evy, evax+55, evay+180, 0);
-    //this.redrawParams(c, xoffset, yoffset);
-    // enter data into buttons;
-    document.getElementById("T_wqin").textContent=this.Temperatures.wq_in+"°C";
-    document.getElementById("T_wqout").textContent=this.Temperatures.wq_out+"°C";
-    document.getElementById("T_wwin").textContent=this.Temperatures.ww_in+"°C";
-    document.getElementById("T_wwout").textContent=this.Temperatures.ww_out+"°C";
-    document.getElementById("T_conn1").textContent=this.Temperatures.conn1+"°C";
-    document.getElementById("T_conn2").textContent=this.Temperatures.conn2+"°C";
-    document.getElementById("T_conn3").textContent=this.Temperatures.conn3+"°C";
-    document.getElementById("T_conn4").textContent=this.Temperatures.conn5+"°C";
-    document.getElementById("P_conn1").textContent=this.Pressures.conn1+"bar";
-    document.getElementById("P_conn2").textContent=this.Pressures.conn2+"bar";
-    document.getElementById("P_conn3").textContent=this.Pressures.conn3+"bar";
-    document.getElementById("P_conn4").textContent=this.Pressures.conn5+"bar";
-    document.getElementById("P_comp").textContent=this.Powers.compressor+" W";
-    document.getElementById("Q_cond").textContent=this.Powers.condenser+" W";
-    document.getElementById("Q_evap").textContent=this.Powers.evaporator+" W";
-    document.getElementById("M_wq").textContent=this.MassFlows.wq+"kg/s";
-    document.getElementById("M_ww").textContent=this.MassFlows.ww+"kg/s";
-    document.getElementById("overheat").textContent=this.overheat+"°K";
+        var xscale = 1.02;
+        var yscale = 1;
+        var c = this.canvas.getContext("2d");
+        var xoffset = 50;
+        var yoffset = 10;
+        // draw compressor
+        var compx = 400*xscale+xoffset;
+        var compy = 85*yscale+yoffset;
+        drawCompressor(c, compx, compy);
+        // draw Evaporator
+        var evax = 100*xscale+xoffset;
+        var evay = 250*yscale+yoffset;
+        drawHeatExchanger2(c, evax, evay);
+        // draw condenser
+        var cdx = 620*xscale+xoffset;
+        var cdy = 250*yscale+yoffset;
+        drawHeatExchanger1(c, cdx, cdy);
+        // draw expansion valve
+        var evx = 400*xscale+xoffset;
+        var evy = 600*yscale+yoffset;
+        drawValve(c, evx, evy);
+        draw_thingy(c);
+        drawNames(c);
+        line1(c, evax+55,evay,compx-40,compy,0);
+        line2(c, compx+40, compy, cdx+55, cdy, 0);
+        line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
+        line4(c, evx-30, evy, evax+55, evay+180, 0);
+        //this.redrawParams(c, xoffset, yoffset);
+        // enter data into buttons;
+        document.getElementById("para_button_1").textContent=this.Temperatures.wq_in+"°C";
+        document.getElementById("para_button_2").textContent=this.Temperatures.wq_out+"°C";
+        document.getElementById("para_button_3").textContent=this.Temperatures.ww_in+"°C";
+        document.getElementById("para_button_4").textContent=this.Temperatures.ww_out+"°C";
+        document.getElementById("para_button_5").textContent=this.Temperatures.conn1+"°C";
+        document.getElementById("para_button_6").textContent=this.Temperatures.conn2+"°C";
+        document.getElementById("para_button_7").textContent=this.Temperatures.conn3+"°C";
+        document.getElementById("para_button_8").textContent=this.Temperatures.conn5+"°C";
+        document.getElementById("para_button_9").textContent=this.Pressures.conn1+"bar";
+        document.getElementById("para_button_10").textContent=this.Pressures.conn2+"bar";
+        document.getElementById("para_button_11").textContent=this.Pressures.conn3+"bar";
+        document.getElementById("para_button_12").textContent=this.Pressures.conn5+"bar";
+        document.getElementById("para_button_13").textContent=this.Powers.compressor+" W";
+        document.getElementById("para_button_14").textContent=this.Powers.condenser+" W";
+        document.getElementById("para_button_15").textContent=this.Powers.evaporator+" W";
+        document.getElementById("para_button_16").textContent=this.MassFlows.wq+"kg/s";
+        document.getElementById("para_button_17").textContent=this.MassFlows.ww+"kg/s";
+        document.getElementById("para_button_18").textContent=this.overheat+"°K";
     }
 }
+
+// global variable of both heatpumps
+const realpump = new HeatpumpVis(1);
+const simpump = new HeatpumpVis(0);
+let copgaugereal;
+let copgaugesim;
 
 
 // --------------------------------------------------------------------------
@@ -110,9 +133,24 @@ class HeatpumpVis {
 // --------------------------------------------------------------------------
 
 
+// Website scaling maybe later (min width 1280px)
+// function scale(window) {
+    // var width = window.screen.width;
+    // if (width =< 1300) {
+// 
+    // }
+// }
 
-// WEBSITE THINGS
+function throw_error(msg) {
+    document.getElementsByClassName("errorfield")[0].textContent=msg;
+    document.getElementsByClassName("errorfield")[0].style="background-color: rgb(255, 185, 185); color: rgb(110, 20, 20);";
+}   
 
+function reset_error() {
+    document.getElementsByClassName("errorfield")[0].textContent="No errors";
+    document.getElementsByClassName("errorfield")[0].style="background-color: #cbffbb; color: #79c475;";
+}   
+ 
 // copied from the w3schools example for tabs and only slightly modified
 function openTab(evt, tabName) {
     // Declare all variables
@@ -135,17 +173,50 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-function replace_button(b_id, e_id) {
-    // switch button and entry field visibility
+function  close_inputs() {
+    for (let i=1;i<=18;i++) {
+        var newid = "para_in_" + i;
+        document.getElementById(newid).value = "";
+        replace_input(i);
+    }
 }
 
-function run_simulation(pump, gauge) {
-    // run python sim
-    pump.update_data()
+function run_simulation() {
+    // function runs python sim and updates with new results
+    reset_error();
+    close_inputs();
+    // check inputs and generate json string
+    let jsonstring = "{";
+    for (let i = 1; i <= 18; i++) {
+        let id = "para_in_" + i;
+        let element = document.getElementById(id);
+        
+        if (element) {
+            let inputVal = Number(element.value); // Convert to number
+    
+            if (!isNaN(inputVal)) {
+                jsonstring += `"${id}":${inputVal},`;
+            }
+            else {
+                throw_error("One or more inputs are NaN! Aborting...");
+                return;
+            }
+        }
+    }
+    if (jsonstring.endsWith(",")) {
+        jsonstring = jsonstring.slice(0, -1);
+    }
+    jsonstring += "}";
+    // check if json empty
+    if (jsonstring === "{}") {
+        jsonstring = "1"
+    }
+    // run simuilation with given parameters
+    simpump.update_data(jsonstring);
 
-    var cop = pump.Powers.condenser/pump.Powers.compressor;
+    var cop = simpump.Powers.condenser/simpump.Powers.compressor;
     document.getElementById("cop_value_sim").textContent=cop;
-    gauge.value = cop;
+    copgaugesim.value = cop;
 }
   
 window.addEventListener('load', () => {
@@ -163,16 +234,16 @@ window.addEventListener('load', () => {
 document.addEventListener("DOMContentLoaded", function () {
     var HPR = document.getElementById("HeatPumpReal");
     if (HPR) {  
-        const realpump = new HeatpumpVis(1, HPR);
+        realpump.spec_canvas(HPR);
         realpump.drawHeatpump();
     }
     var HPS = document.getElementById("HeatPumpSim");
     if (HPS) {
-        const simpump = new HeatpumpVis(0, HPS);
+        simpump.spec_canvas(HPS);
         simpump.drawHeatpump();
     }
     // ------ CANVAS GAUGES ------
-    var gauge = new RadialGauge({
+    copgaugereal = new RadialGauge({
         renderTo: 'OTGaugeReal',
         width: 250,
         height: 200,
@@ -197,7 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
         animationDuration: 1500,
         animationRule: "linear"
     }).draw();
-    var gauge2 = new RadialGauge({
+    copgaugesim = new RadialGauge({
         renderTo: 'OTGaugeSim',
         width: 250,
         height: 200,
@@ -226,8 +297,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // setInterval(() => {
     //   gauge.value = Math.random() * -20 + 20;
     // }, 100);
-    gauge.value = 6.25;
-    gauge2.value = 6.25;
+    copgaugereal.value = 6.25;
+    copgaugesim.value = 6.25;
 });
 
 
@@ -242,12 +313,15 @@ function buttonclick(element) {
     setTimeout(() => {
         element.classList.remove("button-clicked");
     }, 50);
-    // if (element.id === "calculate_button") {
-        // calculate something here
-    // }
-    // else {
+    if (element.id === "plot_button") {
+        window.open("plots/thermocycle.html", "Thermocycle Plot", "width=1000, height=600")
+    }
+     else if (element.id === "calculate_button"){
+        run_simulation();
+    }
+    else {
         // pass
-    // }
+    }
     // if (element.id === "something_else") {
         // do something else
     // }
@@ -263,6 +337,22 @@ function showtool(element, text) {
     const rect = element.getBoundingClientRect();
     tooltip.style.top = (window.scrollY + rect.top - tooltip.offsetHeight - 8) + "px";
     tooltip.style.left = (window.scrollX + rect.right + 8) + "px";
+}
+
+function replace_button(number) {
+    // switch button and entry field visibility
+    var i_id = "para_in_" + number;
+    var b_id = "para_button_" + number;
+    document.getElementById(b_id).style="display:none;"
+    document.getElementById(i_id).style="display:block;"
+}
+
+function replace_input(number) {
+    // switch entry field and button visibility
+    var i_id = "para_in_" + number;
+    var b_id = "para_button_" + number;
+    document.getElementById(i_id).style="display:none;"
+    document.getElementById(b_id).style="display:block;"
 }
 
 function hidetool() {
@@ -281,6 +371,7 @@ function unbrighten(element) {
 }
 
 
+
 // --------------------------------------------------------------------------
 // ------------------ DRAWING FUNCTIONS -------------------------------------
 // --------------------------------------------------------------------------
@@ -296,7 +387,40 @@ function drawNames(c) {
     c.fillText("Expansionsventil", 360, 580);
     c.fillText("Verflüssiger", 760, 230);
     c.fillText("Verdampfer", 40, 230);
-    c.fillText("Überhitzung", 400, 260);
+    c.fillText("Überhitzung", 20, 40);
+    /*
+    var [r,x,y,width,height] = [5,385,210,165,80];
+    c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(x + r, y);
+    c.lineTo(x + width - r, y);
+    c.quadraticCurveTo(x + width, y, x + width, y + r);
+    c.lineTo(x + width, y + height - r);
+    c.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+    c.lineTo(x + r, y + height);
+    c.quadraticCurveTo(x, y + height, x, y + height - r);
+    c.lineTo(x, y + r);
+    c.quadraticCurveTo(x, y, x + r, y);
+    c.stroke();
+    */
+}
+
+function draw_thingy(c) {
+    // Draw the circular path
+    var dia = 60;
+    c.strokeStyle = "rgb(94, 94, 94)";
+    c.beginPath();
+    var cx = 470;
+    var cy = 345;
+    c.arc(cx, cy, dia, 0.5, 0 * Math.PI); // radius = 50 for 100px diameter
+    //c.stroke();
+    // draw the center thingy
+    //c.beginPath();
+    //c.moveTo(ax+50, ay);
+    c.lineTo(cx+dia+7, cy-15   );
+    //c.moveTo(ax+50, ay);
+    //c.lineTo(ax+50+5, ay-5);
+    c.stroke();
 }
 
 function drawPoint(c, d, cX, cY) {

@@ -37,20 +37,20 @@ class Heatpump():
     def __init__(self, **kwargs):
         # --- HEATPUMP PARAMETERS ---
         self.working_fluid = "R410a"
-        self.compressor_power = 774                    # Leistungsaufnahme Verdichter
-        self.isentropen_koeffizient = 0.685
-        self.design_heat_output = 4971
-        self.condensation_temp = 273.15 + 2.16         # Niederdruckseitig!
+        self.compressor_power = 780                    # Leistungsaufnahme Verdichter
+        self.isentropen_koeffizient = 0.95
+        self.design_heat_output = 5112
+        self.condensation_temp = 273.15 + 6.38         # Niederdruckseitig!
         self.low_pressure = PropsSI('P', 'T',  self.condensation_temp, 'Q', 0, self.working_fluid) / 100000
-        self.starting_enthalpy = 430                   # enthalpie zu Beginn (Eintritt in Verdichter)
-        self.high_pressure_side_temp = 273.15 + 58.6   # Temperaturwert aus Laborbericht
-        self.high_pressure = 21.8                      # hochdruckwert für design chart
-        self.superheat = 7.2                           # Überhitzung laut Laborbericht
+        #self.starting_enthalpy = 480                   # enthalpie zu Beginn (Eintritt in Verdichter)
+        self.high_pressure_side_temp = 273.15 + 50.6   # Temperaturwert
+        self.high_pressure = 22.6                      # hochdruckwert für design chart
+        self.superheat = 5.1                           # Überhitzung
         # --- HEATING SYSTEM PARAMETERS ---
-        self.wq_massflow = 0.475                       # Massenstrom Wärmequelle        (kg/s)
-        self.wq_inflow_temp = 273.15 + 7.95            # Wärmequelle Rücklauftemperatur (K)
-        self.ww_massflow = 0.265                       # Massenstrom Warmwasser         (kg/s)
-        self.ww_inflow_temp = 273.15 + 30              # Warmwasser Rücklauftemperatur  (K)
+        self.wq_massflow = 0.385                       # Massenstrom Wärmequelle        (kg/s)
+        self.wq_inflow_temp = 273.15 + 12.2            # Wärmequelle Rücklauftemperatur (K)
+        self.ww_massflow = 0.268                       # Massenstrom Warmwasser         (kg/s)
+        self.ww_inflow_temp = 273.15 + 31.1            # Warmwasser Rücklauftemperatur  (K)
         # --- Network ---
         self.heatpump = Network()
         self.heatpump.set_attr(T_unit='K', p_unit='bar', h_unit='kJ / kg', iterinfo=True)
@@ -105,7 +105,8 @@ class Heatpump():
         self.wq1.set_attr(T=self.wq_inflow_temp, p=2, m=self.wq_massflow, fluid={'ethanol': 1})      # Wärmequelle Vorlauf
         #self.wq3.set_attr(T=self.condensation_temp+10, p=2, m=0.6, fluid={'ethanol': 1})      # Superheater seperater zulauf
         #self.wq2.set_attr()
-        self.compressor.set_attr(P=self.compressor_power, eta_s=self.isentropen_koeffizient)
+        #self.compressor.set_attr(P=self.compressor_power, eta_s=self.isentropen_koeffizient)
+        self.compressor.set_attr(P=self.compressor_power, pr=2.32)
         self.compressor.set_attr(design=['P', 'eta_s'], offdesign=['P', 'eta_s'])
         self.condenser.set_attr(Q=-self.design_heat_output, pr1=0.98, pr2=0.98)
         self.condenser.set_attr(design=['Q', 'pr1', 'pr2'], offdesign=['zeta1', 'zeta2', 'kA'])
@@ -126,8 +127,11 @@ class Heatpump():
         else:
             self.heatpump.solve(mode="offdesign", design_path='designstate/design_state.json')
             self.heatpump.print_results()
-        
-        print(f"high pressure side p = {self.high_pressure}")
+        pres = 0
+        for c in self.conn_list:
+            if c.p.val > pres:
+                pres = c.p.val
+        print(f"high pressure side p = {round(pres,3)}")
 
     def show_design(self): # fluid property diagram pre calc
         pressures = [self.low_pressure, 28, self.high_pressure, self.low_pressure, self.low_pressure]  # in bar
@@ -174,8 +178,8 @@ class Heatpump():
         plt.plot(r_enthalpies, r_pressures, 'b-', label='Heat Pump Cycle')
         #fig.savefig('logph_diagram_H2O.svg')
         #fig.savefig('logph_diagram_calculated.png', dpi=300)
-        #mpld3.save_html(fig, "thermocycle.html", figid="thermocycle")
-        mpld3.save_json(fig, "thermocycle.json")
+        mpld3.save_html(fig, "webpage/plots/thermocycle.html", figid="thermocycle")
+        #mpld3.save_json(fig, "thermocycle.json")
         
     def show_temps(self):
         r_enthalpies = []
