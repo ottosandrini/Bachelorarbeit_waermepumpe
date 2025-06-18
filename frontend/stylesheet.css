@@ -64,6 +64,10 @@
   max-width: 1280px;
 }
 
+.tablinks {
+  font-family: ubuntu;
+}
+
 html {
     display: table;
     margin: auto;
@@ -142,13 +146,24 @@ body {
   opacity: 0.9;
 }
 
-#calculate_button, #plot_button {
+#plot_button {
+  position: relative;
+  bottom:100px;
+}
+#debug_button {
+  position: relative;
+  bottom: 100px;
+}
+
+.side_button {
   /*position: relative;*/
   background-color: #2872d3;
   border-radius: 5px;
   border: None;
-  padding: 15px 30px;
-  margin-top: 10px;
+  /* padding: 15px 30px; */
+  width: 120px;
+  height: 50px;
+  margin-top: 10px; 
   margin-bottom: 10px;
   color: white;
   text-align: center;
@@ -164,7 +179,6 @@ body {
 }
 
 #HeatPumpSim, #HeatPumpReal {
-  /* position:relative; */
   display: block;
   z-index: -1;
 }
@@ -211,7 +225,7 @@ body {
   position:absolute;
   margin:0px;
   padding:0px;
-  width:130px;
+  width:145px;
 }
 
 #headline {

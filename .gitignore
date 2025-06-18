@@ -61,5 +61,7 @@ tespy_scheme.drawio
 logph_diagram_calculated.png
 pyproject.toml
 .pdm-build
+pdm.lock
+.pdm-python
 thermocycle.html
 thermocycle.json

@@ -3,10 +3,13 @@
 
 <head>
 <title>Web Interface Heat Pump</title>
-<link rel="stylesheet" href="stylewebpage.css"> 
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="manifest" href="favicon_io/site.webmanifest">
+<link rel="stylesheet" href="stylesheet.css">
 <script src="lib/gauge.min.js"></script>
 <script src="lib/jquery.js"></script>
-<script type="text/javascript" src="illustration.js"></script>
 <meta charset="UTF-8">
 <meta name="description" content="Heat Pump digital Twin">
 <meta name="keywords" content="HTML, CSS, JavaScript">
@@ -17,10 +20,11 @@
 <body>
     <div class="tab_structure">
         <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'digital')">Digital System</button>
-            <button class="tablinks" onclick="openTab(event, 'real')">Real System</button>
-            <button class="tablinks" onclick="openTab(event, 'comp')">Comparison</button>
-            <button class="tablinks" onclick="throw_error('Test Error')">Error</button>
+            <button class="tablinks" onclick="openTab(event, 'digital')">Digitales System</button>
+            <button class="tablinks" onclick="openTab(event, 'real')">Reales System</button>
+            <button class="tablinks" onclick="openTab(event, 'comp')">Bedienung</button>
+            <!-- <button class="tablinks" onclick="throw_error('Test Error')">Error</button> -->
+            <button type="button" class="refreshbt" id="r_b" onclick="session_refresh(event)">Neue Session</button>
             <p class="errorfield">No errors</p>
         </div>
 
@@ -28,14 +32,16 @@
         <div id="digital" class="tabcontent">
             <div class="row">
                 <div class="column" id="leftcol">
-                    <h2 id="headline">Simulation</h2>
+                    <h2 id="headline" style="font-family: ubuntu; font-size: 30px;">Simulation</h2>
                     <!-- <p style="padding: 0%; margin: 0%;">-</p> -->
-                    <button id="calculate_button" onmouseover="brighten(this)" onmouseout="unbrighten(this)" onclick="buttonclick(this)">Calculate</button>
+                    <button class="side_button" id="calculate_button" onmouseover="brighten(this)" onmouseout="unbrighten(this)" onclick="buttonclick(this)">Simulieren</button>
                     <p style="padding: 0%; margin: 0%;"></p>
                     <canvas id="OTGaugeSim"></canvas>
-                    <h3 id="cop">COP</h3>
-                    <h2 id="cop_value_sim">6.25</h2>
-                    <button id="plot_button" onmouseover="brighten(this)" onmouseout="unbrighten(this)" onclick="buttonclick(this)">Plot Cycle</button>
+                    <h2 id="cop" style="margin-bottom: 0%; font-family: ubuntu;">COP</h2>
+                    <h2 id="cop_value_sim" style="margin-top: 10px; font-family: ubuntu;">6.25</h2>
+                    <button class="side_button" id="plot_button" onmouseover="brighten(this)" onmouseout="unbrighten(this)" onclick="buttonclick(this)">Kreisprozess anzeigen</button>
+                    <p style="padding: 0%; margin: 0%;"></p>
+                    <button class="side_button" id="debug_button" onmouseover="brighten(this)" onmouseout="unbrighten(this)" onclick="buttonclick(this)">Design Simulation</button>
                 </div>
                 <div class="column" id="rightcol">
                     <canvas id="HeatPumpSim" width="900" height="700"></canvas>
@@ -72,19 +78,19 @@
                         <button class="para_button" id="para_button_8"  onmouseover="showtool(this, 'Temperatur Niederdruck 2')"       onmouseout="hidetool()" onclick="replace_button(8)">222</button>
                         <input  class="para_input"  id="para_in_8"  ondblclick="replace_input(8)"></input>
                     </div>
-                    <div class="para_div" style="left:680px; bottom:670px;">
+                    <div class="para_div" style="left:700px; bottom:670px;">
                         <button class="para_button" id="para_button_9"  onmouseover="showtool(this, 'Hochdurck 1')"                    onmouseout="hidetool()" onclick="replace_button(9)">222</button>
                         <input  class="para_input"  id="para_in_9"  ondblclick="replace_input(9)"></input>
                     </div>
-                    <div class="para_div" style="left:680px; bottom:100px;">
+                    <div class="para_div" style="left:700px; bottom:100px;">
                         <button class="para_button" id="para_button_10" onmouseover="showtool(this, 'Hochdruck 2')"                    onmouseout="hidetool()" onclick="replace_button(10)">222</button>
                         <input  class="para_input"  id="para_in_10" ondblclick="replace_input(10)"></input>
                     </div>
-                    <div class="para_div" style="left:250px; bottom:100px;">
+                    <div class="para_div" style="left:230px; bottom:100px;">
                         <button class="para_button" id="para_button_11" onmouseover="showtool(this, 'Niederdruck 1')"                  onmouseout="hidetool()" onclick="replace_button(11)">222</button>
                         <input  class="para_input"  id="para_in_11" ondblclick="replace_input(11)"></input>
                     </div>
-                    <div class="para_div" style="left:250px; bottom:670px;">
+                    <div class="para_div" style="left:230px; bottom:670px;">
                         <button class="para_button" id="para_button_12" onmouseover="showtool(this, 'Niederdruck 2')"                  onmouseout="hidetool()" onclick="replace_button(12)">222</button>
                         <input  class="para_input"  id="para_in_12" ondblclick="replace_input(12)"></input>
                     </div>
@@ -92,7 +98,7 @@
                         <button class="para_button" id="para_button_13" onmouseover="showtool(this, 'Verdichter Leistung')"            onmouseout="hidetool()" onclick="replace_button(13)">222</button>
                         <input class="para_input"  id="para_in_13" ondblclick="replace_input(13)"></input>
                     </div>
-                    <div class="para_div" style="left:600px; bottom:395px;">
+                    <div class="para_div" style="left:590px; bottom:395px;">
                         <button class="para_button" id="para_button_14" onmouseover="showtool(this, 'Verflüssiger Leistung')"          onmouseout="hidetool()" onclick="replace_button(14)">222</button>
                         <input  class="para_input"  id="para_in_14" ondblclick="replace_input(14)"></input>
                     </div>
@@ -100,11 +106,11 @@
                         <button class="para_button" id="para_button_15" onmouseover="showtool(this, 'Verdampfer  Leistung')"           onmouseout="hidetool()" onclick="replace_button(15)">222</button>
                         <input  class="para_input"  id="para_in_15" ondblclick="replace_input(15)"></input>
                     </div>
-                    <div class="para_div" style="left:35px;  bottom:390px;">
+                    <div class="para_div" style="left:30px;  bottom:395px;">
                         <button class="para_button" id="para_button_16" onmouseover="showtool(this, 'Massenstrom Wärmequelle')"        onmouseout="hidetool()" onclick="replace_button(16)">222</button>
                         <input  class="para_input"  id="para_in_16" ondblclick="replace_input(16)"></input>
                     </div>
-                    <div class="para_div" style="left:825px; bottom:390px;">
+                    <div class="para_div" style="left:818px; bottom:395px;">
                         <button class="para_button" id="para_button_17" onmouseover="showtool(this, 'Massenstrom Wärmesenke')"         onmouseout="hidetool()" onclick="replace_button(17)">222</button>
                         <input  class="para_input"  id="para_in_17" ondblclick="replace_input(17)"></input>
                     </div>
@@ -134,9 +140,15 @@
 
         <!-- Comparison -->
         <div id="comp" class="tabcontent">
-            <h3>Comparison</h3>
-            <p>Here we have a comparison between the two.</p>
+            <h3>Wie verwende ich diese Seite?</h3>
+            <p>Auf dieser Seite können verschieden Betriebspunkte auf einer virtuelle Wärmepumpe simuliert werden.</p>
+            <h3>Wie kann ich daten eingeben?</h3>
+            <p>Wenn man auf einen Parameter klickt, öffnet sich ein Eingabefeld und man kann dort der Simulation einen Wert für den Parameter vorgeben. 
+            <br>  Wenn man nun auf den "Simulieren" button drückt wird mit dem eingegebem Wert simuliert.</p>
         </div>
     </div> 
+    <!-- Development version so fast api loads the script fresh every time: -->
+    <script>document.write('<script src="script.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+    <!-- <script type="text/javascript" src="script.js"></script> -->
 </body>
 </html> 

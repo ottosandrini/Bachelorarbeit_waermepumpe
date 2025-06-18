@@ -10,38 +10,114 @@ class HeatpumpVis {
         this.Pressures = {conn0:8, conn1:22, conn2:22, conn3:8, conn4:8, conn5:8};
         this.Enthalpies = {conn0:430, conn1:450, conn2:200, conn3:200, conn4:400, conn5:430};
         this.Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800};
-        this.MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02, wq:0.475, ww:0.265};
+        this.MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02, wq:0.475*60, ww:0.265*60};
         // Select Simulation or Real Thing with 0 or 1
         this.type = type;
         this.overheat = 7;
+    }
+
+    reload_data(data) {
+        if (data.Temperatures) {
+            this.Temperatures = {
+                conn0: data.Temperatures.conn0 || this.Temperatures.conn0,
+                conn1: data.Temperatures.conn1 || this.Temperatures.conn1,
+                conn2: data.Temperatures.conn2 || this.Temperatures.conn2,
+                conn3: data.Temperatures.conn3 || this.Temperatures.conn3,
+                conn4: data.Temperatures.conn4 || this.Temperatures.conn4,
+                conn5: data.Temperatures.conn5 || this.Temperatures.conn5,
+                wq_in: data.Temperatures.wq_in || this.Temperatures.wq_in,
+                wq_out: data.Temperatures.wq_out || this.Temperatures.wq_out,
+                ww_in: data.Temperatures.ww_in || this.Temperatures.ww_in,
+                ww_out: data.Temperatures.ww_out || this.Temperatures.ww_out
+            };
+        }
+        // Update pressures
+        if (data.Pressures) {
+            this.Pressures = {
+                conn0: data.Pressures.conn0 || this.Pressures.conn0,
+                conn1: data.Pressures.conn1 || this.Pressures.conn1,
+                conn2: data.Pressures.conn2 || this.Pressures.conn2,
+                conn3: data.Pressures.conn3 || this.Pressures.conn3,
+                conn4: data.Pressures.conn4 || this.Pressures.conn4,
+                conn5: data.Pressures.conn5 || this.Pressures.conn5
+            };
+        }
+        // Update powers
+        if (data.Powers) {
+            this.Powers = {
+                evaporator: data.Powers.evaporator || this.Powers.evaporator,
+                condenser: data.Powers.condenser || this.Powers.condenser,
+                superheater: data.Powers.superheater || this.Powers.superheater,
+                compressor: data.Powers.compressor || this.Powers.compressor
+            };
+        }
+        // Update mass flows
+        if (data.MassFlows) {
+            this.MassFlows = {
+                conn0: data.MassFlows.conn0 || this.MassFlows.conn0,
+                conn1: data.MassFlows.conn1 || this.MassFlows.conn1,
+                conn2: data.MassFlows.conn2 || this.MassFlows.conn2,
+                conn3: data.MassFlows.conn3 || this.MassFlows.conn3,
+                conn4: data.MassFlows.conn4 || this.MassFlows.conn4,
+                conn5: data.MassFlows.conn5 || this.MassFlows.conn5,
+                wq: data.MassFlows.wq || this.MassFlows.wq,
+                ww: data.MassFlows.ww || this.MassFlows.ww
+            };
+        }
+        // Update overheat
+        if (data.overheat !== undefined) {
+            this.overheat = data.overheat;
+        }
     }
 
     spec_canvas(canvas) {
         this.canvas = canvas;
     }
 
-    update_data(json) {
+    async update_data(json) {
         // this function updates Heat pump data by running a python script and reading new data
-        
-        if (this.type == 0) {
+        if (this.type == 0) { // Object is of type simulation
             // update by running python script
             // if jsonstring === 1 then no input specified -> run last simulation
             // if jsonstring === 20 then run design simulation
-            if (jsonstring === 1) {
-                // run simulation with last json string
+            if (json === 1) {
+                // do nothing
+                return 0
             }
-            else if (jsonstring === 20) {
+            else if (json === 20) {
                 // run design simulation
+                var url = "http://127.0.0.1:8000/design_simulation/" + my_session_id;
+                let response = await fetch(url, {method:"GET",headers:{"Content-type":"application/json; charset=UTF-8"}});
+                if (!response.ok) {
+                    throw_error("ID not ok. Something went wrong!");
+                    return;
+                }
+                const json_resp  = await response.json();
+                /*if (json_resp.my_session_id === 0 || json_resp.error) {
+                    throw_error("Already too many people simulating. Please try again later");
+                    my_session_id_get_in_progress = 0;
+                    return;
+                }*/
+                //console.log(json_resp);
+                this.reload_data(json_resp);
+                this.update_buttons();
+                var newcop = this.Powers.condenser / this.Powers.compressor;
+                copgaugesim.value = newcop;
+                document.getElementById("cop_value_sim").textContent = Math.round(newcop*100)/100;
             }
+
             else {
                 // run simulation with json as inputs
+                var url = "http://127.0.0.1:8000/offdesign_simulation/" + my_session_id;
+                fetch(url, {method:"POST", body:json, headers:{"Content-type": "application/json; charset=UTF-8"}});
             }
         }
-        else if (this.type == 1) {
+        else if (this.type == 1) { // Object is of type Real System
             // update data from mqtt
         }
         else  {
             // give an error: Type not supported; choose Simulation (0) or Real System (1)
+            throw_error("heat pump type not supported! Something went wrong here!");
         }
     }
 
@@ -71,7 +147,7 @@ class HeatpumpVis {
     */
 
     drawHeatpump(){                            // draws the Heatpump at first start
-        var xscale = 1.02;
+        var xscale = 1;
         var yscale = 1;
         var c = this.canvas.getContext("2d");
         var xoffset = 50;
@@ -98,12 +174,17 @@ class HeatpumpVis {
         line2(c, compx+40, compy, cdx+55, cdy, 0);
         line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
         line4(c, evx-30, evy, evax+55, evay+180, 0);
+        drawRoundedRect(c, 8, 8, 160, 90, 15);
         //this.redrawParams(c, xoffset, yoffset);
         // enter data into buttons;
-        document.getElementById("para_button_1").textContent=this.Temperatures.wq_in+"°C";
-        document.getElementById("para_button_2").textContent=this.Temperatures.wq_out+"°C";
-        document.getElementById("para_button_3").textContent=this.Temperatures.ww_in+"°C";
-        document.getElementById("para_button_4").textContent=this.Temperatures.ww_out+"°C";
+        this.update_buttons();
+    }
+
+    update_buttons(){
+        document.getElementById("para_button_1").textContent=this.Temperatures.wq_out+"°C";
+        document.getElementById("para_button_2").textContent=this.Temperatures.wq_in+"°C";
+        document.getElementById("para_button_3").textContent=this.Temperatures.ww_out+"°C";
+        document.getElementById("para_button_4").textContent=this.Temperatures.ww_in+"°C";
         document.getElementById("para_button_5").textContent=this.Temperatures.conn1+"°C";
         document.getElementById("para_button_6").textContent=this.Temperatures.conn2+"°C";
         document.getElementById("para_button_7").textContent=this.Temperatures.conn3+"°C";
@@ -115,22 +196,162 @@ class HeatpumpVis {
         document.getElementById("para_button_13").textContent=this.Powers.compressor+" W";
         document.getElementById("para_button_14").textContent=this.Powers.condenser+" W";
         document.getElementById("para_button_15").textContent=this.Powers.evaporator+" W";
-        document.getElementById("para_button_16").textContent=this.MassFlows.wq+"kg/s";
-        document.getElementById("para_button_17").textContent=this.MassFlows.ww+"kg/s";
+        document.getElementById("para_button_16").textContent=this.MassFlows.wq+" l/min";
+        document.getElementById("para_button_17").textContent=this.MassFlows.ww+" l/min";
         document.getElementById("para_button_18").textContent=this.overheat+"°K";
     }
 }
-
-// global variable of both heatpumps
-const realpump = new HeatpumpVis(1);
-const simpump = new HeatpumpVis(0);
-let copgaugereal;
-let copgaugesim;
 
 
 // --------------------------------------------------------------------------
 // ----------------------- WEBSITE THINGS -----------------------------------
 // --------------------------------------------------------------------------
+
+// ------ CANVAS GAUGES ------
+let copgaugereal = new RadialGauge({
+    renderTo: 'OTGaugeReal',
+    width: 250,
+    height: 200,
+    units: "",
+    minValue: 0,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
+    maxValue: 12,
+    majorTicks: ["0","2","4","6","8","10", "12"],
+    minorTicks: 6,
+    strokeTicks: true,
+    // Highlights sind willkürlich gewählt
+    highlights: [{"from": 4.5,"to": 12,"color": "rgba(10, 180, 50, .55)"}, {"from": 1.5,"to": 4.5,"color": "rgba(219, 191, 33, 0.59)"}, {"from": 0,"to": 1.5,"color": "rgba(180, 21, 10, 0.55)"}],
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    animationDuration: 1500,
+    animationRule: "linear"
+}).draw();
+let copgaugesim = new RadialGauge({
+    renderTo: 'OTGaugeSim',
+    width: 250,
+    height: 200,
+    units: "",
+    minValue: 0,
+    startAngle: 90,
+    ticksAngle: 180,
+    valueBox: false,
+    maxValue: 12,
+    majorTicks: ["0","2","4","6","8","10", "12"],
+    minorTicks: 6,
+    strokeTicks: true,
+    // Highlights sind willkürlich gewählt
+    highlights: [{"from": 4.5,"to": 12,"color": "rgba(10, 180, 50, .55)"}, {"from": 1.5,"to": 4.5,"color": "rgba(219, 191, 33, 0.59)"}, {"from": 0,"to": 1.5,"color": "rgba(180, 21, 10, 0.55)"}],
+    colorPlate: "#fff",
+    borderShadowWidth: 0,
+    borders: false,
+    needleType: "arrow",
+    needleWidth: 2,
+    needleCircleSize: 7,
+    needleCircleOuter: true,
+    needleCircleInner: false,
+    animationDuration: 1500,
+    animationRule: "linear"
+}).draw();
+// TEST ANIMATION:
+// setInterval(() => {
+//   gauge.value = Math.random() * -20 + 20;
+// }, 100);
+copgaugereal.value = 6.25;
+copgaugesim.value = 6.25;
+
+// global variable of both heatpumps and my_session_id
+var my_session_id = "test";
+var my_session_id_get_in_progress = 0;
+var attempted_to_get_my_session_id = 0;
+// console.log(my_session_id);
+const realpump = new HeatpumpVis(1);
+const simpump = new HeatpumpVis(0);
+
+
+// function runs when .js file is loaded by webpage
+// function sets my_session_id if none is loaded
+(async () => {
+  try {
+    var local = localStorage.getItem("my_session_id");
+    if (local !== null && local !== "test") {
+        if (await check_session_id(local)) {
+            console.log("session id loaded from localStorage")
+            my_session_id = local;
+        }
+        else  {
+            await get_my_session_id();
+        }
+        document.getElementById("r_b").textContent = `Session ID: ${my_session_id}`;
+    }
+    else {
+        await get_my_session_id();
+        console.log("getting a new session id");
+        document.getElementById("r_b").textContent = `Session ID: ${my_session_id}`;
+    } 
+  } catch (error) {
+    console.error("Session init failed:", error);
+  }
+})();
+
+async function check_session_id(current_id) {
+    var url = "http://127.0.0.1:8000/checkID/" + current_id;
+    let response = await fetch(url, {method:"GET", headers:{"Content-type": "application/json; charset=UTF-8"}});
+    if (!response.ok) {
+        throw_error("ID not ok. Something went wrong!");
+        my_session_id_get_in_progress = 0;
+        return;
+    }
+    const json_resp = await response.json();
+    if (json_resp.message === "OK") {
+        return true;
+    }
+    else if (json_resp.message === "NOT_OK") {
+        return false;
+    }
+    else {
+        console.log("session id verification error");
+        return false;
+    }
+}
+
+// get session id to communicate with FastAPI
+async function get_my_session_id(){
+    if (my_session_id_get_in_progress === 1) {return;}
+    my_session_id_get_in_progress = 1;
+    // console.log("session: ", my_session_id);
+    
+    if (my_session_id === "test" || my_session_id === null) {    // if my_session_id = test get new my_session_id, check and set it
+        let response = await fetch("http://127.0.0.1:8000/session_start", {method:"GET",headers:{"Content-type":"application/json; charset=UTF-8"}});
+        if (!response.ok) {
+            throw_error("ID not ok. Something went wrong!");
+            my_session_id_get_in_progress = 0;
+            return;
+        }
+        const json_resp  = await response.json();
+        if (json_resp.my_session_id === 0 || json_resp.error) {
+            throw_error("Already too many people simulating. Please try again later");
+            my_session_id_get_in_progress = 0;
+            return;
+        }
+        localStorage.setItem("my_session_id", json_resp.my_session_id);
+        my_session_id = json_resp.my_session_id;
+        document.getElementsByClassName("refreshbt")[0].textContent="Session ID: " + my_session_id;
+        console.log("Successfully initialized session:", my_session_id);
+    }
+    else {
+        console.log("session already started, with id: " + my_session_id);
+    }
+    my_session_id_get_in_progress = 0;
+}
+
 
 
 // Website scaling maybe later (min width 1280px)
@@ -140,6 +361,28 @@ let copgaugesim;
 // 
     // }
 // }
+
+function session_refresh(event) {
+    if (event) event.preventDefault();
+    var url = "http://127.0.0.1:8000/session_end/" + my_session_id;
+    fetch(url, {method:"GET", headers:{"Content-type": "application/json; charset=UTF-8"}});
+    console.log("ended session with id:" + my_session_id);
+    my_session_id = "test";
+    // get new my_session_id from api
+    get_my_session_id();
+}
+
+// function debug_python(){
+//     var url = "http://127.0.0.1:8000/print_list";
+//     fetch(url, {method:"GET", headers:{"Content-type": "application/json; charset=UTF-8"}});
+// }
+
+/*window.onbeforeunload = function () {
+    var url = "http://127.0.0.1:8000/session_end/" + my_session_id;
+    fetch(url, {method:"GET", headers:{"Content-type": "application/json; charset=UTF-8"}});
+    console.log("ended session on unload with id: " + my_session_id);
+    localStorage.removeItem("my_session_id");
+}*/
 
 function throw_error(msg) {
     document.getElementsByClassName("errorfield")[0].textContent=msg;
@@ -183,6 +426,7 @@ function  close_inputs() {
 
 function run_simulation() {
     // function runs python sim and updates with new results
+    // function runs after calculate_button is pressed
     reset_error();
     close_inputs();
     // check inputs and generate json string
@@ -229,9 +473,7 @@ window.addEventListener('load', () => {
 // ------------------------- DOM THINGS -------------------------------------
 // --------------------------------------------------------------------------
 
-
-// Main Function ?!
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {             // draw the heatpumps and gauges
     var HPR = document.getElementById("HeatPumpReal");
     if (HPR) {  
         realpump.spec_canvas(HPR);
@@ -242,63 +484,7 @@ document.addEventListener("DOMContentLoaded", function () {
         simpump.spec_canvas(HPS);
         simpump.drawHeatpump();
     }
-    // ------ CANVAS GAUGES ------
-    copgaugereal = new RadialGauge({
-        renderTo: 'OTGaugeReal',
-        width: 250,
-        height: 200,
-        units: "",
-        minValue: 0,
-        startAngle: 90,
-        ticksAngle: 180,
-        valueBox: false,
-        maxValue: 12,
-        majorTicks: ["0","2","4","6","8","10", "12"],
-        minorTicks: 6,
-        strokeTicks: true,
-        highlights: [{"from": 3,"to": 12,"color": "rgba(10, 180, 50, .55)"}],
-        colorPlate: "#fff",
-        borderShadowWidth: 0,
-        borders: false,
-        needleType: "arrow",
-        needleWidth: 2,
-        needleCircleSize: 7,
-        needleCircleOuter: true,
-        needleCircleInner: false,
-        animationDuration: 1500,
-        animationRule: "linear"
-    }).draw();
-    copgaugesim = new RadialGauge({
-        renderTo: 'OTGaugeSim',
-        width: 250,
-        height: 200,
-        units: "",
-        minValue: 0,
-        startAngle: 90,
-        ticksAngle: 180,
-        valueBox: false,
-        maxValue: 12,
-        majorTicks: ["0","2","4","6","8","10", "12"],
-        minorTicks: 6,
-        strokeTicks: true,
-        highlights: [{"from": 3,"to": 12,"color": "rgba(10, 180, 50, .55)"}],
-        colorPlate: "#fff",
-        borderShadowWidth: 0,
-        borders: false,
-        needleType: "arrow",
-        needleWidth: 2,
-        needleCircleSize: 7,
-        needleCircleOuter: true,
-        needleCircleInner: false,
-        animationDuration: 1500,
-        animationRule: "linear"
-    }).draw();
-    // TEST ANIMATION:
-    // setInterval(() => {
-    //   gauge.value = Math.random() * -20 + 20;
-    // }, 100);
-    copgaugereal.value = 6.25;
-    copgaugesim.value = 6.25;
+ 
 });
 
 
@@ -319,8 +505,11 @@ function buttonclick(element) {
      else if (element.id === "calculate_button"){
         run_simulation();
     }
+    else if (element.id === "debug_button"){
+        simpump.update_data(20);
+    }
     else {
-        // pass
+        //pass0
     }
     // if (element.id === "something_else") {
         // do something else
@@ -370,8 +559,6 @@ function unbrighten(element) {
     element.style.filter = "brightness(1)";
 }
 
-
-
 // --------------------------------------------------------------------------
 // ------------------ DRAWING FUNCTIONS -------------------------------------
 // --------------------------------------------------------------------------
@@ -406,7 +593,7 @@ function drawNames(c) {
 }
 
 function draw_thingy(c) {
-    // Draw the circular path
+    // Draw the circular arrow in the middle
     var dia = 60;
     c.strokeStyle = "rgb(94, 94, 94)";
     c.beginPath();
@@ -577,5 +764,21 @@ function line4(c, x1, y1, x2, y2, r) {
     c.beginPath();
     c.moveTo(x1,y1);
     c.bezierCurveTo(x2+r, y1, x2, y1-r, x2, y2);
+    c.stroke();
+}
+
+function drawRoundedRect(c, x, y, width, height, radius) {
+    radius = Math.min(radius, width/2, height/2);
+    c.strokeStyle = "rgb(155,155,155)";
+    c.beginPath();
+    c.moveTo(x + radius, y);
+    c.lineTo(x + width - radius, y);
+    c.arcTo(x + width, y, x + width, y + radius, radius);
+    c.lineTo(x + width, y + height - radius);
+    c.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+    c.lineTo(x + radius, y + height);
+    c.arcTo(x, y + height, x, y + height - radius, radius);
+    c.lineTo(x, y + radius);
+    c.arcTo(x, y, x + radius, y, radius);
     c.stroke();
 }
