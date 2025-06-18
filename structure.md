@@ -6,6 +6,7 @@
 - Kapitel 1 bis 3 fertig machen
 
 ## Was fehlt noch?
+- isentropic efficiency of compressor!
 - daten der realen WP über mqtt bekommen
 - Offdesign Simulation
 - genaue Dokumentation was gemacht wurde

@@ -9,7 +9,7 @@ class HeatpumpVis {
         this.Temperatures = {conn0:10, conn1:60, conn2:55, conn3:3, conn4:3, conn5:10, wq_in:11, wq_out:9, ww_in:11, ww_out:14};
         this.Pressures = {conn0:8, conn1:22, conn2:22, conn3:8, conn4:8, conn5:8};
         this.Enthalpies = {conn0:430, conn1:450, conn2:200, conn3:200, conn4:400, conn5:430};
-        this.Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800};
+        this.Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800, comp_eff:0.99};
         this.MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02, wq:0.475*60, ww:0.265*60};
         // Select Simulation or Real Thing with 0 or 1
         this.type = type;
@@ -48,7 +48,8 @@ class HeatpumpVis {
                 evaporator: data.Powers.evaporator || this.Powers.evaporator,
                 condenser: data.Powers.condenser || this.Powers.condenser,
                 superheater: data.Powers.superheater || this.Powers.superheater,
-                compressor: data.Powers.compressor || this.Powers.compressor
+                compressor: data.Powers.compressor || this.Powers.compressor,
+                comp_eff: data.Powers.comp_eff || this.Powers.comp_eff
             };
         }
         // Update mass flows
@@ -147,7 +148,7 @@ class HeatpumpVis {
     */
 
     drawHeatpump(){                            // draws the Heatpump at first start
-        var xscale = 1;
+        var xscale = 1.02;
         var yscale = 1;
         var c = this.canvas.getContext("2d");
         var xoffset = 50;
@@ -175,6 +176,10 @@ class HeatpumpVis {
         line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
         line4(c, evx-30, evy, evax+55, evay+180, 0);
         drawRoundedRect(c, 8, 8, 160, 90, 15);
+        // sollen die bleiben?
+        drawRoundedRect(c, 2, 195, 380, 270, 50);   // Verdampfer
+        drawRoundedRect(c, 555, 195, 380, 270, 50); // Verflüssiger
+        drawRoundedRect(c, 380, 5, 160, 225, 40);   // Verdichter
         //this.redrawParams(c, xoffset, yoffset);
         // enter data into buttons;
         this.update_buttons();
@@ -199,6 +204,7 @@ class HeatpumpVis {
         document.getElementById("para_button_16").textContent=this.MassFlows.wq+" l/min";
         document.getElementById("para_button_17").textContent=this.MassFlows.ww+" l/min";
         document.getElementById("para_button_18").textContent=this.overheat+"°K";
+        document.getElementById("para_button_19").textContent=this.Powers.comp_eff;
     }
 }
 
@@ -268,6 +274,7 @@ copgaugereal.value = 6.25;
 copgaugesim.value = 6.25;
 
 // global variable of both heatpumps and my_session_id
+const NUMBER_OF_PARAMETERS = 19;
 var my_session_id = "test";
 var my_session_id_get_in_progress = 0;
 var attempted_to_get_my_session_id = 0;
@@ -417,7 +424,7 @@ function openTab(evt, tabName) {
 }
 
 function  close_inputs() {
-    for (let i=1;i<=18;i++) {
+    for (let i=1;i<=NUMBER_OF_PARAMETERS;i++) {
         var newid = "para_in_" + i;
         document.getElementById(newid).value = "";
         replace_input(i);
@@ -431,7 +438,7 @@ function run_simulation() {
     close_inputs();
     // check inputs and generate json string
     let jsonstring = "{";
-    for (let i = 1; i <= 18; i++) {
+    for (let i = 1; i <= NUMBER_OF_PARAMETERS; i++) {
         let id = "para_in_" + i;
         let element = document.getElementById(id);
         

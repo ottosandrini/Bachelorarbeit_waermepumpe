@@ -176,12 +176,15 @@ class Heatpump():
         if design:
             self.heatpump.solve(mode='design')
             self.heatpump.save('designstate/design_state.json')
+            self.calc_superheat()
             self.show_cycle()
             # get json of simulation results
             json_res = self.create_json()
             return json_res
         else:
             self.heatpump.solve(mode="offdesign", design_path='designstate/design_state.json')
+            self.EVR()
+            self.calc_superheat()
             self.show_cycle()
             # get json of simulation results
             sim_res = 5
@@ -376,7 +379,8 @@ class Heatpump():
                 "evaporator": round(-self.evaporator.Q.val, 1),
                 "condenser": round(-self.condenser.Q.val, 1),
                 "superheater": round(-self.superheater.Q.val, 1),
-                "compressor": round(self.compressor.P.val, 1)
+                "compressor": round(self.compressor.P.val, 1),
+                "comp_eff": round(self.isentropen_koeffizient, 2)
             },
             "MassFlows": {
                 "conn0": round(self.conn0.m.val*60, 1),
@@ -396,6 +400,21 @@ class Heatpump():
 
         # print("Simulation data saved to 'calculated_data.json'!")
         return data
+    
+    def calc_superheat(self):
+        pressure = self.conn5.p.val * 1e5
+        temp_inlet = self.conn5.T.val  # Temperature at compressor inlet [K]
+        fluid = self.working_fluid
+        T_sat = PropsSI('T', 'P', pressure, 'Q', 1, fluid)  # Q=1 for saturated vapor
+        self.superheat = temp_inlet - T_sat
+
+    def EVR(self):
+        ''' 
+        This function takes the result of a previous calculation
+        and changes the expansionvalve pressure ration until
+        the superheat approaches the superheat_control_value
+        '''
+        pass
 
 
 
