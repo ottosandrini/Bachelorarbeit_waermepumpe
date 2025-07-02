@@ -65,20 +65,24 @@ The system allows users to:
 2. Create virtual environment:
     ```bash 
     python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-
+    source venv/bin/activate  
+On Windows use `venv\Scripts\activate`
 3. Install dependencies:
+    ```bash
     pip install -r requirements.txt
 
 4. Install additional frontend dependencies:
+    ```bash
     npm install gauge.js
 
 ## Usage
 
 1. Start developement server:
+    ```bash
     fastapi dev MCI_HeatPump.py
 
-2. Access GUI at:
+3. Access GUI at:
+    ```bash
     http://127.0.0.1:8000/frontend/
 
 
