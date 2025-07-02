@@ -8,7 +8,6 @@
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Project Structure](#project-structure)
 
 
 ## Project Description
@@ -85,20 +84,6 @@ On Windows use `venv\Scripts\activate`
 3. Access GUI at:
     ```bash
     http://127.0.0.1:8000/frontend/
-
-
-## Project Structure
-
-heatpump-digital-twin/
-├── frontend/                  # Web interface files
-│   ├── index.html             # Main HTML file
-│   ├── script.js              # Frontend logic
-│   ├── stylesheet.css         # Styling
-│   └── plots/                 # Generated diagrams
-├── MCI_HeatPump.py            # Main Python application
-├── requirements.txt           # Python dependencies
-├── README.md                  # This file
-└── design_state.json          # Saved design state
-
+    
 
 README generated using gen AI (deepseek.com model:R1)
