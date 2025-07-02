@@ -65,3 +65,8 @@ pdm.lock
 .pdm-python
 thermocycle.html
 thermocycle.json
+R410A.py
+R410A.json
+heat_pump.py
+tespynotes.txt
+design_state.json

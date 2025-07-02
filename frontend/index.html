@@ -7,7 +7,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
 <link rel="manifest" href="favicon_io/site.webmanifest">
-<link rel="stylesheet" href="stylesheet.css">
+<script>document.write('<link rel="stylesheet" href="stylesheet.css?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
+<!-- <link rel="stylesheet" href="mystylesheet.css"> -->
 <script src="lib/gauge.min.js"></script>
 <script src="lib/jquery.js"></script>
 <meta charset="UTF-8">
@@ -45,85 +46,72 @@
                 </div>
                 <div class="column" id="rightcol" style="padding-right: 0px;">
                     <canvas id="HeatPumpSim" width="940" height="700"></canvas>
-                    <!-- Parameter buttons -->
+                    <!-- P buttons -->
                     <div class="para_div" style="left:30px;  bottom:450px;">
-                        <button class="para_button" id="para_button_1"  onmouseover="showtool(this, 'Wärmequelle Vorlauftemperatur')"  onmouseout="hidetool()" onclick="replace_button(1)">222</button>
-                        <input  class="para_input"  id="para_in_1"  ondblclick="replace_input(1)"></input>
-                    </div>
-                    <div class="para_div" style="left:30px;  bottom:330px;">
-                        <button class="para_button" id="para_button_2"  onmouseover="showtool(this, 'Wärmequelle Rücklauftemperatur')" onmouseout="hidetool()" onclick="replace_button(2)">222</button>
-                        <input  class="para_input"  id="para_in_2"  ondblclick="replace_input(2)"></input>
+                        <button class="p_button" id="p_button_1"  onmouseover="showtool(this, 'Wärmequelle Vorlauftemperatur')"  onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:880px; bottom:450px; width:60px;">
-                        <button class="para_button" id="para_button_3"  onmouseover="showtool(this, 'Warmwasser Vorlauftemperatur')"   onmouseout="hidetool()" onclick="replace_button(3)">222</button>
-                        <input  class="para_input"  id="para_in_3"  ondblclick="replace_input(3)"></input>
-                    </div>
-                    <div class="para_div" style="left:880px; bottom:330px; width:60px;">
-                        <button class="para_button" id="para_button_4"  onmouseover="showtool(this, 'Warmwasser Rücklauftemperatur')"  onmouseout="hidetool()" onclick="replace_button(4)">222</button>
-                        <input  class="para_input"  id="para_in_4"  ondblclick="replace_input(4)"></input>
+                        <button class="p_button" id="p_button_2"  onmouseover="showtool(this, 'Warmwasser Vorlauftemperatur')"   onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:600px; bottom:670px;">
-                        <button class="para_button" id="para_button_5"  onmouseover="showtool(this, 'Temperatur Hochdurck 1')"         onmouseout="hidetool()" onclick="replace_button(5)">222</button>
-                        <input  class="para_input"  id="para_in_5"  ondblclick="replace_input(5)"></input>
+                        <button class="p_button" id="p_button_3"  onmouseover="showtool(this, 'Temperatur Hochdurck 1')"         onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:600px; bottom:100px;">
-                        <button class="para_button" id="para_button_6"  onmouseover="showtool(this, 'Temperatur Hochdruck 2')"         onmouseout="hidetool()" onclick="replace_button(6)">222</button>
-                        <input  class="para_input"  id="para_in_6"  ondblclick="replace_input(6)"></input>
+                        <button class="p_button" id="p_button_4"  onmouseover="showtool(this, 'Temperatur Hochdruck 2')"         onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:320px; bottom:100px;">
-                        <button class="para_button" id="para_button_7"  onmouseover="showtool(this, 'Temperatur Niederdruck 1')"       onmouseout="hidetool()" onclick="replace_button(7)">222</button>
-                        <input  class="para_input"  id="para_in_7"  ondblclick="replace_input(7)"></input>
+                        <button class="p_button" id="p_button_5"  onmouseover="showtool(this, 'Temperatur Niederdruck 1')"       onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:320px; bottom:670px;">
-                        <button class="para_button" id="para_button_8"  onmouseover="showtool(this, 'Temperatur Niederdruck 2')"       onmouseout="hidetool()" onclick="replace_button(8)">222</button>
-                        <input  class="para_input"  id="para_in_8"  ondblclick="replace_input(8)"></input>
+                        <button class="p_button" id="p_button_6"  onmouseover="showtool(this, 'Temperatur Niederdruck 2')"       onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:700px; bottom:670px;">
-                        <button class="para_button" id="para_button_9"  onmouseover="showtool(this, 'Hochdurck 1')"                    onmouseout="hidetool()" onclick="replace_button(9)">222</button>
-                        <input  class="para_input"  id="para_in_9"  ondblclick="replace_input(9)"></input>
+                        <button class="p_button" id="p_button_7"  onmouseover="showtool(this, 'Hochdurck 1')"                    onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:700px; bottom:100px;">
-                        <button class="para_button" id="para_button_10" onmouseover="showtool(this, 'Hochdruck 2')"                    onmouseout="hidetool()" onclick="replace_button(10)">222</button>
-                        <input  class="para_input"  id="para_in_10" ondblclick="replace_input(10)"></input>
+                        <button class="p_button" id="p_button_8" onmouseover="showtool(this, 'Hochdruck 2')"                    onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:230px; bottom:100px;">
-                        <button class="para_button" id="para_button_11" onmouseover="showtool(this, 'Niederdruck 1')"                  onmouseout="hidetool()" onclick="replace_button(11)">222</button>
-                        <input  class="para_input"  id="para_in_11" ondblclick="replace_input(11)"></input>
+                        <button class="p_button" id="p_button_9" onmouseover="showtool(this, 'Niederdruck 1')"                  onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:230px; bottom:670px;">
-                        <button class="para_button" id="para_button_12" onmouseover="showtool(this, 'Niederdruck 2')"                  onmouseout="hidetool()" onclick="replace_button(12)">222</button>
-                        <input  class="para_input"  id="para_in_12" ondblclick="replace_input(12)"></input>
+                        <button class="p_button" id="p_button_10" onmouseover="showtool(this, 'Niederdruck 2')"                  onmouseout="hidetool()">222</button>
                     </div>
-                    <div class="para_div" style="left:440px; bottom:580px;">
-                        <button class="para_button" id="para_button_13" onmouseover="showtool(this, 'Verdichter Leistung')"            onmouseout="hidetool()" onclick="replace_button(13)">222</button>
-                        <input class="para_input"  id="para_in_13" ondblclick="replace_input(13)"></input>
-                    </div>
-                   
                     <div class="para_div" style="left:590px; bottom:395px;">
-                        <button class="para_button" id="para_button_14" onmouseover="showtool(this, 'Verflüssiger Leistung')"          onmouseout="hidetool()" onclick="replace_button(14)">222</button>
-                        <input  class="para_input"  id="para_in_14" ondblclick="replace_input(14)"></input>
+                        <button class="p_button" id="p_button_11" onmouseover="showtool(this, 'Verflüssiger Leistung')"          onmouseout="hidetool()">222</button>
                     </div>
                     <div class="para_div" style="left:290px; bottom:395px;">
-                        <button class="para_button" id="para_button_15" onmouseover="showtool(this, 'Verdampfer  Leistung')"           onmouseout="hidetool()" onclick="replace_button(15)">222</button>
-                        <input  class="para_input"  id="para_in_15" ondblclick="replace_input(15)"></input>
+                        <button class="p_button" id="p_button_12" onmouseover="showtool(this, 'Verdampfer  Leistung')"           onmouseout="hidetool()">222</button>
+                    </div>
+                    <!-- Parameter Buttons -->
+                    <div class="para_div" style="left:30px;  bottom:330px;">
+                        <button class="para_button" id="para_button_1"  onmouseover="showtool(this, 'Wärmequelle Rücklauftemperatur')" onmouseout="hidetool()" onclick="replace_button(1)">222</button>
+                        <input  class="para_input"  id="para_in_1"  ondblclick="replace_input(1)"></input>
+                    </div>
+                    <div class="para_div" style="left:880px; bottom:330px; width:60px;">
+                        <button class="para_button" id="para_button_2"  onmouseover="showtool(this, 'Warmwasser Rücklauftemperatur')"  onmouseout="hidetool()" onclick="replace_button(2)">222</button>
+                        <input  class="para_input"  id="para_in_2"  ondblclick="replace_input(2)"></input>
+                    </div>
+                    <div class="para_div" style="left:440px; bottom:580px;">
+                        <button class="para_button" id="para_button_3" onmouseover="showtool(this, 'Verdichter Leistung')"            onmouseout="hidetool()" onclick="replace_button(3)">222</button>
+                        <input class="para_input"  id="para_in_3" ondblclick="replace_input(3)"></input>
                     </div>
                     <div class="para_div" style="left:30px;  bottom:395px;">
-                        <button class="para_button" id="para_button_16" onmouseover="showtool(this, 'Massenstrom Wärmequelle')"        onmouseout="hidetool()" onclick="replace_button(16)">222</button>
-                        <input  class="para_input"  id="para_in_16" ondblclick="replace_input(16)"></input>
+                        <button class="para_button" id="para_button_4" onmouseover="showtool(this, 'Massenstrom Wärmequelle')"        onmouseout="hidetool()" onclick="replace_button(4)">222</button>
+                        <input  class="para_input"  id="para_in_4" ondblclick="replace_input(4)"></input>
                     </div>
                     <div class="para_div" style="left:818px; bottom:395px;">
-                        <button class="para_button" id="para_button_17" onmouseover="showtool(this, 'Massenstrom Wärmesenke')"         onmouseout="hidetool()" onclick="replace_button(17)">222</button>
-                        <input  class="para_input"  id="para_in_17" ondblclick="replace_input(17)"></input>
-                    </div>
-                    <div class="para_div" style="left:80px;  bottom:670px;">
-                        <button class="para_button" id="para_button_18" onmouseover="showtool(this, 'Überhitzung')"                    onmouseout="hidetool()" onclick="replace_button(18)">222</button>
-                        <input  class="para_input"  id="para_in_18" ondblclick="replace_input(18)"></input>
+                        <button class="para_button" id="para_button_5" onmouseover="showtool(this, 'Massenstrom Wärmesenke')"         onmouseout="hidetool()" onclick="replace_button(5)">222</button>
+                        <input  class="para_input"  id="para_in_5" ondblclick="replace_input(5)"></input>
                     </div>
                     <div class="para_div" style="left:455px; bottom:538px;">
-                        <button class="para_button" id="para_button_19" onmouseover="showtool(this, 'Verdichter Isentroptische Effizienz')"            onmouseout="hidetool()" onclick="replace_button(19)">222</button>
-                        <input class="para_input"  id="para_in_19" ondblclick="replace_input(19)"></input>
+                        <button class="para_button" id="para_button_6" onmouseover="showtool(this, 'Verdichter Isentroptische Effizienz')"            onmouseout="hidetool()" onclick="replace_button(6)">222</button>
+                        <input class="para_input"  id="para_in_6" ondblclick="replace_input(6)"></input>
                     </div>
-                    <!-- Parameter inputs -->
+                    <div class="para_div" style="left:80px;  bottom:670px;">
+                        <button class="para_button" id="para_button_7" onmouseover="showtool(this, 'Überhitzung')"                    onmouseout="hidetool()" onclick="replace_button(7)">222</button>
+                        <input  class="para_input"  id="para_in_7" ondblclick="replace_input(7)"></input>
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,9 +124,69 @@
                     <canvas id="OTGaugeReal"></canvas>
                     <h3 id="cop">COP</h3>
                     <h2 id="cop_value_real">6.25</h2>
+                    <p style="padding: 0%; margin: 0%;"></p>
+                    <button class="side_button" id="update_button" onmouseover="brighten(this)" onmouseout="unbrighten(this)" onclick="buttonclick(this)">Update</button>
                 </div>
-                <div class="column" id="rightcol">
-                    <canvas id="HeatPumpReal" width="1000" height="800"></canvas>
+                <div class="column" id="rightcol" style="padding-right: 0px;">
+                    <canvas id="HeatPumpReal" width="940" height="700"></canvas>
+                    <!-- Visualization Buttons -->
+                    <div class="para_div" style="left:30px; bottom:450px;">
+                        <button class="viz_button" id="viz_button_1" onmouseover="showtool(this, 'Wärmequelle Vorlauftemperatur')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:880px; bottom:450px; width:60px;">
+                        <button class="viz_button" id="viz_button_2" onmouseover="showtool(this, 'Warmwasser Vorlauftemperatur')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:600px; bottom:670px;">
+                        <button class="viz_button" id="viz_button_3" onmouseover="showtool(this, 'Temperatur Hochdurck 1')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:600px; bottom:100px;">
+                        <button class="viz_button" id="viz_button_4" onmouseover="showtool(this, 'Temperatur Hochdruck 2')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:320px; bottom:100px;">
+                        <button class="viz_button" id="viz_button_5" onmouseover="showtool(this, 'Temperatur Niederdruck 1')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:320px; bottom:670px;">
+                        <button class="viz_button" id="viz_button_6" onmouseover="showtool(this, 'Temperatur Niederdruck 2')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:700px; bottom:670px;">
+                        <button class="viz_button" id="viz_button_7" onmouseover="showtool(this, 'Hochdurck 1')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:700px; bottom:100px;">
+                        <button class="viz_button" id="viz_button_8" onmouseover="showtool(this, 'Hochdruck 2')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:230px; bottom:100px;">
+                        <button class="viz_button" id="viz_button_9" onmouseover="showtool(this, 'Niederdruck 1')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:230px; bottom:670px;">
+                        <button class="viz_button" id="viz_button_10" onmouseover="showtool(this, 'Niederdruck 2')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:590px; bottom:395px;">
+                        <button class="viz_button" id="viz_button_11" onmouseover="showtool(this, 'Verflüssiger Leistung')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:290px; bottom:395px;">
+                        <button class="viz_button" id="viz_button_12" onmouseover="showtool(this, 'Verdampfer Leistung')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:30px; bottom:330px;">
+                        <button class="viz_button" id="viz_button_13" onmouseover="showtool(this, 'Wärmequelle Rücklauftemperatur')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:880px; bottom:330px; width:60px;">
+                        <button class="viz_button" id="viz_button_14" onmouseover="showtool(this, 'Warmwasser Rücklauftemperatur')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:440px; bottom:580px;">
+                        <button class="viz_button" id="viz_button_15" onmouseover="showtool(this, 'Verdichter Leistung')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:30px; bottom:395px;">
+                        <button class="viz_button" id="viz_button_16" onmouseover="showtool(this, 'Massenstrom Wärmequelle')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:818px; bottom:395px;">
+                        <button class="viz_button" id="viz_button_17" onmouseover="showtool(this, 'Massenstrom Wärmesenke')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:80px; bottom:670px;">
+                        <button class="viz_button" id="viz_button_18" onmouseover="showtool(this, 'Überhitzung')" onmouseout="hidetool()">222</button>
+                    </div>
+                    <div class="para_div" style="left:455px; bottom:538px;">
+                        <button class="viz_button" id="viz_button_19" onmouseover="showtool(this, 'Verdichter Isentroptische Effizienz')" onmouseout="hidetool()">222</button>
+                    </div>
                 </div>
             </div>        
         </div>
@@ -148,11 +196,14 @@
             <h3>Wie verwende ich diese Seite?</h3>
             <p>Auf dieser Seite können verschieden Betriebspunkte auf einer virtuelle Wärmepumpe simuliert werden.</p>
             <h3>Wie kann ich daten eingeben?</h3>
-            <p>Wenn man auf einen Parameter klickt, öffnet sich ein Eingabefeld und man kann dort der Simulation einen Wert für den Parameter vorgeben. 
-            <br>  Wenn man nun auf den "Simulieren" button drückt wird mit dem eingegebem Wert simuliert.</p>
+            <p>Parameter die umrahmt werden, wenn man mit der Maus drüber fährt, können verändert werden. <br> 
+            Wenn man auf einen Parameter klickt, öffnet sich ein Eingabefeld und man kann dort der Simulation einen Wert für den Parameter vorgeben. 
+            <br>  Wenn man nun auf den "Simulieren" button drückt wird mit dem eingegebem Wert simuliert.
+            <br> Das Eingabefeld kann durch einen Doppelklick wieder geschlossen werden.</p>
+            <h3>Warum hat diese Frage noch keinen Text?</h3>
         </div>
     </div> 
-    <!-- Development version so fast api loads the script fresh every time: -->
+    <!-- Development version so fasapi loads the script fresh every time: -->
     <script>document.write('<script src="script.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
     <!-- <script type="text/javascript" src="script.js"></script> -->
 </body>

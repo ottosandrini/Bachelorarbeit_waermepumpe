@@ -1,95 +1,99 @@
-# Otto Sandrini - Digitaler Zwilling Wärmepumpe
-## 2024-03-07
+# Digital Twin of a Heat Pump System - Bachelor's Thesis Project
 
-## Wärmepumpe zeigen
+![Heat Pump Visualization](frontend/plots/thermocycle.png)
 
-### Ideen
-Fokus festlegen:
-- Zustände simulieren für Lehre?
-- Virtuelle Experimente für Auslegung?
-- Betrieb simulieren (Kosten, Effizienz)
-
-Wunschvorstellung
-- Paket mit Objekt Wärmepumpe, die man konfigurieren und beschreiben kann
-- Hilfslibrary, zur visualisierung der Ergebnisse
-- Logging oder Datenbank
-- Grafische Oberfläche oder verständliches Notebook
-
-Einstellbar ist
-- Konstruktionsparameter z.B. Leistung des Verdichters
-- Einstellungsparameter
-- Simulierte Umweltparameter z.B. Außentemperatur
-- Einstellungsparameter z.B. Vorlauftemperatur
-- Statische oder Dynamische Betrachtung?
-
-Validierung
-- Daten von echter WP mit Simulation vergleichen
-- Simulationsfehler für Testszenarien
-
-## Abstract für Anmeldung
-
-Context: Energiewende, Auslegungsplanugn WP wichtig, komplexes System. Muss simuliert werden, um nahe ans optimum zu kommen
-
-Problem: DIN normen , auselgugnsrichtlienien, Betirebzustände können sich sher utnerscheiden, je nach Nutzung, deswegen kann man nicht generalisierung und wir kommen zu besseren WP, wenn wir diese vorab simulieren können
-
-Related Work: TesPy (zu breit), Jentsch et al. haben schon folgendes gemacht. ABER passt für uns nicht, wir wissen nicht wie gut die Modelle sind, da nicht mit echten Welt korreliert
-
-Own approach: Wir bauen einen Digialen Wzillen, der wird open soruce, man kann verschiedene systemzustände simulieren, und wir validieren das an einen echten system
-
-Evaluation: Wir schauen, wie groß der Fehler unseres Digitalen Zwillings ist und im besten Fall schauen wir auch, unter welchen Bedigugnen die Fehler am größten sind
-
-Results: Generationen von Studiernedne werden dieses Systen nutzen um eine besseres verständis zu erlenagen und wir können bessere Wärmepumoen bauen
-
-Outlook:Dauch dass wir open soruce sind, kann man das dann weiter entwicklein
+## Table of Contents
+- [Project Description](#project-description)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
 
 
+## Project Description
+This project implements a digital twin of a heat pump system for a bachelor's thesis. It consists of:
+- A thermodynamic simulation backend using TESPy (Thermal Engineering Systems in Python)
+- A web-based frontend for visualization and interaction
+- REST API for communication between frontend and backend
 
-Rezept Abstract
+The system allows users to:
+- Simulate different operating conditions of the heat pump
+- Visualize the thermodynamic cycle
+- Compare design and off-design performance
+- Monitor key parameters (temperatures, pressures, power, etc.)
 
-Context: What is problem area, why is it interesting and important?
+## Features
+- **Thermodynamic Simulation**:
+  - Complete heat pump cycle modeling (compressor, condenser, evaporator, expansion valve)
+  - Design and off-design calculations
+  - R410A refrigerant properties via CoolProp
+- **Visualization**:
+  - Interactive log(p)-h diagrams
+  - Real-time parameter display
+  - COP (Coefficient of Performance) gauge
+- **Web Interface**:
+  - Parameter adjustment
+  - Session management
+  - Comparison between simulated and real systems
+- **API**:
+  - FastAPI backend
+  - Session-based operation
+  - JSON data exchange
 
-Problem: What is problem we specifically consider, why is it hard? (e.g., why do
-naive approaches fail?)
+## Technologies Used
+### Backend
+- Python >= 3.12
+- TESPy (Thermal Engineering Systems in Python) 0.9.0
+- CoolProp for refrigerant properties
+- FastAPI for web server
+- Fluprodia for thermodynamic diagrams
+- Matplotlib for plotting
 
-Related Work: Survey past work relevant to this topic. Why hasn’t it been
-solved before (related work)? Or, what’s wrong with previous proposed
-solutions?
+### Frontend
+- HTML5, CSS3, JavaScript
+- Canvas API for heat pump visualization
+- mpld3 for interactive plots
+- RadialGauge.js for COP display
 
-Own approach: What are the key components of our approach and how does it
-differ to related work?
+## Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/heatpump-digital-twin.git
+    cd heatpump-digital-twin
 
-Evaluation: What are the results and how will we have validated them?
+2. Create virtual environment:
+    ```bash 
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-Results The scientific surplus value
+3. Install dependencies:
+    pip install -r requirements.txt
 
-Outlook: An outlook on application or further research
+4. Install additional frontend dependencies:
+    npm install gauge.js
 
-## Arbeitsplan
+## Usage
 
-Welche Digitalen Zwillinge gibt es schon
-Anforderungsanalyse:
-- Use Cases: Labor an Echter Maschine
-- Wie sieht das UI aus?
-- Wie sieht die Datenstruktur aus
-- Welche Parameter werden erfasst und gespeichert
-- Was wird vereinfacht (Verdichterkennline)
+1. Start developement server:
+    fastapi dev MCI_HeatPump.py
 
-Aufbau eines Software Zwillings V0.1
-Datenerhebung an echter Maschine
-Vergleich
-ggf. Anpassung des Softwarezwilling V1.0
-Finale Evaluation
-Schreiben
-Optional:
-- Live Anbindung echte Maschine
-- Use Case Betirebsoptimierung mittels Digitalem Zwilling
+2. Access GUI at:
+    http://127.0.0.1:8000/frontend/
 
-## Literatur
 
-https://www.glendimplex.de/de-de/virtueller-problemloeser-der-digitale-zwilling
-https://www.ki-portal.de/wp-content/uploads/2021/04/KI_2021_04_48_Wissenschaft_Jentsch_neu-testf.
+## Project Structure
 
-## To-Do Julian
+heatpump-digital-twin/
+├── frontend/                  # Web interface files
+│   ├── index.html             # Main HTML file
+│   ├── script.js              # Frontend logic
+│   ├── stylesheet.css         # Styling
+│   └── plots/                 # Generated diagrams
+├── MCI_HeatPump.py            # Main Python application
+├── requirements.txt           # Python dependencies
+├── README.md                  # This file
+└── design_state.json          # Saved design state
 
-## To-Do Otto
 
+README generated using gen AI (deepseek.com model:R1)

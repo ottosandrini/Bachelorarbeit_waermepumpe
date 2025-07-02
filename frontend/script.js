@@ -77,12 +77,14 @@ class HeatpumpVis {
 
     async update_data(json) {
         // this function updates Heat pump data by running a python script and reading new data
+        // or getting new data from mqtt -> depending on this.type
         if (this.type == 0) { // Object is of type simulation
             // update by running python script
             // if jsonstring === 1 then no input specified -> run last simulation
             // if jsonstring === 20 then run design simulation
             if (json === 1) {
                 // do nothing
+                console.log("No parameters changed -> doing nothing")
                 return 0
             }
             else if (json === 20) {
@@ -109,16 +111,40 @@ class HeatpumpVis {
 
             else {
                 // run simulation with json as inputs
+                // send inputs and fetch result
                 var url = "http://127.0.0.1:8000/offdesign_simulation/" + my_session_id;
-                fetch(url, {method:"POST", body:json, headers:{"Content-type": "application/json; charset=UTF-8"}});
+                let resp = await fetch(url, {method:"POST", body:json, headers:{"Content-type": "application/json; charset=UTF-8"}});
+                let json_resp = await resp.json();
+                console.log("Server response; " + json_resp);
+                // set new heatpump data and change buttons to match
+                if (json_resp.message === undefined) {
+                    this.reload_data(json_resp);
+                    this.update_buttons();
+                }
+                else {
+                    throw_error(json_resp.message)
+                    console.log(`message from server: ${json_resp.message}`)
+                }
             }
         }
-        else if (this.type == 1) { // Object is of type Real System
+        else if (this.type == 1) { // Heatpump is of type Real System
+            // fetch mqtt data
+            // response = await fetch();
+            // json = await response.json();
+            // console.log("Server Response; " + json);
+            // this.reload_data(json);
+            // this.update_viz_buttons();
             // update data from mqtt
+
+            // testing things
+            if (json === 1) {
+                //console.log(Math.floor(Math.random() * 100) + ": update button pressed! Something might happen here eventually...")
+                console.log("update button pressed! Something might happen here eventually...")
+            }
         }
         else  {
             // give an error: Type not supported; choose Simulation (0) or Real System (1)
-            throw_error("heat pump type not supported! Something went wrong here!");
+            throw_error("heat pump type not supported! Something went badly wrong here!");
         }
     }
 
@@ -176,38 +202,58 @@ class HeatpumpVis {
         line3(c, cdx+55, cdy+180, evx+30 ,evy,0);
         line4(c, evx-30, evy, evax+55, evay+180, 0);
         drawRoundedRect(c, 8, 8, 160, 90, 15);
-        // sollen die bleiben?
-        drawRoundedRect(c, 2, 195, 380, 270, 50);   // Verdampfer
-        drawRoundedRect(c, 555, 195, 380, 270, 50); // Verflüssiger
-        drawRoundedRect(c, 380, 5, 160, 225, 40);   // Verdichter
-        //this.redrawParams(c, xoffset, yoffset);
-        // enter data into buttons;
-        this.update_buttons();
+        // enter data into buttons
+        if (this.type === 0) {
+            this.update_buttons();
+        }
+        else if (this.type === 1) {
+            this.update_viz_buttons();
+        }
     }
 
     update_buttons(){
-        document.getElementById("para_button_1").textContent=this.Temperatures.wq_out+"°C";
-        document.getElementById("para_button_2").textContent=this.Temperatures.wq_in+"°C";
-        document.getElementById("para_button_3").textContent=this.Temperatures.ww_out+"°C";
-        document.getElementById("para_button_4").textContent=this.Temperatures.ww_in+"°C";
-        document.getElementById("para_button_5").textContent=this.Temperatures.conn1+"°C";
-        document.getElementById("para_button_6").textContent=this.Temperatures.conn2+"°C";
-        document.getElementById("para_button_7").textContent=this.Temperatures.conn3+"°C";
-        document.getElementById("para_button_8").textContent=this.Temperatures.conn5+"°C";
-        document.getElementById("para_button_9").textContent=this.Pressures.conn1+"bar";
-        document.getElementById("para_button_10").textContent=this.Pressures.conn2+"bar";
-        document.getElementById("para_button_11").textContent=this.Pressures.conn3+"bar";
-        document.getElementById("para_button_12").textContent=this.Pressures.conn5+"bar";
-        document.getElementById("para_button_13").textContent=this.Powers.compressor+" W";
-        document.getElementById("para_button_14").textContent=this.Powers.condenser+" W";
-        document.getElementById("para_button_15").textContent=this.Powers.evaporator+" W";
-        document.getElementById("para_button_16").textContent=this.MassFlows.wq+" l/min";
-        document.getElementById("para_button_17").textContent=this.MassFlows.ww+" l/min";
-        document.getElementById("para_button_18").textContent=this.overheat+"°K";
-        document.getElementById("para_button_19").textContent=this.Powers.comp_eff;
+        document.getElementById("p_button_1").textContent=this.Temperatures.wq_out+"°C";
+        document.getElementById("p_button_2").textContent=this.Temperatures.ww_out+"°C";
+        document.getElementById("p_button_3").textContent=this.Temperatures.conn1+"°C";
+        document.getElementById("p_button_4").textContent=this.Temperatures.conn2+"°C";
+        document.getElementById("p_button_5").textContent=this.Temperatures.conn3+"°C";
+        document.getElementById("p_button_6").textContent=this.Temperatures.conn5+"°C";
+        document.getElementById("p_button_7").textContent=this.Pressures.conn1+"bar";
+        document.getElementById("p_button_8").textContent=this.Pressures.conn2+"bar";
+        document.getElementById("p_button_9").textContent=this.Pressures.conn3+"bar";
+        document.getElementById("p_button_10").textContent=this.Pressures.conn5+"bar";
+        document.getElementById("p_button_11").textContent=this.Powers.condenser+" W";
+        document.getElementById("p_button_12").textContent=this.Powers.evaporator+" W";
+        document.getElementById("para_button_1").textContent=this.Temperatures.wq_in+"°C";
+        document.getElementById("para_button_2").textContent=this.Temperatures.ww_in+"°C";
+        document.getElementById("para_button_3").textContent=this.Powers.compressor+" W";
+        document.getElementById("para_button_4").textContent=this.MassFlows.wq+" l/min";
+        document.getElementById("para_button_5").textContent=this.MassFlows.ww+" l/min";
+        document.getElementById("para_button_6").textContent=this.Powers.comp_eff;
+        document.getElementById("para_button_7").textContent=this.overheat+"°K";
+    }
+    update_viz_buttons() {
+        document.getElementById("viz_button_1").textContent = this.Temperatures.wq_out + "°C";
+        document.getElementById("viz_button_2").textContent = this.Temperatures.ww_out + "°C";
+        document.getElementById("viz_button_3").textContent = this.Temperatures.conn1 + "°C";
+        document.getElementById("viz_button_4").textContent = this.Temperatures.conn2 + "°C";
+        document.getElementById("viz_button_5").textContent = this.Temperatures.conn3 + "°C";
+        document.getElementById("viz_button_6").textContent = this.Temperatures.conn5 + "°C";
+        document.getElementById("viz_button_7").textContent = this.Pressures.conn1 + "bar";
+        document.getElementById("viz_button_8").textContent = this.Pressures.conn2 + "bar";
+        document.getElementById("viz_button_9").textContent = this.Pressures.conn3 + "bar";
+        document.getElementById("viz_button_10").textContent = this.Pressures.conn5 + "bar";
+        document.getElementById("viz_button_11").textContent = this.Powers.condenser + " W";
+        document.getElementById("viz_button_12").textContent = this.Powers.evaporator + " W";
+        document.getElementById("viz_button_13").textContent = this.Temperatures.wq_in + "°C";
+        document.getElementById("viz_button_14").textContent = this.Temperatures.ww_in + "°C";
+        document.getElementById("viz_button_15").textContent = this.Powers.compressor + " W";
+        document.getElementById("viz_button_16").textContent = this.MassFlows.wq + " l/min";
+        document.getElementById("viz_button_17").textContent = this.MassFlows.ww + " l/min";
+        document.getElementById("viz_button_18").textContent = this.overheat + "°K";
+        document.getElementById("viz_button_19").textContent = this.Powers.comp_eff;
     }
 }
-
 
 // --------------------------------------------------------------------------
 // ----------------------- WEBSITE THINGS -----------------------------------
@@ -273,8 +319,9 @@ let copgaugesim = new RadialGauge({
 copgaugereal.value = 6.25;
 copgaugesim.value = 6.25;
 
-// global variable of both heatpumps and my_session_id
-const NUMBER_OF_PARAMETERS = 19;
+// global variables of both heatpumps and my_session_id
+const NUMBER_OF_PARAMETERS = 7;
+var superheat_control_value = 7;
 var my_session_id = "test";
 var my_session_id_get_in_progress = 0;
 var attempted_to_get_my_session_id = 0;
@@ -286,26 +333,30 @@ const simpump = new HeatpumpVis(0);
 // function runs when .js file is loaded by webpage
 // function sets my_session_id if none is loaded
 (async () => {
-  try {
-    var local = localStorage.getItem("my_session_id");
-    if (local !== null && local !== "test") {
-        if (await check_session_id(local)) {
-            console.log("session id loaded from localStorage")
-            my_session_id = local;
-        }
-        else  {
-            await get_my_session_id();
-        }
-        document.getElementById("r_b").textContent = `Session ID: ${my_session_id}`;
+    for (var i=1;i<=NUMBER_OF_PARAMETERS;i++) {
+        var el_id = "para_in_" + i;
+        document.getElementById(el_id).value = -22;
     }
-    else {
-        await get_my_session_id();
-        console.log("getting a new session id");
-        document.getElementById("r_b").textContent = `Session ID: ${my_session_id}`;
-    } 
-  } catch (error) {
-    console.error("Session init failed:", error);
-  }
+    try {
+        var local = localStorage.getItem("my_session_id");
+        if (local !== null && local !== "test") {
+            if (await check_session_id(local)) {
+                console.log("session id loaded from localStorage")
+                my_session_id = local;
+            }
+            else  {
+                await get_my_session_id();
+            }
+            document.getElementById("r_b").textContent = `Session ID: ${my_session_id}`;
+        }
+        else {
+            await get_my_session_id();
+            console.log("getting a new session id");
+            document.getElementById("r_b").textContent = `Session ID: ${my_session_id}`;
+        } 
+    } catch (error) {
+        console.error("Session init failed:", error);
+    }
 })();
 
 async function check_session_id(current_id) {
@@ -359,7 +410,13 @@ async function get_my_session_id(){
     my_session_id_get_in_progress = 0;
 }
 
-
+async function plot_request() {
+    var url = "http://127.0.0.1:8000/build_plot/" + my_session_id;
+    let response = await fetch(url, {method:"GET", headers:{"Content-type": "application/json; charset=UTF-8"}});
+    let json_resp = await response.json();
+    console.log(json_resp);
+    window.open("plots/thermocycle.html", "Thermocycle Plot", "width=1000, height=600");
+}
 
 // Website scaling maybe later (min width 1280px)
 // function scale(window) {
@@ -423,30 +480,40 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-function  close_inputs() {
+function  close_inputs() { // closes all input fields open on the simulation canvas
     for (let i=1;i<=NUMBER_OF_PARAMETERS;i++) {
         var newid = "para_in_" + i;
-        document.getElementById(newid).value = "";
+        document.getElementById(newid).value = -22;
         replace_input(i);
     }
 }
 
 function run_simulation() {
     // function runs python sim and updates with new results
-    // function runs after calculate_button is pressed
+    // function runs only after calculate_button is pressed
+    var isempty = true;
     reset_error();
-    close_inputs();
     // check inputs and generate json string
     let jsonstring = "{";
-    for (let i = 1; i <= NUMBER_OF_PARAMETERS; i++) {
+    for (let i=1; i <= NUMBER_OF_PARAMETERS; i++) {
         let id = "para_in_" + i;
         let element = document.getElementById(id);
-        
+        if (element.value !== -22) {
+            isempty = false;
+        }
         if (element) {
             let inputVal = Number(element.value); // Convert to number
     
             if (!isNaN(inputVal)) {
+                if (id === 'para_in_7') {
+                    if (inputVal !== -22) {
+                        superheat_control_value = inputVal;
+                    }
+                    jsonstring += `"para_in_7":${superheat_control_value},`;
+                    continue;
+                }
                 jsonstring += `"${id}":${inputVal},`;
+                
             }
             else {
                 throw_error("One or more inputs are NaN! Aborting...");
@@ -454,47 +521,22 @@ function run_simulation() {
             }
         }
     }
+    if (isempty) {
+        jsonstring = 1;
+    }
     if (jsonstring.endsWith(",")) {
         jsonstring = jsonstring.slice(0, -1);
     }
     jsonstring += "}";
-    // check if json empty
-    if (jsonstring === "{}") {
-        jsonstring = "1"
-    }
     // run simuilation with given parameters
+    console.log("run_simulation json; "+jsonstring);
     simpump.update_data(jsonstring);
-
+    close_inputs();
     var cop = simpump.Powers.condenser/simpump.Powers.compressor;
+    cop = Math.round(cop*100) / 100
     document.getElementById("cop_value_sim").textContent=cop;
     copgaugesim.value = cop;
 }
-  
-window.addEventListener('load', () => {
-    openTab(event, 'digital');
-});
-
-
-
-// --------------------------------------------------------------------------
-// ------------------------- DOM THINGS -------------------------------------
-// --------------------------------------------------------------------------
-
-document.addEventListener("DOMContentLoaded", function () {             // draw the heatpumps and gauges
-    var HPR = document.getElementById("HeatPumpReal");
-    if (HPR) {  
-        realpump.spec_canvas(HPR);
-        realpump.drawHeatpump();
-    }
-    var HPS = document.getElementById("HeatPumpSim");
-    if (HPS) {
-        simpump.spec_canvas(HPS);
-        simpump.drawHeatpump();
-    }
- 
-});
-
-
 
 
 // --------------------------------------------------------------------------
@@ -507,13 +549,16 @@ function buttonclick(element) {
         element.classList.remove("button-clicked");
     }, 50);
     if (element.id === "plot_button") {
-        window.open("plots/thermocycle.html", "Thermocycle Plot", "width=1000, height=600")
+        plot_request();
     }
      else if (element.id === "calculate_button"){
         run_simulation();
     }
     else if (element.id === "debug_button"){
         simpump.update_data(20);
+    }
+    else if (element.id === "update_button"){
+        realpump.update_data(1);
     }
     else {
         //pass0
@@ -565,6 +610,28 @@ function brighten(element) {
 function unbrighten(element) {
     element.style.filter = "brightness(1)";
 }
+
+// --------------------------------------------------------------------------
+// ------------------------- DOM THINGS -------------------------------------
+// --------------------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", function () {             // draw the heatpumps and gauges
+    var HPR = document.getElementById("HeatPumpReal");
+    if (HPR) {  
+        realpump.spec_canvas(HPR);
+        realpump.drawHeatpump();
+    }
+    var HPS = document.getElementById("HeatPumpSim");
+    if (HPS) {
+        simpump.spec_canvas(HPS);
+        simpump.drawHeatpump();
+    }
+ 
+});  
+
+window.addEventListener('load', () => {
+    openTab(event, 'digital');
+});
 
 // --------------------------------------------------------------------------
 // ------------------ DRAWING FUNCTIONS -------------------------------------

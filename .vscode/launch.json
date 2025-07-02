@@ -1,0 +1,21 @@
+
+
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Debug TESPy Simulation",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",  // Debug the currently open file
+            "console": "integratedTerminal",
+            "justMyCode": false,   // Step into library code if needed
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"  // Ensure project imports work
+            },
+            "args": [],  // Add command-line arguments if needed
+            "python": "${workspaceFolder}/.venv/bin/python"  // Explicit path to venv
+        }
+    ]
+}
