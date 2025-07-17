@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt, mpld3
 import numpy as np
 import json as jsonlib
 from uuid import uuid4
-import os
+import os      
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -36,81 +36,23 @@ logpath="myloggings", log_the_path=True, log_the_version=True,
 screen_level=logging.INFO, file_level=logging.DEBUG
 );()
 
-# PARAMETER LIST
-working_fluid = "R410A"  # Kaeltemittel
-high_pressure = 2480000  # pa
-low_pressure = 1040000   # pa
-high_temp = 273.15 + 56.3
-t_cond = PropsSI("T", "Q", 1, "P", high_pressure, working_fluid)    # verdampfungstemperatur Hochdurck
-t_evap = PropsSI("T", "Q", 1, "P", low_pressure, working_fluid)    # verdampfungstemperatur Niederdurck
-print("t_cond: " + str(t_cond))
-print("t_evap: " + str(t_evap))
-compressor_power = 880          # Leistungsaufnahme Verdichter [W]
-isentropen_koeffizient = 0.7    # isentropische effizienz Verdichter                                
-design_heat_output = 5070       # design Leistung der Wärmequelle
-design_heat_input = 4158        # Leistung des Verdampfers (inkl superheater)
-condenser_pressure_ratio = 0.98
-evaporator_pressure_ratio = 0.98
-superheater_pressure_ratio = 0.99
-superheat = 4.8                                         # K
-compressor_entry_enthalpy = PropsSI("H", "P", low_pressure, "T", t_evap + superheat, working_fluid)
-compressor_output_enthalpy = PropsSI("H", "P", high_pressure, "T", high_temp, working_fluid)
-print("compressor_entry_enthalpy: " + str(compressor_entry_enthalpy))
-print("compressor_output_enthalpy: " + str(compressor_output_enthalpy))
-# falls notwendig:
-superheater_entry_enthalpy = PropsSI("H", "P", low_pressure / superheater_pressure_ratio, "T", t_evap, working_fluid)
-
-
-# # --- HEATING SYSTEM PARAMETERS ---
-wq_massflow_data = 23                                   # kg/min
-ww_massflow_data = 16.1                                 # kg/min        
-wq_massflow = wq_massflow_data / 60                     # kg/s
-ww_massflow = ww_massflow_data / 60                     # kg/s
-ww_inflow_temp = 273.15 + 35.5    
-water_pressure = 200000 # pa
-condenser_wq_pressure_ratio = 0.99
-superheater_wq_pressure_ratio = 0.99
 # Heatpipe compensation
-t_eingang = 273.15 + 14.2                # K
-t_ausgang = 273.15 + 11.7                # K
-h1 = PropsSI("H", "P", water_pressure, "T", t_eingang, "water")
-h2 = PropsSI("H", "P", water_pressure * superheater_wq_pressure_ratio, "T", t_ausgang, "water")
-dh = h2 - h1            # Enthalpieverlust der Wärmequelle 
-Q = wq_massflow * dh    # von der Wärmequelle übertragene Wärme
-
-Q_ges = -design_heat_input    # gesamte Leistung der Wärmeaufnahme
-dh_ges = Q_ges / wq_massflow    # Enthalpieverlust der Wärmequelle wenn gesamte Leistung von Wärmequelle kommen würde
-h1_virt = h2 - dh_ges
-t_compensated = PropsSI("T", "P", water_pressure, "H", h1_virt, "water" ) # theoretische Einganstemperatur der Wärmequelle
-wq_inflow_temp = t_compensated
 
 # Wärmepumpe objekt das Sachen simulieren kann
 class Heatpump():
     def __init__(self, **kwargs):
         # --- HEATPUMP PARAMETERS ---
-        self.working_fluid = working_fluid
-        self.compressor_power = compressor_power
-        self.isentropen_koeffizient = isentropen_koeffizient
-        self.design_heat_output = design_heat_output
-        self.condensation_temp = t_cond
-        self.evaporation_temp = t_evap
-        self.low_pressure = low_pressure / 100000
-        self.condenser_pressure_ratio = condenser_pressure_ratio
-        self.superheat = superheat
-        self.superheat_control_value = superheat
-        self.compressor_out_enth = compressor_output_enthalpy / 1000
+        self.working_fluid = "R410A"
+        self.isentropen_koeffizient = 0.7
+        self.superheat = 5
 
-        self.high_pressure = high_pressure / 100000 # nur für design chart!
         # --- HEATING SYSTEM PARAMETERS ---
-        self.wq_massflow = wq_massflow                       # Massenstrom Wärmequelle        (kg/s)
-        self.wq_inflow_temp = t_compensated             # Wärmequelle Rücklauftemperatur (K)
-        self.ww_massflow = ww_massflow                       # Massenstrom Warmwasser         (kg/s)
-        self.ww_inflow_temp = ww_inflow_temp            # Warmwasser Rücklauftemperatur  (K)
+        self.wq_massflow = 23 / 60
+        self.wq_inflow_temp = 273.15 + 14.2
+        self.ww_massflow = 16.1 / 60
+        self.ww_inflow_temp = 273.15 + 35.5
+        self.water_pressure = 200000
 
-        self.condenser_w_pressure_ratio = condenser_wq_pressure_ratio
-        self.superheater_w_pressure_ratio = superheater_wq_pressure_ratio
-        self.superheater_pressure_ratio = superheater_pressure_ratio
-        self.evaporator_pressure_ratio = evaporator_pressure_ratio
         # --- Network ---
         self.heatpump = Network()
         self.heatpump.set_attr(T_unit='K', p_unit='bar', h_unit='kJ / kg', iterinfo=True)
@@ -142,134 +84,66 @@ class Heatpump():
         self.wq2 = Connection(self.superheater, 'out1', self.evaporator, 'in1')
         self.wq3 = Connection(self.evaporator, 'out1', self.tank_in_wq, 'in1')
         self.conn_list = [self.conn0, self.conn1, self.conn2, self.conn3, self.conn4, self.conn5]
-        # set parameters
-        self.parametise()
         # add connections to network
         self.heatpump.add_conns(self.conn0, self.conn1, self.conn2, self.conn3, self.conn4, self.conn5, self.ww1, self.ww2, self.wq1, self.wq2, self.wq3)
 
 
     def parametise(self):
-        # --- PARAMETRISATION ---
-        # COMPONENTS
-        self.compressor.set_attr(eta_s=self.isentropen_koeffizient, P=self.compressor_power)
-        self.compressor.set_attr(design=['P', 'eta_s'], offdesign=['P', 'eta_s'])
+        #print("\nParametising Heatpump... ")
 
-        self.condenser.set_attr(Q=-self.design_heat_output, pr1=self.condenser_pressure_ratio, pr2=self.condenser_w_pressure_ratio)
-        self.condenser.set_attr(design=['Q', 'pr1', 'pr2'], offdesign=['kA', 'zeta1', 'zeta2'])
-        
-        self.superheater.set_attr(pr1=self.superheater_w_pressure_ratio, pr2=self.superheater_pressure_ratio)
-        self.superheater.set_attr(design=['pr1', 'pr2'], offdesign=['kA', 'zeta1', 'zeta2'])
-        self.evaporator.set_attr(pr1=self.superheater_w_pressure_ratio, pr2=self.evaporator_pressure_ratio)
-        self.evaporator.set_attr(design=['pr1', 'pr2'], offdesign=['kA', 'zeta1', 'zeta2'])
-        # CONNECTIONS
+        #print("ww_input: " + str(self.ww_inflow_temp))
 
-        self.conn1.set_attr(p=self.high_pressure)
-        self.conn1.set_attr(design=['p'])
-
-        self.conn3.set_attr(p=self.low_pressure)
-        self.conn3.set_attr(design=['p'])
-
-        self.conn4.set_attr(x=1, fluid={working_fluid: 1})
-
-        self.conn5.set_attr(T=self.evaporation_temp + self.superheat)
-        self.conn5.set_attr(design=['T'], offdesign=['T'])
-
-        self.ww1.set_attr(T=self.ww_inflow_temp, p=2, m=self.ww_massflow, fluid={'ethanol': 1})      # Warmwasser Vorlauf
-        self.ww1.set_attr(design=['T', 'p', 'm'], offdesign=['T', 'p', 'm'])
+        self.ww1.set_attr(T=self.ww_inflow_temp, p=2, m=self.ww_massflow, fluid={'ethanol': 1})
         self.wq1.set_attr(T=self.wq_inflow_temp, p=2, m=self.wq_massflow, fluid={'ethanol': 1})
-        self.wq1.set_attr(design=['T', 'p', 'm'], offdesign=['T', 'p', 'm'])
-        #self.wq2.set_attr(printout=False)
-        #self.wq3.set_attr(printout=False)
-        #self.ww2.set_attr(printout=False)
 
-    def parametise_offdesign(self):
-        self.conn1.set_attr(p=None)
-        self.conn3.set_attr(p=None)
-        self.conn1.set_attr(p0=self.high_pressure)
-        self.compressor.set_attr(P=900, eta_s=0.77)
-        self.conn5.set_attr(T=294)
+        compressor_power = 21.88877055400408 * (self.ww_inflow_temp-273.15) + 101.71412575912325
+        #print("Compressor Power: " + str(compressor_power) + " W")
+        self.compressor.set_attr(eta_s=self.isentropen_koeffizient, P=compressor_power)
 
-    def solve(self, design):
-        if design:
-            self.reset()
-            self.heatpump.solve(mode='design')
-            self.heatpump.save('design_state.json')
-            self.heatpump.print_results()
-        else:
-            self.heatpump.solve(mode="offdesign", design_path='design_state.json')
-            self.heatpump.print_results()
-        pres = 0
-        for c in self.conn_list:
-            if c.p.val > pres:
-                pres = c.p.val
-        print(f"high pressure side p = {round(pres,3)}")
+        pressure1 = 0.6029903492677208 * (self.ww_inflow_temp - 273.15) + 4.036221627874944
+        #print("high pressure: " + str(pressure1) + " bar")
+        self.conn1.set_attr(p=pressure1)
+
+        #t_cond_guess = PropsSI('T', 'P', pressure1*100000, 'Q', 0, working_fluid)
+        #self.conn2.set_attr(T0=t_cond_guess)
+
+        self.condenser.set_attr(pr1=1, pr2=1) # , kA=7.39e+02
+        self.superheater.set_attr(pr1=1, pr2=1) # , kA=1.36e+03
+        self.evaporator.set_attr(pr1=1, pr2=1) # , kA=5.9e+01
+
+        dt = 3 # in die 3 °K kann das heatpipe ding integriert werden (temp dt zwischen heiss und kalt im evap)
+        t_evap = self.wq_inflow_temp - (dt+self.superheat)
+        low_pres = PropsSI("P", "T", t_evap, "Q", 1, self.working_fluid) / 100000  # convert to bar
+        #print("low_pres: " + str(low_pres) + ' bar ')
+        #print("T5: " + str(self.wq_inflow_temp-dt))
+        #h_test = PropsSI("H", 'T', self.wq_inflow_temp-dt, 'P', low_pres, self.working_fluid)
+        #print('H5: ' + str(h_test))
+        self.conn4.set_attr(x=1, fluid={self.working_fluid: 1})
+        self.conn5.set_attr(T=self.wq_inflow_temp-dt)
+        self.conn3.set_attr(p=low_pres)
+        carnot = self.ww_inflow_temp / (self.ww_inflow_temp - self.wq_inflow_temp)
+        cop = carnot * 0.368 # hardcoded efficiency
+        #cop = (-9.5888331628315e-05) * (compressor_power * (self.ww_inflow_temp - self.wq_inflow_temp+ 1.5)) + 7.7508400878806025
+        Q_cond = cop * compressor_power
+        self.condenser.set_attr(Q=-Q_cond)
+        #print("Parametisation done!\n")
+
+
+    def solve(self):
+        self.parametise()
+        self.heatpump.solve("design")
 
     
-    def solvejson(self, design: bool):
-        if design:
-            self.heatpump.solve(mode='design')
-            self.heatpump.save('design_state.json')
-            self.calc_superheat()
-            # self.show_cycle() only do this when plot button is pressed
-            # get json of simulation results
-            json_res = self.create_json()
-            return json_res
-        else:
-            # self.solve_offdesign()
-            # EVR control loop
-            self.heatpump.solve(mode="offdesign", design_path='design_state.json', max_iter=100)
-            #self.heatpump.print_results()
-            # check pump status:
-
-            json_res = self.create_json()
-            return json_res
-            # self.show_cycle()
-            # get json of simulation results
-            # CODE BELOW ONLY FOR TESTING PURPOSES:
-            test_res = 5
-            results = {"test":test_res}
-            return results
-        
-    def reset(self):
-        # Change params that are changed in offdesign mode
-        # --- PARAMETRISATION ---
-        #self.conn1.set_attr(p=self.high_pressure)
-        self.compressor.set_attr(eta_s=self.isentropen_koeffizient, P=self.compressor_power)
-        self.conn1.set_attr(p=self.high_pressure)
-        #self.conn1.set_attr(h=self.compressor_out_enth)
-        self.condenser.set_attr(Q=-self.design_heat_output, pr1=self.condenser_pressure_ratio, pr2=self.condenser_w_pressure_ratio)
-        
-        self.conn5.set_attr(T=self.evaporation_temp + self.superheat)
-        self.conn3.set_attr(p=self.low_pressure)
-        self.conn4.set_attr(x=1, fluid={working_fluid: 1})
-
-        self.superheater.set_attr(pr1=self.superheater_w_pressure_ratio, pr2=self.superheater_pressure_ratio)
-        self.evaporator.set_attr(pr1=self.superheater_w_pressure_ratio, pr2=self.evaporator_pressure_ratio)
-
-
-        self.ww1.set_attr(T=self.ww_inflow_temp, p=2, m=self.ww_massflow, fluid={'ethanol': 1})      # Warmwasser Vorlauf
-        self.wq1.set_attr(T=self.wq_inflow_temp, p=2, m=self.wq_massflow, fluid={'ethanol': 1})
-
-    def show_design(self): # fluid property diagram pre calc
-        pressures = [self.low_pressure, 28, self.high_pressure, self.low_pressure, self.low_pressure]  # in bar
-        enthalpies = [430, 470, 260, 260, 430] # in kJ/kg
-        diagram = FluidPropertyDiagram(fluid=self.working_fluid)
-        diagram.set_unit_system(T='°C', h='kJ/kg', p='bar')
-        Q = np.linspace(0, 1, 11)
-        T = np.arange(-25, 150, 5)
-        p = np.geomspace(0.01, 1000, 6)
-        v = np.geomspace(0.001, 10, 5)
-        s = np.linspace(1000, 10000, 10)
-        h = np.linspace(0, 1000, 19)
-        #diagram.set_isolines( T=T, p=p, v=v, s=s, h=h)
-        diagram.set_isolines(Q=Q, T=T, p=p, h=h)
-        diagram.calc_isolines()
-        fig, ax = plt.subplots(1, figsize=(8, 5))
-        diagram.draw_isolines(diagram_type='logph', fig=fig, ax=ax, x_min=0, x_max=750, y_min=1, y_max=800)
-        plt.plot(enthalpies, pressures, 'b-', label='Heat Pump Cycle')
-        #fig.savefig('logph_diagram.svg')
-        #fig.savefig('logph_diagram.png', dpi=300)
-        #plt.show() 
+    def solvejson(self):
+        self.parametise()
+        self.heatpump.solve(mode='design')
+        self.heatpump.save('design_state.json')
+        self.calc_superheat()
+        self.heatpump.print_results()
+        # self.show_cycle() only do this when plot button is pressed
+        # get json of simulation results
+        json_res = self.create_json()
+        return json_res
 
     def show_cycle(self):
         r_enthalpies = []
@@ -292,13 +166,17 @@ class Heatpump():
         fig, ax = plt.subplots(1, figsize=(8, 5))
         
         diagram2.draw_isolines(diagram_type='logph', fig=fig, ax=ax, x_min=0, x_max=750, y_min=1, y_max=800)
-        # WENN DIREKT GEPLOTTET WERDEN SOLL
-        #plt.plot(r_enthalpies, r_pressures, 'b-', label='Heat Pump Cycle')
-        #fig.savefig('logph_diagram_H2O.svg')
-        #fig.savefig('logph_diagram_calculated.png', dpi=300)
-        # WENN NUR FÜR GUI GEPLOTTET WERDEN SOLL
-        mpld3.save_html(fig, "frontend/plots/thermocycle.html", figid="thermocycle")
-        #mpld3.save_json(fig, "thermocycle.json")
+
+        choice = 2 # always plot using mpld3
+        if choice == 1: # WENN DIREKT GEPLOTTET WERDEN SOLL
+            plt.plot(r_enthalpies, r_pressures, 'b-', label='Heat Pump Cycle')
+            plt.show()
+            #fig.savefig('logph_diagram_H2O.svg')
+            #fig.savefig('logph_diagram_calculated.png', dpi=300)
+        elif choice == 2: # WENN NUR FÜR GUI GEPLOTTET WERDEN SOLL
+            ax.plot(r_enthalpies, r_pressures, 'b-', label='Heat Pump Cycle')
+            ax.legend()
+            mpld3.save_html(fig, "frontend/plots/thermocycle.html", figid="thermocycle")
         
     def show_temps(self):
         # Funktion nicht notwendig für GUI
@@ -322,23 +200,7 @@ class Heatpump():
         plt.show()
 
     def show_all(self):
-        fig, axs = plt.subplots(1, 3, figsize=(18, 5))
-
-        # --- Plot 1: Design Diagram ---
-        pressures = [self.low_pressure, self.high_pressure, self.high_pressure, self.low_pressure, self.low_pressure]
-        enthalpies = [430, 470, 260, 260, 430]
-
-        diagram = FluidPropertyDiagram(fluid=self.working_fluid)
-        diagram.set_unit_system(T='°C', h='kJ/kg', p='bar')
-        Q = np.linspace(0, 1, 11)
-        T = np.arange(-25, 150, 5)
-        p = np.geomspace(0.01, 1000, 6)
-        h = np.linspace(0, 1000, 19)
-        diagram.set_isolines(Q=Q, T=T, p=p, h=h)
-        diagram.calc_isolines()
-        diagram.draw_isolines(diagram_type='logph', fig=fig, ax=axs[0], x_min=0, x_max=750, y_min=1, y_max=800)
-        axs[0].plot(enthalpies, pressures, 'b-', label='Design Cycle')
-        axs[0].set_title('Design Log(p)-h Diagram')
+        fig, axs = plt.subplots(1, 2, figsize=(18, 5))
 
         # --- Plot 2: Real Cycle Diagram ---
         r_enthalpies = [c.h.val for c in self.conn_list]
@@ -436,7 +298,7 @@ class Heatpump():
 
         # print("Simulation data saved to 'calculated_data.json'!")
         return data
-    
+
     def calc_superheat(self):
         pressure = self.conn5.p.val * 1e5
         temp_inlet = self.conn5.T.val  # Temperature at compressor inlet [K]
@@ -450,6 +312,7 @@ class Heatpump():
             return True
         else:
             return False
+    
 
 # FastAPI backend for webpage
 app = FastAPI()
@@ -464,7 +327,6 @@ class SimulationInput(BaseModel):
     para_in_4: Optional[float] = None
     para_in_5: Optional[float] = None
     para_in_6: Optional[float] = None
-    para_in_7: Optional[float] = None
 
 
 logger = logging.getLogger("uvicorn.error")
@@ -501,16 +363,6 @@ def session_end(my_session_id: str):
         return {"message":"Session ended"}
     else:
         return {"message":"Session ID old or incorrect"}
-
-# run a design simulation to "wipe the slate clean"
-@app.get("/design_simulation/{my_session_id}")
-def run_simulation(my_session_id: str):
-    if id_check(app.state.session_ids, my_session_id):
-        app.state.heatpumps[my_session_id].reset()
-        results = app.state.heatpumps[my_session_id].solvejson(True)
-        return results
-    else:
-        return  {"error":"Session ID Error"}
     
 @app.get("/build_plot/{my_session_id}")
 def build_plot(my_session_id: str):
@@ -530,13 +382,13 @@ def clear_sessions():
 
 
 # receive data as input for new simulation
-@app.post("/offdesign_simulation/{my_session_id}")
+@app.post("/simulation/{my_session_id}")
 def run_offdesign(data: SimulationInput, my_session_id: str):
     if id_check(app.state.session_ids, my_session_id):
         #return data.model_dump_json()
         data_dict = data.model_dump()
         update_params(app.state.heatpumps[my_session_id], data_dict)
-        result = app.state.heatpumps[my_session_id].solvejson(False)
+        result = app.state.heatpumps[my_session_id].solvejson()
         return result
     else:
         return {"error": "Invalid session ID"}, 423
@@ -558,42 +410,23 @@ def update_params(pump: Heatpump, data: dict):
 
         match param_num:
             case 1:
-                pump.wq1.set_attr(T=value)
+                pump.wq_inflow_temp = value + 273.15
                 logger.info(f"Attribute 1 (wq_in: T) was set to {value}")
             case 2:
-                pump.ww1.set_attr(T=value)
+                pump.ww_inflow_temp = value + 273.15
                 logger.info(f"Attribute 2 (ww1_in: T) was set to {value}")
             case 3:
-                pump.compressor.set_attr(P=value)
-                logger.info(f"Attribute 3 (compressor: P) was set to {value}")
+                pump.wq_massflow = value / 60
+                logger.info(f"Attribute 3 (wq1_in: m) was set to {value}")
             case 4:
-                pump.wq1.set_attr(m=value)
-                logger.info(f"Attribute 4 (wq1_in: m) was set to {value}")
+                pump.ww_massflow = value / 60
+                logger.info(f"Attribute 4 (ww1_in: m) was set to {value}")
             case 5:
-                pump.ww1.set_attr(m=value)
-                logger.info(f"Attribute 5 (ww1_in: m) was set to {value}")
+                pump.isentropen_koeffizient = value
+                logger.info(f"Attribute 5 (compressor: eta_s) was set to {value}")
             case 6:
-                pump.compressor.set_attr(eta_s=value)
-                logger.info(f"Attribute 6 (compressor: eta_s) was set to {value}")
-            case 7:
-                pump.superheat_control_value = value
-                logger.info(f"Attribute 7 (superheat_control_value) was set to {value}")
+                pump.superheat = value
+                logger.info(f"Attribute 6 (superheat_control_value) was set to {value}")
             case _:
                 print(f"Warning: unknown parameter {param_num}")
-        
-
-
-
-
-
-"""
-# not needed when run as web server backend
-# only needed when script should only be run once with python           
-pump = Heatpump()
-pump.solve(1)
-pump.save_json()
-#pump.show_design()
-pump.show_cycle() 
-#pump.show_temps()
-#pump.show_all()
-"""
+    

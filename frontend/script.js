@@ -6,14 +6,25 @@ class HeatpumpVis {
     constructor(type) {
         this.canvas;
         // semi-random starting values
-        this.Temperatures = {conn0:10, conn1:60, conn2:55, conn3:3, conn4:3, conn5:10, wq_in:11, wq_out:9, ww_in:11, ww_out:14};
+        this.Temperatures = {conn0:10, conn1:60, conn2:55, conn3:3, conn4:3, conn5:10, wq_in:11, wq_out:9, ww_in:25, ww_out:28};
         this.Pressures = {conn0:8, conn1:22, conn2:22, conn3:8, conn4:8, conn5:8};
         this.Enthalpies = {conn0:430, conn1:450, conn2:200, conn3:200, conn4:400, conn5:430};
-        this.Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800, comp_eff:0.99};
+        this.Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800, comp_eff:0.75};
         this.MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02, wq:0.475*60, ww:0.265*60};
         // Select Simulation or Real Thing with 0 or 1
         this.type = type;
         this.overheat = 7;
+    }
+
+    reset() {
+        this.Temperatures = {conn0:10, conn1:60, conn2:55, conn3:3, conn4:3, conn5:10, wq_in:11, wq_out:9, ww_in:25, ww_out:28};
+        this.Pressures = {conn0:8, conn1:22, conn2:22, conn3:8, conn4:8, conn5:8};
+        this.Enthalpies = {conn0:430, conn1:450, conn2:200, conn3:200, conn4:400, conn5:430};
+        this.Powers = {evaporator:4000, condenser:5000, superheater:200, compressor:800, comp_eff:0.75};
+        this.MassFlows = {conn0:4.02, conn1:4.02, conn2:4.02, conn03:4.02, conn4:4.02, conn5:4.02, wq:0.475*60, ww:0.265*60};
+        // Select Simulation or Real Thing with 0 or 1
+        this.overheat = 7;
+        this.update_buttons()
     }
 
     reload_data(data) {
@@ -88,31 +99,32 @@ class HeatpumpVis {
                 return 0
             }
             else if (json === 20) {
-                // run design simulation
-                var url = "http://127.0.0.1:8000/design_simulation/" + my_session_id;
-                let response = await fetch(url, {method:"GET",headers:{"Content-type":"application/json; charset=UTF-8"}});
-                if (!response.ok) {
-                    throw_error("ID not ok. Something went wrong!");
-                    return;
-                }
-                const json_resp  = await response.json();
-                /*if (json_resp.my_session_id === 0 || json_resp.error) {
-                    throw_error("Already too many people simulating. Please try again later");
-                    my_session_id_get_in_progress = 0;
-                    return;
-                }*/
-                //console.log(json_resp);
-                this.reload_data(json_resp);
-                this.update_buttons();
+                // reset to standard
+                simpump.reset()
                 var newcop = this.Powers.condenser / this.Powers.compressor;
                 copgaugesim.value = newcop;
                 document.getElementById("cop_value_sim").textContent = Math.round(newcop*100)/100;
+                for (var i=1;i<=NUMBER_OF_PARAMETERS;i++) {
+                    var el_id = "para_in_" + i;
+                    const value = (() => {
+                        switch (i) {
+                            case 1: return simpump.Temperatures.wq_in;
+                            case 2: return simpump.Temperatures.ww_in;
+                            case 3: return simpump.MassFlows.wq;
+                            case 4: return simpump.MassFlows.ww;
+                            case 5: return simpump.Powers.comp_eff;
+                            case 6: return simpump.overheat;
+                            default: return "";
+                        }
+                    })();
+                    document.getElementById(el_id).value = value;
+                }
             }
 
             else {
                 // run simulation with json as inputs
                 // send inputs and fetch result
-                var url = "http://127.0.0.1:8000/offdesign_simulation/" + my_session_id;
+                var url = "http://127.0.0.1:8000/simulation/" + my_session_id;
                 let resp = await fetch(url, {method:"POST", body:json, headers:{"Content-type": "application/json; charset=UTF-8"}});
                 let json_resp = await resp.json();
                 console.log("Server response; " + json_resp);
@@ -120,6 +132,11 @@ class HeatpumpVis {
                 if (json_resp.message === undefined) {
                     this.reload_data(json_resp);
                     this.update_buttons();
+                    var cop = simpump.Powers.condenser/simpump.Powers.compressor;
+                    cop = Math.round(cop*100) / 100
+                    document.getElementById("cop_value_sim").textContent=cop;
+                    copgaugesim.value = cop;
+                    console.log("set COP gauge to: " + cop)
                 }
                 else {
                     throw_error(json_resp.message)
@@ -174,7 +191,7 @@ class HeatpumpVis {
     */
 
     drawHeatpump(){                            // draws the Heatpump at first start
-        var xscale = 1.02;
+        var xscale = 1;
         var yscale = 1;
         var c = this.canvas.getContext("2d");
         var xoffset = 50;
@@ -224,13 +241,13 @@ class HeatpumpVis {
         document.getElementById("p_button_10").textContent=this.Pressures.conn5+"bar";
         document.getElementById("p_button_11").textContent=this.Powers.condenser+" W";
         document.getElementById("p_button_12").textContent=this.Powers.evaporator+" W";
+        document.getElementById("p_button_13").textContent=this.Powers.compressor+" W";
         document.getElementById("para_button_1").textContent=this.Temperatures.wq_in+"°C";
         document.getElementById("para_button_2").textContent=this.Temperatures.ww_in+"°C";
-        document.getElementById("para_button_3").textContent=this.Powers.compressor+" W";
-        document.getElementById("para_button_4").textContent=this.MassFlows.wq+" l/min";
-        document.getElementById("para_button_5").textContent=this.MassFlows.ww+" l/min";
-        document.getElementById("para_button_6").textContent=this.Powers.comp_eff;
-        document.getElementById("para_button_7").textContent=this.overheat+"°K";
+        document.getElementById("para_button_3").textContent=this.MassFlows.wq+" l/min";
+        document.getElementById("para_button_4").textContent=this.MassFlows.ww+" l/min";
+        document.getElementById("para_button_5").textContent=this.Powers.comp_eff;
+        document.getElementById("para_button_6").textContent=this.overheat+"°K";
     }
     update_viz_buttons() {
         document.getElementById("viz_button_1").textContent = this.Temperatures.wq_out + "°C";
@@ -320,7 +337,7 @@ copgaugereal.value = 6.25;
 copgaugesim.value = 6.25;
 
 // global variables of both heatpumps and my_session_id
-const NUMBER_OF_PARAMETERS = 7;
+const NUMBER_OF_PARAMETERS = 6;
 var superheat_control_value = 7;
 var my_session_id = "test";
 var my_session_id_get_in_progress = 0;
@@ -335,7 +352,18 @@ const simpump = new HeatpumpVis(0);
 (async () => {
     for (var i=1;i<=NUMBER_OF_PARAMETERS;i++) {
         var el_id = "para_in_" + i;
-        document.getElementById(el_id).value = -22;
+        const value = (() => {
+            switch (i) {
+                case 1: return simpump.Temperatures.wq_in;
+                case 2: return simpump.Temperatures.ww_in;
+                case 3: return simpump.MassFlows.wq;
+                case 4: return simpump.MassFlows.ww;
+                case 5: return simpump.Powers.comp_eff;
+                case 6: return simpump.overheat;
+                default: return "";
+            }
+        })();
+        document.getElementById(el_id).value = value;
     }
     try {
         var local = localStorage.getItem("my_session_id");
@@ -483,7 +511,7 @@ function openTab(evt, tabName) {
 function  close_inputs() { // closes all input fields open on the simulation canvas
     for (let i=1;i<=NUMBER_OF_PARAMETERS;i++) {
         var newid = "para_in_" + i;
-        document.getElementById(newid).value = -22;
+        // document.getElementById(newid).value = -22;
         replace_input(i);
     }
 }
@@ -498,18 +526,14 @@ function run_simulation() {
     for (let i=1; i <= NUMBER_OF_PARAMETERS; i++) {
         let id = "para_in_" + i;
         let element = document.getElementById(id);
-        if (element.value !== -22) {
-            isempty = false;
-        }
         if (element) {
             let inputVal = Number(element.value); // Convert to number
-    
             if (!isNaN(inputVal)) {
-                if (id === 'para_in_7') {
+                if (id === 'para_in_6') {
                     if (inputVal !== -22) {
                         superheat_control_value = inputVal;
                     }
-                    jsonstring += `"para_in_7":${superheat_control_value},`;
+                    jsonstring += `"para_in_6":${superheat_control_value},`;
                     continue;
                 }
                 jsonstring += `"${id}":${inputVal},`;
@@ -521,9 +545,6 @@ function run_simulation() {
             }
         }
     }
-    if (isempty) {
-        jsonstring = 1;
-    }
     if (jsonstring.endsWith(",")) {
         jsonstring = jsonstring.slice(0, -1);
     }
@@ -532,10 +553,6 @@ function run_simulation() {
     console.log("run_simulation json; "+jsonstring);
     simpump.update_data(jsonstring);
     close_inputs();
-    var cop = simpump.Powers.condenser/simpump.Powers.compressor;
-    cop = Math.round(cop*100) / 100
-    document.getElementById("cop_value_sim").textContent=cop;
-    copgaugesim.value = cop;
 }
 
 
@@ -555,10 +572,10 @@ function buttonclick(element) {
         run_simulation();
     }
     else if (element.id === "debug_button"){
-        simpump.update_data(20);
+        simpump.update_data(20); // resset to start specs
     }
     else if (element.id === "update_button"){
-        realpump.update_data(1);
+        realpump.update_data(1); // not needed for prod
     }
     else {
         //pass0
@@ -671,7 +688,7 @@ function draw_thingy(c) {
     var dia = 60;
     c.strokeStyle = "rgb(94, 94, 94)";
     c.beginPath();
-    var cx = 470;
+    var cx = 450;
     var cy = 345;
     c.arc(cx, cy, dia, 0.5, 0 * Math.PI); // radius = 50 for 100px diameter
     //c.stroke();

@@ -50,12 +50,13 @@ Termine
 .pdm-python
 # push script
 push.sh
-
+__init__.py
 *.svg
 notepad.txt
 tespytest.py
 .tespytestMOD.py
 tests
+src
 myloggings
 tespy_scheme.drawio
 logph_diagram_calculated.png
