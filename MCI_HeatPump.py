@@ -17,28 +17,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
-"""
-'Digitaler Zwilling' Versuchswärmepumpe MCI SBT Labor
-
-Übersicht MCI_HeatPump.py:
-
-parametrisierung der WP
-
-WP Klasse mit folgenden Methoden:
-
-
-"""
-
-
 # Enable logging
 ();logger.define_logging(
 logpath="myloggings", log_the_path=True, log_the_version=True,
 screen_level=logging.INFO, file_level=logging.DEBUG
 );()
 
-# Heatpipe compensation
-
-# Wärmepumpe objekt das Sachen simulieren kann
+# Wärmepumpe objekt mit dem simuliert werden kann
 class Heatpump():
     def __init__(self, **kwargs):
         # --- HEATPUMP PARAMETERS ---
@@ -91,38 +76,38 @@ class Heatpump():
     def parametise(self):
         #print("\nParametising Heatpump... ")
 
-        #print("ww_input: " + str(self.ww_inflow_temp))
-
+        # Wärmequellen und Wärmesenken Parameter setzen
         self.ww1.set_attr(T=self.ww_inflow_temp, p=2, m=self.ww_massflow, fluid={'ethanol': 1})
         self.wq1.set_attr(T=self.wq_inflow_temp, p=2, m=self.wq_massflow, fluid={'ethanol': 1})
 
-        compressor_power = 21.88877055400408 * (self.ww_inflow_temp-273.15) + 101.71412575912325
-        #print("Compressor Power: " + str(compressor_power) + " W")
-        self.compressor.set_attr(eta_s=self.isentropen_koeffizient, P=compressor_power)
-
+        # Hochdruck aus Zusammenhang mit ww_inflow_temp berechnen
         pressure1 = 0.6029903492677208 * (self.ww_inflow_temp - 273.15) + 4.036221627874944
         #print("high pressure: " + str(pressure1) + " bar")
         self.conn1.set_attr(p=pressure1)
 
-        #t_cond_guess = PropsSI('T', 'P', pressure1*100000, 'Q', 0, working_fluid)
-        #self.conn2.set_attr(T0=t_cond_guess)
+        # Druckverluste vernachlässigen
+        self.condenser.set_attr(pr1=1, pr2=1)
+        self.superheater.set_attr(pr1=1, pr2=1)
+        self.evaporator.set_attr(pr1=1, pr2=1)
 
-        self.condenser.set_attr(pr1=1, pr2=1) # , kA=7.39e+02
-        self.superheater.set_attr(pr1=1, pr2=1) # , kA=1.36e+03
-        self.evaporator.set_attr(pr1=1, pr2=1) # , kA=5.9e+01
-
-        dt = 3 # in die 3 °K kann das heatpipe ding integriert werden (temp dt zwischen heiss und kalt im evap)
+        dt = 3 # dT zwischen heiss ein und kalt out im evap
         t_evap = self.wq_inflow_temp - (dt+self.superheat)
         low_pres = PropsSI("P", "T", t_evap, "Q", 1, self.working_fluid) / 100000  # convert to bar
-        #print("low_pres: " + str(low_pres) + ' bar ')
-        #print("T5: " + str(self.wq_inflow_temp-dt))
-        #h_test = PropsSI("H", 'T', self.wq_inflow_temp-dt, 'P', low_pres, self.working_fluid)
-        #print('H5: ' + str(h_test))
-        self.conn4.set_attr(x=1, fluid={self.working_fluid: 1})
-        self.conn5.set_attr(T=self.wq_inflow_temp-dt)
-        self.conn3.set_attr(p=low_pres)
+
+        # Verdichter Leistung abhängig von pressureratio 
+        compressor_power = 192.17666791454684 * (pressure1 / low_pres) + 329.7760464994675
+        #print("Compressor Power: " + str(compressor_power) + " W")
+        self.compressor.set_attr(eta_s=self.isentropen_koeffizient, P=compressor_power)
+
+        self.conn4.set_attr(x=1, fluid={self.working_fluid: 1})     # Phase nach Verdampfer setzen
+        self.conn5.set_attr(T=self.wq_inflow_temp-dt)               # Temperatur nach Überhitzer setzen
+        self.conn3.set_attr(p=low_pres)                             # verdampfungsdruck setzen
         carnot = self.ww_inflow_temp / (self.ww_inflow_temp - self.wq_inflow_temp)
-        cop = carnot * 0.368 # hardcoded efficiency
+
+        #efficiency = -0.03229901428415978 * self.superheat + 0.5325862927250367 # efficiency from correlation with superheat
+        efficiency = 0.368 # hardcoded efficiency
+
+        cop = carnot * efficiency
         #cop = (-9.5888331628315e-05) * (compressor_power * (self.ww_inflow_temp - self.wq_inflow_temp+ 1.5)) + 7.7508400878806025
         Q_cond = cop * compressor_power
         self.condenser.set_attr(Q=-Q_cond)
@@ -132,20 +117,20 @@ class Heatpump():
     def solve(self):
         self.parametise()
         self.heatpump.solve("design")
+        self.heatpump.print_results()
 
     
-    def solvejson(self):
+    def solvejson(self): # löst die simulation und erstellt einen json string aus den resultaten
         self.parametise()
         self.heatpump.solve(mode='design')
         self.heatpump.save('design_state.json')
-        self.calc_superheat()
         self.heatpump.print_results()
         # self.show_cycle() only do this when plot button is pressed
         # get json of simulation results
         json_res = self.create_json()
         return json_res
 
-    def show_cycle(self):
+    def show_cycle(self, id=""): # Kreisprozess anzeigen
         r_enthalpies = []
         r_pressures = []
         for Conn in self.conn_list:
@@ -176,9 +161,9 @@ class Heatpump():
         elif choice == 2: # WENN NUR FÜR GUI GEPLOTTET WERDEN SOLL
             ax.plot(r_enthalpies, r_pressures, 'b-', label='Heat Pump Cycle')
             ax.legend()
-            mpld3.save_html(fig, "frontend/plots/thermocycle.html", figid="thermocycle")
+            mpld3.save_html(fig, f"frontend/plots/thermocycle{id}.html", figid="thermocycle")
         
-    def show_temps(self):
+    def show_temps(self): # Diese Funktion wurde hauptsächlich zum debuggen genutzt
         # Funktion nicht notwendig für GUI
         r_enthalpies = []
         r_pressures = []
@@ -199,7 +184,7 @@ class Heatpump():
         ax.grid()
         plt.show()
 
-    def show_all(self):
+    def show_all(self): # Diese Funktion wurde hauptsächlich zum debuggen genutzt
         fig, axs = plt.subplots(1, 2, figsize=(18, 5))
 
         # --- Plot 2: Real Cycle Diagram ---
@@ -250,7 +235,6 @@ class Heatpump():
         plt.tight_layout()
         plt.show()
 
-    # superheat needs to be calculated by coolprop for offdesign calculations
     def create_json(self):
         data = {
             "Temperatures": {
@@ -297,22 +281,7 @@ class Heatpump():
         #    jsonlib.dump(data, f, indent=4)
 
         # print("Simulation data saved to 'calculated_data.json'!")
-        return data
-
-    def calc_superheat(self):
-        pressure = self.conn5.p.val * 1e5
-        temp_inlet = self.conn5.T.val  # Temperature at compressor inlet [K]
-        fluid = self.working_fluid
-        T_sat = PropsSI('T', 'P', pressure, 'Q', 1, fluid)  # Q=1 for saturated vapor
-        self.superheat = temp_inlet - T_sat
-    
-    def check_superheat(self, boundary):
-        self.calc_superheat()
-        if self.superheat < self.superheat_control_value + boundary and self.superheat > self.superheat_control_value - boundary:
-            return True
-        else:
-            return False
-    
+        return data    
 
 # FastAPI backend for webpage
 app = FastAPI()
@@ -320,6 +289,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
 app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
+# Daten die vom Frontend geschickt werden
 class SimulationInput(BaseModel):
     para_in_1: Optional[float] = None
     para_in_2: Optional[float] = None
@@ -328,24 +298,23 @@ class SimulationInput(BaseModel):
     para_in_5: Optional[float] = None
     para_in_6: Optional[float] = None
 
+logger = logging.getLogger("uvicorn.error") # logging aktivieren
+maximum_amount_of_sessions = 20             # maximale Anzahl an Simualtionen
+app.state.session_ids = {}                  # hier werden session-id's gespeichert
+app.state.heatpumps = {}                    # hier werden HeatPump Objecte gespeichert
 
-logger = logging.getLogger("uvicorn.error")
-maximum_amount_of_sessions = 20
-app.state.session_ids = {}
-app.state.heatpumps = {}
-
-@app.get("/")
+@app.get("/") # static file serving für dev server
 def serve_index():
     return FileResponse(os.path.join(FRONTEND_DIR, "index.html"))
 
-@app.get("/checkID/{my_session_id}")
+@app.get("/checkID/{my_session_id}")        # check if session id is valid
 def check_if_valid(my_session_id: str):
     if id_check(app.state.session_ids, my_session_id):
         return {"message":"OK"}
     else:
         return {"message":"NOT_OK"}
 
-@app.get("/session_start")
+@app.get("/session_start")                  # start a new session -> generate new id & Heatpump Object
 def session_start():
     if len(app.state.session_ids) >= maximum_amount_of_sessions:
         return {"error":"0"}
@@ -355,7 +324,7 @@ def session_start():
     app.state.heatpumps[new_id] = Heatpump()
     return {"my_session_id":new_id}
 
-@app.get("/session_end/{my_session_id}")
+@app.get("/session_end/{my_session_id}")    # end the current session -> delete session id & Heatpump
 def session_end(my_session_id: str):
     if id_check(app.state.session_ids, my_session_id):
         app.state.session_ids.pop(my_session_id)
@@ -364,17 +333,17 @@ def session_end(my_session_id: str):
     else:
         return {"message":"Session ID old or incorrect"}
     
-@app.get("/build_plot/{my_session_id}")
+@app.get("/build_plot/{my_session_id}")     # generate a plot from the current simulation
 def build_plot(my_session_id: str):
     if id_check(app.state.session_ids, my_session_id):
-        app.state.heatpumps[my_session_id].show_cycle()
+        app.state.heatpumps[my_session_id].show_cycle(my_session_id)
         return {"message": "successfully built plot"}
     else:
         return  {"error":"Session ID Error"}
 
 
 # DELETE THIS METHOD BEFORE PRODUCTION!
-@app.get("/clear_sessions")
+@app.get("/clear_sessions") # löscht alle momentanen sessions
 def clear_sessions():
     app.state.session_ids = {}
     app.state.heatpumps = {}
@@ -382,7 +351,7 @@ def clear_sessions():
 
 
 # receive data as input for new simulation
-@app.post("/simulation/{my_session_id}")
+@app.post("/simulation/{my_session_id}")    # simuliert den Betriebszustand mit erhaltenen Daten
 def run_offdesign(data: SimulationInput, my_session_id: str):
     if id_check(app.state.session_ids, my_session_id):
         #return data.model_dump_json()
@@ -395,7 +364,7 @@ def run_offdesign(data: SimulationInput, my_session_id: str):
 
     # change parameters of pump to get it ready for an offdesign calc
     # pass 
-     
+
 def id_check(list, id):
     if id in list:
         return True

@@ -194,15 +194,22 @@
         <div id="comp" class="tabcontent">
             <h3>Wie verwende ich diese Seite?</h3>
             <p>Auf dieser Seite können verschieden Betriebspunkte auf einer virtuelle Wärmepumpe simuliert werden.</p>
-            <h3>Wie kann ich daten eingeben?</h3>
+            <h3>Wie kann ich Daten eingeben?</h3>
             <p>Parameter die umrahmt werden, wenn man mit der Maus drüber fährt, können verändert werden. <br> 
             Wenn man auf einen Parameter klickt, öffnet sich ein Eingabefeld und man kann dort der Simulation einen Wert für den Parameter vorgeben. 
             <br>  Wenn man nun auf den "Simulieren" button drückt wird mit dem eingegebem Wert simuliert.
             <br> Das Eingabefeld kann durch einen Doppelklick wieder geschlossen werden.</p>
-            <h3>Warum hat diese Frage noch keinen Text?</h3>
+            <h3>Warum sehe ich noch keine Daten der realen Wärmepumpe?</h3>
+            <p>Leider wurde diese Simulation noch nicht mit der realen Wärmepumpe verbunden. <br>
+            Watch this space</p>
+            <h3>Es wird etwas nicht richtig angezeigt, was kann ich tun?</h3>
+            <p>Manchmal kann das passieren, sollte sich aber mit einem reload der Seite beheben.</p>
+            <h3>Was hat es mit der Session id auf sich?</h3>
+            <p>Jedem User wird ein sesssion-id zugeordnet, damit jeder nur seine eigene simulation sieht und beeinflussen kann.
+            <br> Wenn man auf die session-id klickt, wird die aktuelle session beendet und eine neue gestartet.</p>
         </div>
     </div> 
-    <!-- Development version so fasapi loads the script fresh every time: -->
+    <!-- Namen ändern, damit fastapi änderungen mitnimmt: -->
     <script>document.write('<script src="script.js?dev=' + Math.floor(Math.random() * 100) + '"\><\/script>');</script>
     <!-- <script type="text/javascript" src="script.js"></script> -->
 </body>

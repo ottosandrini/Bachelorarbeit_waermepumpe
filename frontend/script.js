@@ -336,17 +336,18 @@ let copgaugesim = new RadialGauge({
 copgaugereal.value = 6.25;
 copgaugesim.value = 6.25;
 
-// global variables of both heatpumps and my_session_id
+//  ---- GLOBAL VARIABLES ----
 const NUMBER_OF_PARAMETERS = 6;
 var superheat_control_value = 7;
 var my_session_id = "test";
 var my_session_id_get_in_progress = 0;
 var attempted_to_get_my_session_id = 0;
-// console.log(my_session_id);
+// Heatpump instances
 const realpump = new HeatpumpVis(1);
 const simpump = new HeatpumpVis(0);
 
 
+// --- STARTUP FUNCTION ---
 // function runs when .js file is loaded by webpage
 // function sets my_session_id if none is loaded
 (async () => {
@@ -386,6 +387,8 @@ const simpump = new HeatpumpVis(0);
         console.error("Session init failed:", error);
     }
 })();
+
+// ---- SESSION MANAGEMENT ----
 
 async function check_session_id(current_id) {
     var url = "http://127.0.0.1:8000/checkID/" + current_id;
@@ -438,22 +441,6 @@ async function get_my_session_id(){
     my_session_id_get_in_progress = 0;
 }
 
-async function plot_request() {
-    var url = "http://127.0.0.1:8000/build_plot/" + my_session_id;
-    let response = await fetch(url, {method:"GET", headers:{"Content-type": "application/json; charset=UTF-8"}});
-    let json_resp = await response.json();
-    console.log(json_resp);
-    window.open("plots/thermocycle.html", "Thermocycle Plot", "width=1000, height=600");
-}
-
-// Website scaling maybe later (min width 1280px)
-// function scale(window) {
-    // var width = window.screen.width;
-    // if (width =< 1300) {
-// 
-    // }
-// }
-
 function session_refresh(event) {
     if (event) event.preventDefault();
     var url = "http://127.0.0.1:8000/session_end/" + my_session_id;
@@ -463,6 +450,16 @@ function session_refresh(event) {
     // get new my_session_id from api
     get_my_session_id();
 }
+
+
+
+// Website scaling maybe later (min width 1280px)
+// function scale(window) {
+    // var width = window.screen.width;
+    // if (width =< 1300) {
+// 
+    // }
+// }
 
 // function debug_python(){
 //     var url = "http://127.0.0.1:8000/print_list";
@@ -475,6 +472,8 @@ function session_refresh(event) {
     console.log("ended session on unload with id: " + my_session_id);
     localStorage.removeItem("my_session_id");
 }*/
+
+// ---- WEBSITE STYLING AND FUNCTIONAL THINGS ----
 
 function throw_error(msg) {
     document.getElementsByClassName("errorfield")[0].textContent=msg;
@@ -514,6 +513,17 @@ function  close_inputs() { // closes all input fields open on the simulation can
         // document.getElementById(newid).value = -22;
         replace_input(i);
     }
+}
+
+// ---- SIMULATION API CALLS ----
+
+// generate and visualize cycle plot
+async function plot_request() {
+    var url = "http://127.0.0.1:8000/build_plot/" + my_session_id;
+    let response = await fetch(url, {method:"GET", headers:{"Content-type": "application/json; charset=UTF-8"}});
+    let json_resp = await response.json();
+    console.log(json_resp);
+    window.open("plots/thermocycle" + my_session_id + ".html", "Thermocycle Plot", "width=1000, height=600");
 }
 
 function run_simulation() {
@@ -632,7 +642,7 @@ function unbrighten(element) {
 // ------------------------- DOM THINGS -------------------------------------
 // --------------------------------------------------------------------------
 
-document.addEventListener("DOMContentLoaded", function () {             // draw the heatpumps and gauges
+document.addEventListener("DOMContentLoaded", function () { // draw the heatpumps and gauges
     var HPR = document.getElementById("HeatPumpReal");
     if (HPR) {  
         realpump.spec_canvas(HPR);

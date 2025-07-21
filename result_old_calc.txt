@@ -112,3 +112,252 @@ Total iterations: 5, Calculation time: 0.01 s, Iterations per second: 585.31
 +------------------------------------+-----------+-----------+------------+-----------+-----------+---------+
 
 
+pressures ↔ powers | R = 0.76, p = 0.0004
+pressures ↔ temps | R = 0.80, p = 0.0001                
+pressures ↔ con_pow | R = -0.72, p = 0.0012 
+pressures ↔ eva_pow | R = -0.81, p = 0.0001
+pressures ↔ ww_temp | R = 0.99, p = 0.0000
+   -  pressures ↔ pressureratio | R = 0.93, p = 0.0000
+   -  pressures ↔ dt | R = -0.80, p = 0.0001
+   -  pressures ↔ hp_dt | R = 0.95, p = 0.0000
+pressures ↔ ref_dt | R = 0.85, p = 0.0000
+pressures ↔ t_cond | R = 1.00, p = 0.0000
+pressures ↔ dt_evap_cond | R = 0.86, p = 0.0000
+pressures ↔ logdp | R = 0.93, p = 0.0000
+pressures ↔ test | R = 0.97, p = 0.0000
+   -  pressures ↔ cop | R = -0.93, p = 0.0000
+
+
+low_pressures ↔ low_temps | R = 0.90, p = 0.0000
+low_pressures ↔ wq_in | R = 0.93, p = 0.0000
+low_pressures ↔ wq_out | R = 0.93, p = 0.0000
+low_pressures ↔ pressureratio | R = -0.80, p = 0.0001
+low_pressures ↔ hp_dt | R = -0.75, p = 0.0005
+low_pressures ↔ ref_dt | R = -0.78, p = 0.0002
+low_pressures ↔ t_evap | R = 1.00, p = 0.0000
+low_pressures ↔ dt_evap_cond | R = -0.78, p = 0.0002
+low_pressures ↔ logdp | R = -0.80, p = 0.0001
+low_pressures ↔ test | R = -0.74, p = 0.0008
+
+
+powers ↔ temps | R = 0.75, p = 0.0006
+powers ↔ ww_temp | R = 0.71, p = 0.0013
+powers ↔ pressureratio | R = 0.73, p = 0.0008
+powers ↔ hp_dt | R = 0.71, p = 0.0015
+powers ↔ ref_dt | R = 0.75, p = 0.0005
+powers ↔ t_cond | R = 0.76, p = 0.0004
+powers ↔ dt_evap_cond | R = 0.77, p = 0.0003
+powers ↔ logdp | R = 0.73, p = 0.0008
+powers ↔ test | R = 0.79, p = 0.0001
+powers ↔ cop | R = -0.77, p = 0.0003
+temps ↔ ww_temp | R = 0.79, p = 0.0002
+temps ↔ pressureratio | R = 0.78, p = 0.0002
+temps ↔ hp_dt | R = 0.74, p = 0.0007
+   -   temps ↔ ref_dt | R = 0.95, p = 0.0000
+temps ↔ t_cond | R = 0.81, p = 0.0001
+temps ↔ dt_evap_cond | R = 0.95, p = 0.0000
+temps ↔ logdp | R = 0.78, p = 0.0002
+temps ↔ test | R = 0.79, p = 0.0002
+
+
+low_temps ↔ superheat | R = 0.75, p = 0.0005
+    -  low_temps ↔ wq_in | R = 0.98, p = 0.0000
+    -  low_temps ↔ wq_out | R = 0.98, p = 0.0000
+low_temps ↔ pressureratio | R = -0.81, p = 0.0001
+low_temps ↔ dt | R = 0.71, p = 0.0015
+low_temps ↔ hp_dt | R = -0.83, p = 0.0000
+low_temps ↔ ref_dt | R = -0.75, p = 0.0006
+low_temps ↔ t_evap | R = 0.90, p = 0.0000
+low_temps ↔ dt_evap_cond | R = -0.73, p = 0.0008
+low_temps ↔ logdp | R = -0.81, p = 0.0001
+low_temps ↔ test | R = -0.77, p = 0.0003
+low_temps ↔ cop | R = 0.77, p = 0.0003
+superheat ↔ hp_efficiency | R = -0.73, p = 0.0008
+con_pow ↔ eva_pow | R = 0.99, p = 0.0000
+con_pow ↔ ww_temp | R = -0.76, p = 0.0004
+con_pow ↔ pressureratio | R = -0.71, p = 0.0015
+    -   con_pow ↔ dt | R = 0.90, p = 0.0000
+con_pow ↔ hp_dt | R = -0.78, p = 0.0003
+con_pow ↔ t_cond | R = -0.71, p = 0.0013
+con_pow ↔ logdp | R = -0.71, p = 0.0015
+con_pow ↔ cop | R = 0.71, p = 0.0013
+eva_pow ↔ ww_temp | R = -0.84, p = 0.0000
+eva_pow ↔ pressureratio | R = -0.79, p = 0.0002
+    -   eva_pow ↔ dt | R = 0.93, p = 0.0000
+eva_pow ↔ hp_dt | R = -0.85, p = 0.0000
+eva_pow ↔ t_cond | R = -0.80, p = 0.0001
+eva_pow ↔ logdp | R = -0.79, p = 0.0002
+eva_pow ↔ test | R = -0.79, p = 0.0002
+eva_pow ↔ cop | R = 0.80, p = 0.0001
+ww_temp ↔ pressureratio | R = 0.92, p = 0.0000
+ww_temp ↔ dt | R = -0.82, p = 0.0001
+ww_temp ↔ hp_dt | R = 0.96, p = 0.0000
+ww_temp ↔ ref_dt | R = 0.85, p = 0.0000
+ww_temp ↔ t_cond | R = 0.99, p = 0.0000
+ww_temp ↔ dt_evap_cond | R = 0.86, p = 0.0000
+ww_temp ↔ logdp | R = 0.92, p = 0.0000
+ww_temp ↔ test | R = 0.97, p = 0.0000
+ww_temp ↔ cop | R = -0.94, p = 0.0000
+wq_in ↔ wq_out | R = 1.00, p = 0.0000
+wq_in ↔ pressureratio | R = -0.81, p = 0.0001
+wq_in ↔ dt | R = 0.71, p = 0.0013
+wq_in ↔ hp_dt | R = -0.84, p = 0.0000
+wq_in ↔ ref_dt | R = -0.75, p = 0.0005
+wq_in ↔ t_evap | R = 0.93, p = 0.0000
+wq_in ↔ dt_evap_cond | R = -0.75, p = 0.0005
+wq_in ↔ logdp | R = -0.81, p = 0.0001
+wq_in ↔ test | R = -0.78, p = 0.0003
+wq_in ↔ cop | R = 0.78, p = 0.0002
+wq_out ↔ pressureratio | R = -0.80, p = 0.0001
+wq_out ↔ hp_dt | R = -0.83, p = 0.0000
+wq_out ↔ ref_dt | R = -0.75, p = 0.0005
+wq_out ↔ t_evap | R = 0.92, p = 0.0000
+wq_out ↔ dt_evap_cond | R = -0.75, p = 0.0005
+wq_out ↔ logdp | R = -0.80, p = 0.0001
+wq_out ↔ test | R = -0.76, p = 0.0003
+wq_out ↔ cop | R = 0.78, p = 0.0002
+wq_mass ↔ test2 | R = 0.99, p = 0.0000
+pressureratio ↔ dt | R = -0.84, p = 0.0000
+pressureratio ↔ hp_dt | R = 0.96, p = 0.0000
+pressureratio ↔ ref_dt | R = 0.90, p = 0.0000
+pressureratio ↔ t_cond | R = 0.92, p = 0.0000
+pressureratio ↔ t_evap | R = -0.82, p = 0.0001
+pressureratio ↔ dt_evap_cond | R = 0.90, p = 0.0000
+pressureratio ↔ logdp | R = 1.00, p = 0.0000
+pressureratio ↔ test | R = 0.98, p = 0.0000
+pressureratio ↔ cop | R = -0.90, p = 0.0000
+dt ↔ hp_dt | R = -0.86, p = 0.0000
+dt ↔ t_cond | R = -0.79, p = 0.0002
+dt ↔ logdp | R = -0.84, p = 0.0000
+dt ↔ test | R = -0.83, p = 0.0000
+dt ↔ cop | R = 0.82, p = 0.0001
+hp_dt ↔ ref_dt | R = 0.87, p = 0.0000
+hp_dt ↔ t_cond | R = 0.95, p = 0.0000
+hp_dt ↔ t_evap | R = -0.75, p = 0.0005
+hp_dt ↔ dt_evap_cond | R = 0.89, p = 0.0000
+hp_dt ↔ logdp | R = 0.96, p = 0.0000
+hp_dt ↔ test | R = 0.98, p = 0.0000
+hp_dt ↔ cop | R = -0.97, p = 0.0000
+ref_dt ↔ t_cond | R = 0.85, p = 0.0000
+ref_dt ↔ t_evap | R = -0.78, p = 0.0002
+ref_dt ↔ dt_evap_cond | R = 1.00, p = 0.0000
+ref_dt ↔ logdp | R = 0.90, p = 0.0000
+ref_dt ↔ test | R = 0.89, p = 0.0000
+ref_dt ↔ cop | R = -0.81, p = 0.0001
+hp_efficiency ↔ carnot_con_pow | R = 0.79, p = 0.0001
+t_cond ↔ dt_evap_cond | R = 0.87, p = 0.0000
+t_cond ↔ logdp | R = 0.92, p = 0.0000
+t_cond ↔ test | R = 0.97, p = 0.0000
+t_cond ↔ cop | R = -0.94, p = 0.0000
+t_evap ↔ dt_evap_cond | R = -0.78, p = 0.0002
+t_evap ↔ logdp | R = -0.82, p = 0.0001
+t_evap ↔ test | R = -0.74, p = 0.0006
+dt_evap_cond ↔ logdp | R = 0.90, p = 0.0000
+dt_evap_cond ↔ test | R = 0.90, p = 0.0000
+dt_evap_cond ↔ cop | R = -0.83, p = 0.0000
+logdp ↔ test | R = 0.98, p = 0.0000
+logdp ↔ cop | R = -0.90, p = 0.0000
+test ↔ cop | R = -0.95, p = 0.0000
+
+
+
+
+
+
+
+
+
+t_cond vs pressures: R = 0.999, R² = 0.997, p = 2.309e-20
+pressures vs t_cond: R = 0.999, R² = 0.997, p = 2.309e-20
+t_evap vs low_pressures: R = 0.998, R² = 0.997, p = 3.301e-20
+low_pressures vs t_evap: R = 0.998, R² = 0.997, p = 3.301e-20
+dt_evap_cond vs ref_dt: R = 0.997, R² = 0.994, p = 6.179e-18
+ref_dt vs dt_evap_cond: R = 0.997, R² = 0.994, p = 6.179e-18
+wq_out vs wq_in: R = 0.997, R² = 0.993, p = 1.243e-17
+wq_in vs wq_out: R = 0.997, R² = 0.993, p = 1.243e-17
+t_cond vs ww_temp: R = 0.995, R² = 0.989, p = 3.393e-16
+ww_temp vs t_cond: R = 0.995, R² = 0.989, p = 3.393e-16
+ww_temp vs pressures: R = 0.993, R² = 0.987, p = 1.669e-15
+pressures vs ww_temp: R = 0.993, R² = 0.987, p = 1.669e-15
+eva_pow vs con_pow: R = 0.989, R² = 0.977, p = 9.383e-14
+con_pow vs eva_pow: R = 0.989, R² = 0.977, p = 9.383e-14
+test2 vs wq_mass: R = 0.988, R² = 0.976, p = 1.499e-13
+wq_mass vs test2: R = 0.988, R² = 0.976, p = 1.499e-13
+test vs pressureratio: R = 0.982, R² = 0.965, p = 2.613e-12
+test vs logdp: R = 0.982, R² = 0.965, p = 2.613e-12
+pressureratio vs test: R = 0.982, R² = 0.965, p = 2.613e-12
+logdp vs test: R = 0.982, R² = 0.965, p = 2.613e-12
+test vs hp_dt: R = 0.979, R² = 0.959, p = 7.536e-12
+hp_dt vs test: R = 0.979, R² = 0.959, p = 7.536e-12
+wq_out vs low_temps: R = 0.979, R² = 0.958, p = 9.532e-12
+low_temps vs wq_out: R = 0.979, R² = 0.958, p = 9.532e-12
+wq_in vs low_temps: R = 0.978, R² = 0.957, p = 1.095e-11
+low_temps vs wq_in: R = 0.978, R² = 0.957, p = 1.095e-11
+test vs pressures: R = 0.972, R² = 0.945, p = 7.431e-11
+pressures vs test: R = 0.972, R² = 0.945, p = 7.431e-11
+cop vs hp_dt: R = -0.966, R² = 0.934, p = 2.960e-10
+hp_dt vs cop: R = -0.966, R² = 0.934, p = 2.960e-10
+test vs t_cond: R = 0.966, R² = 0.933, p = 3.146e-10
+t_cond vs test: R = 0.966, R² = 0.933, p = 3.146e-10
+test vs ww_temp: R = 0.965, R² = 0.931, p = 3.986e-10
+ww_temp vs test: R = 0.965, R² = 0.931, p = 3.986e-10
+hp_dt vs pressureratio: R = 0.962, R² = 0.926, p = 6.979e-10
+pressureratio vs hp_dt: R = 0.962, R² = 0.926, p = 6.979e-10
+logdp vs hp_dt: R = 0.962, R² = 0.926, p = 6.979e-10
+hp_dt vs logdp: R = 0.962, R² = 0.926, p = 6.979e-10
+hp_dt vs ww_temp: R = 0.961, R² = 0.923, p = 9.367e-10
+ww_temp vs hp_dt: R = 0.961, R² = 0.923, p = 9.367e-10
+dt_evap_cond vs temps: R = 0.950, R² = 0.902, p = 5.845e-09
+temps vs dt_evap_cond: R = 0.950, R² = 0.902, p = 5.845e-09
+hp_dt vs pressures: R = 0.949, R² = 0.900, p = 6.864e-09
+pressures vs hp_dt: R = 0.949, R² = 0.900, p = 6.864e-09
+ref_dt vs temps: R = 0.948, R² = 0.898, p = 7.609e-09
+temps vs ref_dt: R = 0.948, R² = 0.898, p = 7.609e-09
+t_cond vs hp_dt: R = 0.948, R² = 0.898, p = 7.920e-09
+hp_dt vs t_cond: R = 0.948, R² = 0.898, p = 7.920e-09
+cop vs test: R = -0.946, R² = 0.895, p = 9.549e-09
+test vs cop: R = -0.946, R² = 0.895, p = 9.549e-09
+cop vs ww_temp: R = -0.941, R² = 0.886, p = 1.813e-08
+ww_temp vs cop: R = -0.941, R² = 0.886, p = 1.813e-08
+cop vs t_cond: R = -0.940, R² = 0.884, p = 2.094e-08
+t_cond vs cop: R = -0.940, R² = 0.884, p = 2.094e-08
+wq_in vs low_pressures: R = 0.934, R² = 0.872, p = 4.446e-08
+low_pressures vs wq_in: R = 0.934, R² = 0.872, p = 4.446e-08
+pressureratio vs pressures: R = 0.933, R² = 0.871, p = 4.706e-08
+logdp vs pressures: R = 0.933, R² = 0.871, p = 4.706e-08
+pressures vs pressureratio: R = 0.933, R² = 0.871, p = 4.706e-08
+pressures vs logdp: R = 0.933, R² = 0.871, p = 4.706e-08
+cop vs pressures: R = -0.932, R² = 0.870, p = 5.007e-08
+pressures vs cop: R = -0.932, R² = 0.870, p = 5.007e-08
+t_evap vs wq_in: R = 0.926, R² = 0.858, p = 9.306e-08
+wq_in vs t_evap: R = 0.926, R² = 0.858, p = 9.306e-08
+wq_out vs low_pressures: R = 0.926, R² = 0.857, p = 1.008e-07
+low_pressures vs wq_out: R = 0.926, R² = 0.857, p = 1.008e-07
+dt vs eva_pow: R = 0.925, R² = 0.856, p = 1.057e-07
+eva_pow vs dt: R = 0.925, R² = 0.856, p = 1.057e-07
+pressureratio vs ww_temp: R = 0.924, R² = 0.854, p = 1.182e-07
+logdp vs ww_temp: R = 0.924, R² = 0.854, p = 1.182e-07
+ww_temp vs pressureratio: R = 0.924, R² = 0.854, p = 1.182e-07
+ww_temp vs logdp: R = 0.924, R² = 0.854, p = 1.182e-07
+t_cond vs pressureratio: R = 0.923, R² = 0.851, p = 1.362e-07
+pressureratio vs t_cond: R = 0.923, R² = 0.851, p = 1.362e-07
+logdp vs t_cond: R = 0.923, R² = 0.851, p = 1.362e-07
+t_cond vs logdp: R = 0.923, R² = 0.851, p = 1.362e-07
+t_evap vs wq_out: R = 0.918, R² = 0.843, p = 2.016e-07
+wq_out vs t_evap: R = 0.918, R² = 0.843, p = 2.016e-07
+dt_evap_cond vs pressureratio: R = 0.904, R² = 0.817, p = 6.602e-07
+pressureratio vs dt_evap_cond: R = 0.904, R² = 0.817, p = 6.602e-07
+logdp vs dt_evap_cond: R = 0.904, R² = 0.817, p = 6.602e-07
+dt_evap_cond vs logdp: R = 0.904, R² = 0.817, p = 6.602e-07
+test vs dt_evap_cond: R = 0.902, R² = 0.814, p = 7.395e-07
+dt_evap_cond vs test: R = 0.902, R² = 0.814, p = 7.395e-07
+low_temps vs low_pressures: R = 0.902, R² = 0.814, p = 7.470e-07
+low_pressures vs low_temps: R = 0.902, R² = 0.814, p = 7.470e-07
+t_evap vs low_temps: R = 0.901, R² = 0.813, p = 7.777e-07
+low_temps vs t_evap: R = 0.901, R² = 0.813, p = 7.777e-07
+cop vs pressureratio: R = -0.900, R² = 0.811, p = 8.355e-07
+cop vs logdp: R = -0.900, R² = 0.811, p = 8.355e-07
+pressureratio vs cop: R = -0.900, R² = 0.811, p = 8.355e-07
+logdp vs cop: R = -0.900, R² = 0.811, p = 8.355e-07
+ref_dt vs pressureratio: R = 0.896, R² = 0.803, p = 1.147e-06
+pressureratio vs ref_dt: R = 0.896, R² = 0.803, p = 1.147e-06
